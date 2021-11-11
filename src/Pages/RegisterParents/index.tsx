@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField } from "@material-ui/core";
+import { useUser } from "../../Providers/Users";
 
 interface RegisterUserData {
   name: string;
@@ -29,6 +30,8 @@ export const RegisterParents = () => {
       .oneOf([yup.ref("password")], "Senhas diferentes"),
   });
 
+  const { Register } = useUser();
+
   const {
     register,
     handleSubmit,
@@ -36,7 +39,9 @@ export const RegisterParents = () => {
   } = useForm<RegisterUserData>({ resolver: yupResolver(schema) });
 
   const onSubmit = (data: RegisterUserData) => {
-    console.log(data);
+    const { email, name, password } = data;
+    const ParentUserData = { name, email, password, type: "parent" };
+    Register(ParentUserData);
   };
 
   return (
