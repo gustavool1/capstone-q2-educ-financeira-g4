@@ -31,7 +31,7 @@ export const KnowMore = styled.div`
     text-align: center;
     color: #fff;
     width: 220px;
-    margin: 0 auto 25px auto;
+    margin: 0 auto 45px auto;
   }
   button {
     padding: 20px;
@@ -41,5 +41,26 @@ export const KnowMore = styled.div`
     margin: 0 auto;
     border-radius: 50px;
     font-size: 28px;
+    width: 100%;
+  }
+`;
+
+export const Content = styled.div`
+  padding: 30px;
+  background-color: #00bbf9;
+  h2 {
+    margin: 0 0 65px 0;
+    color: #fff;
+    font-size: 48px;
+  }
+  p {
+    font-size: 18px;
+    color: #fff;
+  }
+  h3 {
+    text-align: left;
+    margin-top: 40px;
+    font-size: 28px;
+    margin-bottom: 5px;
   }
 `;
