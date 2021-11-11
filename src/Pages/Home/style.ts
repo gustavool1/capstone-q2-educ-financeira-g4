@@ -5,6 +5,9 @@ export const VideoContainer = styled.div`
 `;
 
 export const HowItWorks = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 30px;
   background-color: #9b5de5;
   h2 {
@@ -21,6 +24,9 @@ export const HowItWorks = styled.div`
 `;
 
 export const KnowMore = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: #302f4d;
   padding: 65px 30px;
   display: flex;
@@ -46,6 +52,9 @@ export const KnowMore = styled.div`
 `;
 
 export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 30px;
   background-color: #00bbf9;
   h2 {
@@ -57,16 +66,21 @@ export const Content = styled.div`
   p {
     font-size: 18px;
     color: #fff;
+    width: 100%;
   }
   h3 {
     text-align: left;
     margin-top: 40px;
     font-size: 28px;
     margin-bottom: 5px;
+    width: 100%;
   }
 `;
 
 export const Steps = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
   background-color: #8c218e;
   h2 {
@@ -85,6 +99,7 @@ export const Steps = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    width: 100%;
     h4 {
       color: #fff;
       margin-bottom: 20px;
@@ -98,6 +113,9 @@ export const Steps = styled.div`
   }
 `;
 export const JoinToday = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 45px 30px;
   background-color: #302f4d;
   img {
@@ -114,5 +132,24 @@ export const JoinToday = styled.div`
     border-radius: 50px;
     font-size: 28px;
     width: 240px;
+  }
+`;
+
+export const WhoWeAre = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 45px 30px;
+  background: #00f5d4;
+  h2 {
+    font-weight: normal;
+    font-size: 48px;
+    text-align: center;
+  }
+
+  p {
+    font-size: 36px;
+    text-align: center;
+    margin: 50px 0;
   }
 `;

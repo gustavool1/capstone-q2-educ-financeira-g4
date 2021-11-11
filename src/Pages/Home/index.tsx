@@ -5,6 +5,7 @@ import {
   Content,
   Steps,
   JoinToday,
+  WhoWeAre,
 } from "./style";
 import Dollar from "../../assets/images/Dollar.svg";
 export const Home = () => {
@@ -79,6 +80,14 @@ export const Home = () => {
         <img src={Dollar} alt="Dollar representation" />
         <button>Cadastre-se</button>
       </JoinToday>
+      <WhoWeAre>
+        <h2>Quem somos</h2>
+        <p>
+          Uma equipe de desenvolvedores comprometidos com a sociedade buscando
+          um mundo melhor e mais justo por meio da democratização do
+          conhecimento
+        </p>
+      </WhoWeAre>
     </>
   );
 };
