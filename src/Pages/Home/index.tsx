@@ -1,4 +1,12 @@
-import { VideoContainer, HowItWorks, KnowMore, Content, Steps } from "./style";
+import {
+  VideoContainer,
+  HowItWorks,
+  KnowMore,
+  Content,
+  Steps,
+  JoinToday,
+} from "./style";
+import Dollar from "../../assets/images/Dollar.svg";
 export const Home = () => {
   return (
     <>
@@ -66,6 +74,11 @@ export const Home = () => {
           </p>
         </div>
       </Steps>
+
+      <JoinToday>
+        <img src={Dollar} alt="Dollar representation" />
+        <button>Cadastre-se</button>
+      </JoinToday>
     </>
   );
 };

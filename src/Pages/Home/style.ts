@@ -41,7 +41,7 @@ export const KnowMore = styled.div`
     margin: 0 auto;
     border-radius: 50px;
     font-size: 28px;
-    width: 100%;
+    width: 240px;
   }
 `;
 
@@ -95,5 +95,24 @@ export const Steps = styled.div`
       color: #fff;
       text-align: center;
     }
+  }
+`;
+export const JoinToday = styled.div`
+  padding: 45px 30px;
+  background-color: #302f4d;
+  img {
+    width: 240px;
+    height: 253px;
+    margin-bottom: 40px;
+  }
+  button {
+    padding: 20px;
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    margin: 0 auto;
+    border-radius: 50px;
+    font-size: 28px;
+    width: 240px;
   }
 `;
