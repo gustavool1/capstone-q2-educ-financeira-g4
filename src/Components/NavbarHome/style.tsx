@@ -81,10 +81,6 @@ export const NavSubContainer = styled.div`
         font-weight: 500;
     }
 
-    @media screen and (max-width: 900px) {
-        padding: 0 25px;
-    }
-
     @media screen and (max-width: 370px) {
         h1 {
             font-size: 38px;
@@ -97,8 +93,7 @@ export const MenuListContainter = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-        
+    justify-content: space-between;       
 
     .links {
         display: flex;

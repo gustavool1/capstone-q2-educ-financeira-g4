@@ -3,7 +3,6 @@ import { NavContainer, NavSubContainer } from "./style"
 import { GiHamburgerMenu } from "react-icons/gi";
 import MenuList from "./menuList";
 import { useState } from "react";
-import { memoryUsage } from "process";
 
 const NavbarHome = () => {
     const [showMenu, setshowMenu] = useState<boolean>(false)
@@ -18,14 +17,17 @@ const NavbarHome = () => {
                     <MenuList/>
                 </span>
 
-                <span className='mobile'>
-                    <MenuList/>    
-                </span>                
+               {showMenu && <span className='mobile'>
+                    <MenuList/>   
+                </span> 
+                }          
 
-               
             </NavSubContainer>
 
-            <button className='btnMenu'>
+            <button 
+                className='btnMenu'
+                onClick={() => setshowMenu(!showMenu)}
+            >                
                 <GiHamburgerMenu/>
             </button>
         </NavContainer>
