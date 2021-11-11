@@ -3,8 +3,10 @@ import { Container, IntroduceContainer, SpendsContainer, CharityContainer, Waist
 import LottieMaker from '../../Components/LottieMaker/';
 import { useEffect } from 'react';
 import { gsap } from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 export const ContentHome = () => {
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
     gsap.from("#div1",{
       duration:4,
       scrollTrigger: "#div1", 
@@ -115,7 +117,16 @@ export const ContentHome = () => {
       opacity: 1
     })
 
-    gsap.fromTo("div5-img", {opacity: 0}, {opacity: 1, duration: 1});
+    gsap.from("#div5-img",{
+      duration:5,
+      scrollTrigger:"#div5-img",
+      x:700,
+      opacity: 0
+    })
+    gsap.to("#div5-img",{
+      x:0,
+      opacity: 1
+    })
   }, []);
   return(
    
