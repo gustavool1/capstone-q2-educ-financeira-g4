@@ -17,7 +17,7 @@ export default createGlobalStyle`
     --warning: #ffcd07;
     --sucess: #168821;
     --information: #155bcb;
-    --white: F5F5F5;
+    --white: #F5F5F5;
   }
 
   html, body, figure, div, input, textarea, p, h1, h2, h3, h4, h5, h6, ul, summary, footer, main, aside, section{
