@@ -1,6 +1,7 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components"
 
-export default createGlobalStyle`
+
+export const GlobalStyle = createGlobalStyle`
 
 :root {
     --color-primary: #9B5DE5;
@@ -20,13 +21,15 @@ export default createGlobalStyle`
     --white: F5F5F5;
   }
 
-  html, body, figure, div, input, textarea, p, h1, h2, h3, h4, h5, h6, ul, summary, footer, main, aside, section{
+  html, body, a, figure, div, input, textarea, p, h1, h2, h3, h4, h5, h6, ul, summary, footer, main, aside, section{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     list-style: none;
     list-style-type: none;
+    text-decoration: none;
 }
+
   
   h1 {
     font-weight: bold;
