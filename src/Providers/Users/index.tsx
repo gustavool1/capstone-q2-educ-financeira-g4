@@ -2,6 +2,7 @@ import { createContext, ReactNode, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import api from "../../Services/api";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UserContext = createContext<UserProviderData>({} as UserProviderData);
 
