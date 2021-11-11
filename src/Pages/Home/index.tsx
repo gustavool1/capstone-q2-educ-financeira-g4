@@ -1,4 +1,4 @@
-import { VideoContainer, HowItWorks } from "./style";
+import { VideoContainer, HowItWorks, KnowMore } from "./style";
 export const Home = () => {
   return (
     <>
@@ -13,6 +13,10 @@ export const Home = () => {
           próprio balanço financeiro.
         </p>
       </HowItWorks>
+      <KnowMore>
+        <p>Saiba agora porque vocês precisam da gente!</p>
+        <button>Saiba Mais</button>
+      </KnowMore>
     </>
   );
 };
