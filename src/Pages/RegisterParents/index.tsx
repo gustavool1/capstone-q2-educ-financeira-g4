@@ -52,7 +52,7 @@ export const RegisterParents = () => {
         </ImageContainer>
         <FormContainer onClick={handleSubmit(onSubmit)}>
           <Form>
-            <h1>Cadastro</h1>
+            <h1>Cadastrar </h1>
             <TextField
               margin="dense"
               type="text"
