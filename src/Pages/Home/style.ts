@@ -52,6 +52,7 @@ export const Content = styled.div`
     margin: 0 0 65px 0;
     color: #fff;
     font-size: 48px;
+    font-weight: normal;
   }
   p {
     font-size: 18px;
@@ -62,5 +63,37 @@ export const Content = styled.div`
     margin-top: 40px;
     font-size: 28px;
     margin-bottom: 5px;
+  }
+`;
+
+export const Steps = styled.div`
+  padding: 20px;
+  background-color: #8c218e;
+  h2 {
+    margin: 45px 0;
+    color: #fff;
+    font-size: 48px;
+    font-weight: normal;
+    text-align: center;
+  }
+  div {
+    border: 3px solid #ffffff;
+    border-radius: 10px;
+    height: 237px;
+    margin: 30px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    h4 {
+      color: #fff;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 20px;
+    }
+    p {
+      color: #fff;
+      text-align: center;
+    }
   }
 `;
