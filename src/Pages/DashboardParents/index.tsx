@@ -1,3 +1,11 @@
+import ProfileBarParents from "../../Components/ProfileBarParents";
+
 export const DashboardParents = () => {
-  return <>DashboardParents</>;
+
+
+  return (
+    <>
+      <ProfileBarParents/>
+    </>
+  );
 };
