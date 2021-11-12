@@ -245,7 +245,62 @@ export const Home = () => {
           conhecimento
         </p>
         <div>
-          <PersonCard>Guilhermino</PersonCard>
+          <PersonCard
+            href="https://www.linkedin.com/in/guilherminolucas/"
+            whileHover={{
+              scale: [1, 1.2, 1],
+              transition: { duration: 3, repeat: Infinity },
+            }}
+          >
+            <img
+              src="https://ca.slack-edge.com/TQZR39SET-U022FLKLUGK-44a5f12ab113-512"
+              alt=" Guilhermino Profile"
+            />
+            <h3>Guilhermino - SM</h3>
+          </PersonCard>
+
+          <PersonCard
+            href="https://www.linkedin.com/in/gustavo-oliveira-a2837b1a3/"
+            whileHover={{
+              scale: [1, 1.2, 1],
+              transition: { duration: 3, repeat: Infinity },
+            }}
+          >
+            <img
+              src="https://media-exp1.licdn.com/dms/image/C4D03AQEjlnu8OI6BLw/profile-displayphoto-shrink_200_200/0/1629588814155?e=1642032000&v=beta&t=rWbc6eiA4fZWTDdAJmEeMqCpy1tC__Cks5FTbpTZZLY"
+              alt="Gustavo Profile"
+            />
+            <h3>Gustavo - PO</h3>
+          </PersonCard>
+        </div>
+        <div>
+          <PersonCard
+            href="https://www.linkedin.com/in/matheus-gomes-de-almeida96/"
+            whileHover={{
+              scale: [1, 1.2, 1],
+              transition: { duration: 3, repeat: Infinity },
+            }}
+          >
+            <img
+              src="https://media-exp1.licdn.com/dms/image/C4D03AQFMSTeLTHkKbg/profile-displayphoto-shrink_200_200/0/1516657902718?e=1642032000&v=beta&t=GEBW7mTMXpTd63v77NuWRR31YC404MzNIKljeuD0G6s"
+              alt="Matheus Profile"
+            />
+            <h3>Matheus - TL</h3>
+          </PersonCard>
+
+          <PersonCard
+            href="https://www.linkedin.com/in/ericestevesmartins/"
+            whileHover={{
+              scale: [1, 1.2, 1],
+              transition: { duration: 3, repeat: Infinity },
+            }}
+          >
+            <img
+              src="https://ca.slack-edge.com/TQZR39SET-U023TBBCVED-238fd4e90dbd-512"
+              alt="Eric Profile"
+            />
+            <h3>Eric - QA</h3>
+          </PersonCard>
         </div>
       </WhoWeAre>
     </>

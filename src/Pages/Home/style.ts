@@ -173,7 +173,6 @@ export const Steps = styled.div`
 export const AnimatedSection = styled.div`
   display: none;
   background: #fee440;
-  display: flex;
   align-items: center;
   justify-content: space-around;
   height: 615px;
@@ -181,7 +180,8 @@ export const AnimatedSection = styled.div`
     font-size: 48px;
     width: 600px;
   }
-  @media (max-width: 768) {
+  @media (min-width: 768px) {
+    display: flex;
   }
 `;
 export const JoinToday = styled.div`
@@ -196,6 +196,8 @@ export const JoinToday = styled.div`
     margin-bottom: 40px;
   }
   button {
+    transition: 0.3s;
+
     padding: 20px;
     background-color: transparent;
     border: 2px solid #fff;
@@ -203,6 +205,12 @@ export const JoinToday = styled.div`
     border-radius: 50px;
     font-size: 28px;
     width: 240px;
+    :hover {
+      transition: 0.3s;
+      color: #000;
+      scale: 1.5;
+      background-color: #fff;
+    }
   }
   @media (min-width: 768px) {
     flex-direction: row-reverse;
@@ -228,6 +236,34 @@ export const WhoWeAre = styled.div`
     margin: 50px 0;
     max-width: 1300px;
   }
+  div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  @media (min-width: 768px) {
+    div {
+      flex-direction: row;
+    }
+  }
 `;
 
-export const PersonCard = styled(motion.a)``;
+export const PersonCard = styled(motion.a)`
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  img {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    margin: auto;
+  }
+  h3 {
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    font-size: 28px;
+  }
+`;
