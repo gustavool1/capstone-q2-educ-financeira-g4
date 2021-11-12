@@ -1,8 +1,10 @@
 
-import { NavContainer, NavSubContainer } from "./style"
+import { MenuMobile, NavContainer, NavSubContainer } from "./style"
 import { GiHamburgerMenu } from "react-icons/gi";
 import MenuList from "./menuList";
 import { useState } from "react";
+
+
 
 const NavbarHome = () => {
     const [showMenu, setshowMenu] = useState<boolean>(false)
@@ -17,10 +19,14 @@ const NavbarHome = () => {
                     <MenuList/>
                 </span>
 
-               {showMenu && <span className='mobile'>
-                    <MenuList/>   
-                </span> 
-                }          
+                {showMenu && <MenuMobile 
+                        initial={{opacity:0 , x:-300}}
+                        transition={{ duration: 1}}
+                        animate={{opacity:1, x: 0}}
+                    >
+                        <MenuList/>
+                </MenuMobile>
+                }
 
             </NavSubContainer>
 
