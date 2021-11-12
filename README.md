@@ -1,46 +1,105 @@
-# Getting Started with Create React App
+<h1>Finance Kids API - DOCS</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h2>POST/register</h2>
+<p>Este end point é utilizado para cadastrar um novo usuário. Nesta API temos dois tipos de usuário o tipo parent e o tipo children, segue abaixo o corpo da requisição para criar qualquer um dos tipos de usuário. </p>
 
-## Available Scripts
+```json
+{
+	"name":"Eric",
+	"email":"eric@email.com",
+	"password":"123456",
+	"wallet":[],
+	"wishlist":[],
+	"balance":[],
+    "type":"children"
+}
+```
 
-In the project directory, you can run:
 
-### `yarn start`
+```json
+{
+	"name":"Cássio",
+	"email":"gugu@gmail1.com",
+	"password":"123456",
+	"children":[]
+}
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<p>Caso a requisição seja bem sucedida irá retornar algo parecido com isto</p>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```json
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imd1Z3VAZ21haWwxLmNvbSIsImlhdCI6MTYzNjY2NjY5NiwiZXhwIjoxNjM2NjcwMjk2LCJzdWIiOiI0In0.zTpvZlH9NiBQx6NP4Imm8DQjs4Y8YVbdYy9g-nTf1ZM",
+  "user": {
+    "email": "gugu@gmail1.com",
+    "name": "Cássio",
+    "children": [],
+    "id": 4
+  }
+}
+```
 
-### `yarn test`
+<h2>POST/login</h2>
+<p>Este endpoint é utilizado para fazer o login, segue abaixo uma requisição de exemplo</p>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```json
+{
+	"email":"gugu@gmail1.com",
+	"password":"123456"
+}
+```
+<p>Caso a requisição dê certo irá retornar a seguinte resposta <p>
 
-### `yarn build`
+```json
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imd1Z3VAZ21haWwxLmNvbSIsImlhdCI6MTYzNjY2Nzk1OSwiZXhwIjoxNjM2NjcxNTU5LCJzdWIiOiI0In0.8ezY_t4lQqxOuTAMwcEe0YHFGfcYLXDTQVcrfCmZpOc",
+  "user": {
+    "email": "gugu@gmail1.com",
+    "name": "Cássio",
+    "children": [],
+    "id": 4
+    }
+}
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<h2>POST/activities</h2>
+<p>Este endpoint é utilizado para criar uma nova atividade, segue abaixo uma requisição de exemplo. Também é necessário  uma autentificação de Bearer.</p>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```json
+{
+    "name":"Lavar a louça",
+    "reward":10,
+    "frequency":"Diaria",
+    "userId":1
+}
+```
+<p>Caso dê certo irá retornar uma resposta assim</p>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```json
+ {
+    "name": "Lavar a louça",
+    "reward": 10,
+    "frequency": "Diaria",
+    "userId":1,
+    "id": 1
+  }
+```
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<h2>PATCH/activities/id</h2>
+<p>Este endpoint serve para editar a atividade.Para editarmos a atividade precisamos apenas passar o id da atividade pela URL e no corpo da requisição faremos as mudanças. Como no exemplo abaixo.  Também é necessário  uma autentificação de Bearer.</p>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```json
+{
+    "name": "Lavar a louça",
+    "reward": 10,
+    "frequency": "Diaria",
+    "userId":1,
+    "id": 1
+}
+```
+<p>Caso a requisição dê errado irá retornar um objeto vazio.</p>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+<h2>DELETE/activities/id</h2>
+<p>Este endpoint tem o intuito de apagar uma atividade para faze-lo basta apenas passar o id da atividade pela url. Caso a requisição seja bem sucedida irá retornar um objeto vazio.  Também é necessário  uma autentificação de Bearer.</p>
