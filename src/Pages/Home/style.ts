@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { motion } from "framer-motion";
 export const VideoContainer = styled.div`
   height: 500px;
 `;
@@ -229,3 +229,5 @@ export const WhoWeAre = styled.div`
     max-width: 1300px;
   }
 `;
+
+export const PersonCard = styled(motion.a)``;

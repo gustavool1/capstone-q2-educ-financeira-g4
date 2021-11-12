@@ -7,6 +7,7 @@ import {
   JoinToday,
   WhoWeAre,
   AnimatedSection,
+  PersonCard,
 } from "./style";
 import Dollar from "../../assets/images/Dollar.svg";
 import LottieMaker from "../../Components/LottieMaker";
@@ -243,6 +244,9 @@ export const Home = () => {
           um mundo melhor e mais justo por meio da democratização do
           conhecimento
         </p>
+        <div>
+          <PersonCard>Guilhermino</PersonCard>
+        </div>
       </WhoWeAre>
     </>
   );
