@@ -43,7 +43,7 @@ export const IntroduceContainer = styled.div`
             width: 90%;
             margin: 0 auto;
         }
-        
+        overflow: hidden;
     }
 `
 
@@ -80,7 +80,7 @@ export const SpendsContainer = styled.div`
             width: 90%;
             margin: 0 auto;
         }
-        
+        overflow: hidden;
     }
 `
 export const CharityContainer = styled.div`
@@ -123,6 +123,7 @@ export const CharityContainer = styled.div`
                 width: 200px;
             }
         }
+        overflow: hidden;
     }
 `
 export const WaistContainer = styled.div`
@@ -155,6 +156,7 @@ export const WaistContainer = styled.div`
         .text-introduce{
             width: 90%;
         }
+        overflow: hidden;
     }
 `
 export const EntrepreneurContainer = styled.div`
@@ -190,5 +192,6 @@ export const EntrepreneurContainer = styled.div`
             width: 90%;
             
         }
+        overflow: hidden;
     }
 `

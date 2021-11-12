@@ -8,125 +8,154 @@ export const ContentHome = () => {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
     gsap.from("#div1",{
-      duration:4,
-      scrollTrigger: "#div1", 
       x: -700,
       opacity: 0
     })
     gsap.to("#div1", {
-      scrollTrigger: "#div1", 
       x: 0,
-      opacity: 1
+      opacity: 1,
+      duration:3,
+      scrollTrigger:{
+        trigger:"#div1",
+        toggleActions:"restart play"
+      }
     })
 
 
-    gsap.from("#div1-img",{
-      duration:4,
-      scrollTrigger:"div1-img",
+    gsap.from("#div1",{
       x:700,
       opacity:0
     })
     gsap.to("#div1-img",{
-      scrollTrigger: "div1-img", 
       x: 0,
-      opacity: 1
+      opacity: 1,
+      duration:3,
+      scrollTrigger:{
+        trigger:"#div1",
+        toggleActions:"restart play"
+      }
     })
 
 
 
     gsap.from("#div2",{
-      duration:5,
-      scrollTrigger: "#div2", 
       x: 700,
       opacity: 0
     })
     gsap.to("#div2",{
-      scrollTrigger: "#div2", 
       x: 0,
-      opacity: 0
+      opacity: 1,
+      duration:3,
+      scrollTrigger:{
+        trigger:"#div2",
+        toggleActions:"restart play"
+      }
     })
 
 
 
     gsap.from("#div2-img",{
-      duration:5,
-      scrollTrigger:"#div2-img",
       x:-700,
       opacity: 0
     })
     gsap.to("#div2-img",{
       x:0,
-      opacity: 1
+      opacity: 1,
+      duration:3,
+      scrollTrigger:{
+        trigger:"#div2",
+        toggleActions:"restart play ",
+      }
     })
 
 
     gsap.from("#div3",{
-      duration:5,
-      scrollTrigger:"#div3",
       x:-700,
       opacity: 0
     })
     gsap.to("#div3",{
       x:0,
-      opacity: 1
+      opacity: 1,
+      duration:3,
+      scrollTrigger:{
+        trigger:"#div3",
+        toggleActions:"restart play ",
+      }
     })
 
     gsap.from("#div3-img",{
-      duration:5,
-      scrollTrigger:"#div3-img",
       x:700,
       opacity: 0
     })
     gsap.to("#div3-img",{
       x:0,
-      opacity: 1
+      opacity: 1,
+      duration:3,
+      scrollTrigger:{
+        trigger:"#div3",
+        toggleActions:"restart play ",
+      }
     })
 
 
     gsap.from("#div4",{
-      duration:5,
       scrollTrigger:"#div4",
       x:700,
       opacity: 0
     })
     gsap.to("#div4",{
       x:0,
-      opacity: 1
+      opacity: 1,
+      duration:3,
+      scrollTrigger:{
+        trigger:"#div4",
+        toggleActions:"restart play ",
+      }
     })
 
 
     gsap.from("#div4-img",{
-      duration:5,
-      scrollTrigger:"#div4-img",
       x:-700,
       opacity: 0
     })
     gsap.to("#div4-img",{
       x:0,
-      opacity: 1
+      opacity: 1,
+      duration:3,
+      scrollTrigger:{
+          trigger:"#div4",
+          toggleActions:"restart play play play",
+        }
     })
 
-    gsap.from("#div5",{
-      duration:5,
-      scrollTrigger:"#div5",
-      x:-700,
-      opacity: 0
-    })
-    gsap.to("#div5",{
-      x:0,
-      opacity: 1
-    })
 
-    gsap.from("#div5-img",{
-      duration:5,
-      scrollTrigger:"#div5-img",
-      x:700,
-      opacity: 0
-    })
-    gsap.to("#div5-img",{
-      x:0,
-      opacity: 1
-    })
+      gsap.from("#div5",{
+        x:-500,
+        opacity: 0
+      })
+      gsap.to('#div5',{
+        x:0,
+        opacity: 1,
+        duration:3,
+        scrollTrigger:{
+          trigger:"#div5",
+          toggleActions:"restart play play play",
+        }
+      })
+      gsap.from("#div5-img",{
+        x:500,
+        opacity: 0,
+      })
+      gsap.to("#div5-img",{
+        x:0,
+        opacity: 1,
+        duration:3,
+        scrollTrigger:{
+          trigger:"#div5",
+          toggleActions:"restart play play play",
+
+        }
+      })
   }, []);
   return(
    
@@ -177,7 +206,7 @@ export const ContentHome = () => {
           <h2>Incentive o empreendedorismo</h2>
           <p>Algumas crianças adoram vender objetos, brinquedos, revistinhas e tudo o que puderem para os amigos e colegas de classe! Se o seu filho tiver este espírito empreendedor, estimule-o! Mais importante do que a quantia de dinheiro adquirida, é o aprendizado e a postura de fazer algo para mudar determinada situação. </p>
         </div>
-        <div className='div5-img'>
+        <div id='div5-img'>
         <LottieMaker lottieImage={"https://assets5.lottiefiles.com/packages/lf20_jt4mhmk1.json"}  height={400} width={375} playerAreVisible={false}/>
         </div>
       </EntrepreneurContainer>
