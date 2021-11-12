@@ -8,12 +8,14 @@ import {
   WhoWeAre,
   AnimatedSection,
   PersonCard,
+  VideoBg,
 } from "./style";
 import Dollar from "../../assets/images/Dollar.svg";
 import LottieMaker from "../../Components/LottieMaker";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
+import Video from "../../assets/Videos/HomePage.mp4";
 
 export const Home = () => {
   useEffect(() => {
@@ -85,7 +87,6 @@ export const Home = () => {
       scrollTrigger: {
         trigger: ".up",
         toggleActions: "restart play",
-        markers: true,
       },
     });
     gsap.from(".upLeft", {
@@ -101,7 +102,6 @@ export const Home = () => {
       scrollTrigger: {
         trigger: ".upLeft",
         toggleActions: "restart play",
-        markers: true,
       },
     });
     gsap.from(".upRight", {
@@ -117,14 +117,15 @@ export const Home = () => {
       scrollTrigger: {
         trigger: ".upLeft",
         toggleActions: "restart play",
-        markers: true,
       },
     });
   });
 
   return (
     <>
-      <VideoContainer />
+      <VideoContainer>
+        <VideoBg autoPlay loop muted src={Video} />
+      </VideoContainer>
 
       <HowItWorks>
         <div className="Animation visibleAnimation">

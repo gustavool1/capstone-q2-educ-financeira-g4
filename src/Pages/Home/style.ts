@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 export const VideoContainer = styled.div`
-  height: 500px;
+  height: fit-content;
+  background-color: #9b5de5;
 `;
 
 export const HowItWorks = styled.div`
+  overflow-x: hidden;
   padding: 30px;
   background-color: #9b5de5;
   display: flex;
@@ -45,6 +47,8 @@ export const HowItWorks = styled.div`
 `;
 
 export const KnowMore = styled.div`
+  overflow-x: hidden;
+
   display: flex;
   background-color: #302f4d;
   padding: 65px 30px;
@@ -83,6 +87,8 @@ export const KnowMore = styled.div`
 `;
 
 export const Content = styled.div`
+  overflow-x: hidden;
+
   display: flex;
   flex-direction: column;
   padding: 30px;
@@ -121,6 +127,8 @@ export const Content = styled.div`
 `;
 
 export const Steps = styled.div`
+  overflow-x: hidden;
+
   padding: 20px;
   background-color: #8c218e;
   h2 {
@@ -171,6 +179,8 @@ export const Steps = styled.div`
   }
 `;
 export const AnimatedSection = styled.div`
+  overflow-x: hidden;
+
   display: none;
   background: #fee440;
   align-items: center;
@@ -185,6 +195,8 @@ export const AnimatedSection = styled.div`
   }
 `;
 export const JoinToday = styled.div`
+  overflow-x: hidden;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -219,6 +231,8 @@ export const JoinToday = styled.div`
 `;
 
 export const WhoWeAre = styled.div`
+  overflow-x: hidden;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -239,7 +253,7 @@ export const WhoWeAre = styled.div`
   div {
     width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: space-around;
   }
   @media (min-width: 768px) {
@@ -266,4 +280,8 @@ export const PersonCard = styled(motion.a)`
     text-shadow: 1px 1px 1px #000;
     font-size: 28px;
   }
+`;
+export const VideoBg = styled.video`
+  width: 100%;
+  height: 100%;
 `;
