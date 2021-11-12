@@ -14,12 +14,11 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField } from "@material-ui/core";
 import { useUser } from "../../Providers/Users";
+import NavbarHome from "../../Components/NavbarHome";
 
 interface RegisterUserData {
-  name: string;
   email: string;
   password: string;
-  confirmPassword: string;
 }
 
 export const Login = () => {
@@ -44,14 +43,15 @@ export const Login = () => {
 
   return (
     <>
+      <NavbarHome />
       <Container>
         <ImageContainer>
           <LottieMaker
             lottieImage={
               "https://assets10.lottiefiles.com/private_files/lf30_u4rzoljr.json"
             }
-            height={500}
-            width={500}
+            height={700}
+            width={700}
             playerAreVisible={false}
           />
         </ImageContainer>

@@ -13,7 +13,7 @@ export const Container = styled.div`
 
 export const ImageContainer = styled.div`
   display: none;
-  @media screen and (min-width: 500px) {
+  @media screen and (min-width: 700px) {
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -33,7 +33,7 @@ export const FormContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  @media screen and (min-width: 500px) {
+  @media screen and (min-width: 700px) {
     width: 50%;
   }
 `;
@@ -49,6 +49,9 @@ export const Form = styled.form`
     position: absolute;
     top: 1rem;
     left: 1rem;
+    @media screen and (min-width: 700px) {
+      width: 500px;
+    }
   }
 `;
 

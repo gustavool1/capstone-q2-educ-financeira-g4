@@ -12,6 +12,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField } from "@material-ui/core";
 import { useUser } from "../../Providers/Users";
+import NavbarHome from "../../Components/NavbarHome";
 
 interface RegisterUserData {
   name: string;
@@ -46,12 +47,13 @@ export const RegisterParents = () => {
 
   return (
     <>
+      <NavbarHome />
       <Container>
         <ImageContainer>
           <img src={Image} alt="imagem de registro" />
         </ImageContainer>
-        <FormContainer onClick={handleSubmit(onSubmit)}>
-          <Form>
+        <FormContainer>
+          <Form onClick={handleSubmit(onSubmit)}>
             <h1>Cadastrar </h1>
             <TextField
               margin="dense"
@@ -79,7 +81,7 @@ export const RegisterParents = () => {
               variant="outlined"
               {...register("password")}
             />
-            <p>{errors.email?.message}</p>
+            <p>{errors.password?.message}</p>
             <TextField
               margin="dense"
               type="password"
@@ -88,7 +90,7 @@ export const RegisterParents = () => {
               variant="outlined"
               {...register("confirmPassword")}
             />
-            <span>{errors.email?.message}</span>
+            <span>{errors.confirmPassword?.message}</span>
             <Button type="submit">Cadastrar</Button>
           </Form>
         </FormContainer>

@@ -3,11 +3,10 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100vw;
   height: Calc(100vh - 80px);
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
   align-content: center;
 `;
 
@@ -15,13 +14,13 @@ export const ImageContainer = styled.div`
   display: none;
   @media screen and (min-width: 700px) {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    width: 60%;
+    width: 50%;
     height: 100%;
     img {
-      width: 90%;
-      height: 90%;
+      width: 100%;
+      height: 100%;
     }
   }
 `;
@@ -33,8 +32,8 @@ export const FormSide = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  @media screen and (min-width: 500px) {
-    width: 40%;
+  @media screen and (min-width: 700px) {
+    width: 50%;
   }
 `;
 export const FormContainer = styled.div`
@@ -55,13 +54,23 @@ export const FormContainer = styled.div`
   }
   span {
     position: absolute;
+    font-weight: 500;
     top: 1.5rem;
     right: 1rem;
     color: var(--gray-500);
+    cursor: pointer;
+    :hover {
+      color: var(--white);
+    }
   }
 `;
 
-export const Form = styled.form``;
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+`;
 
 export const ChooseContainer = styled.div`
   display: flex;
