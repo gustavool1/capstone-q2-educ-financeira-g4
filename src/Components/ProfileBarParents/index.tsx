@@ -7,10 +7,12 @@ import { UserContext } from '../../Providers/Users'
 
 const ProfileBarParents = () => {
     const { getAmountToPay, amountToPay } = useContext(ActivitiesContext)
-    const { userData } = useContext(UserContext)
+    const { getUserData, userData } = useContext(UserContext)
 
     useEffect(() => {
         getAmountToPay()
+        getUserData()
+        console.log(userData)
     }, [])
 
     return (

@@ -16,7 +16,7 @@ export const Routes = () => {
       <Route exact path="/" component={Home} />
       <Route path="/login" component={Login} />
       <Route path="/balance" component={Balance} isPrivate/>
-      <Route path="/registerkids" component={RegisterKids} />
+      <Route path="/registerkids" component={RegisterKids} isPrivate/>
       <Route path="/registerparents" component={RegisterParents} />
       <Route path="/dashboardkids" component={DashboardKids} isPrivate />
       <Route path="/contenthome" component={ContentHome} />
