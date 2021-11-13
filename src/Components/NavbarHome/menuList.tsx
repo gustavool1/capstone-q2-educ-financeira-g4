@@ -16,7 +16,7 @@ const MenuList = ({initial, transition, animate}: MenuListProps) => {
         <MenuListContainter>
             <div className='links'>
                 <Link to=''>Saiba mais</Link>
-                <Link to=''>Serviços</Link>
+                <Link to='/dashboardparents'>Serviços</Link>
 
                 <Link to=''>Quem somos</Link>
 

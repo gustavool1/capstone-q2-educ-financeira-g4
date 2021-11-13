@@ -4,7 +4,6 @@ import api from "../../Services/api";
 
 interface ChildrenUser{
     email:string,
-    password: string,
     name: string,
     wallet: number,
     type: string,

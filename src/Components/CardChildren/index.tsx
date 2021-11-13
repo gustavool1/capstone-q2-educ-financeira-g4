@@ -2,13 +2,13 @@ import { useContext, useEffect, useState } from "react"
 import { ActivitiesContext } from "../../Providers/Activities"
 import { Container, InfoContainer, ActivitiesContainer, Achivied, NotAchivied }from "./style.js"
 import api from '../../Services/api'
+import { IoIosCreate } from "react-icons/io";
 import { ChildrenContext } from "../../Providers/Children"
 interface Children{
     balance:[],
     email:string,
     id:number,
     parentId:number,
-    password:string,
     wallet:number,
     wishlist:[],
     name:string,
@@ -62,7 +62,7 @@ const CardChildren = ({children}:CardChildrenProps) =>{
     return(
         <Container>
             <InfoContainer>
-                <img src='https://d3ugyf2ht6aenh.cloudfront.net/stores/001/829/347/themes/amazonas/img-1347263166-1629736427-e77800fdb2094c2bcc4fb6f44d82ce1d1629736428.jpg?1211721950'/>
+                <img src='https://d3ugyf2ht6aenh.cloudfront.net/stores/001/829/347/themes/amazonas/img-1347263166-1629736427-e77800fdb2094c2bcc4fb6f44d82ce1d1629736428.jpg?1211721950' alt='img'/>
                 <div>
                     <p>{children.name}</p>
                     <p>R${children.wallet}</p>
@@ -74,20 +74,22 @@ const CardChildren = ({children}:CardChildrenProps) =>{
                     {childrenActivies.filter((item)=>item.achivied === true).map((achivied,key)=>(
                         <div key={key}>
                             <p>{achivied.name}</p>
-                            <p>{achivied.reward}</p>
-                            <input type="checkbox"  onClick={(e)=>FinishingTask(e,achivied)}/>
-
+                            <p>R${achivied.reward}</p>
+                            <button><IoIosCreate/></button>
                         </div>
                     ))}
                 </Achivied>
                 <NotAchivied>
                     <h2>Tarefas a concluir: {childrenActivies.filter((item)=>item.achivied === false).length}</h2>
                     {childrenActivies.filter((item)=>item.achivied === false).map((achivied,key)=>(
-                        <p key={key}>
-                            {achivied.name}  
-                        </p>
+                       <div key={key}>
+                            <p>{achivied.name}</p>
+                            <p>R${achivied.reward}</p>
+                            <input type="checkbox"  onClick={(e)=>FinishingTask(e,achivied)}/>
+                       </div>
                     ))}
                 </NotAchivied>
+                <button className='create-activity'>Criar Atividade</button>
             </ActivitiesContainer>
         </Container>
     )
