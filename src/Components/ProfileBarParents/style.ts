@@ -11,6 +11,7 @@ export const ProfileContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     font-weight: 500;
+    margin-top: 80px;
 
     a {
         color: #FFFFFF;
