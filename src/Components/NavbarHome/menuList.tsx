@@ -8,7 +8,7 @@ const MenuList = () => {
             <div className='links'>
                 <Link to=''>Serviços</Link>
                 <Link to=''>Sobre</Link>
-                <Link to=''>Comunidade</Link>
+                <Link to='/dashboardparents'>Comunidade</Link>
                 <Link to=''>Suporte</Link>
             </div>
             <div className='btnContainer'>
