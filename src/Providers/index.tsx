@@ -1,5 +1,7 @@
 
 import { ReactNode } from "react";
+import { ActivitiesProvider } from "./Activities";
+import { ChildrenProvider } from "./Children";
 import { UserProvider } from "./Users";
 
 interface UserProps {
@@ -7,5 +9,13 @@ interface UserProps {
 }
 
 export const Provider = ({ children }: UserProps) => {
-  return <UserProvider>{children}</UserProvider>;
+  return(
+    <UserProvider>
+      <ActivitiesProvider>
+        <ChildrenProvider>
+          {children}
+        </ChildrenProvider>
+      </ActivitiesProvider>
+    </UserProvider>
+  )
 };

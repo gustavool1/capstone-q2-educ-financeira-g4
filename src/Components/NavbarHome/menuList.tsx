@@ -17,7 +17,9 @@ const MenuList = ({initial, transition, animate}: MenuListProps) => {
             <div className='links'>
                 <Link to=''>Saiba mais</Link>
                 <Link to=''>Serviços</Link>
+
                 <Link to=''>Quem somos</Link>
+
             </div>
 
             <div className='btnContainer'>

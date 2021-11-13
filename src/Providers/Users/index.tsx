@@ -46,6 +46,7 @@ export const UserProvider = ({ children }: UserProps) => {
     api
       .post("login", userData)
       .then((response) => {
+        localStorage.setItem("userId", response.data.user.id)
         localStorage.setItem("token", response.data.accessToken);
         toast.success("Parabéns, você esta logado!");
         setUserToken(response.data.accessToken);
