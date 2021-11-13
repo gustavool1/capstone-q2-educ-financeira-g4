@@ -47,7 +47,6 @@ export const RegisterParents = () => {
 
   return (
     <>
-      <NavbarHome />
       <Container>
         <ImageContainer>
           <img src={Image} alt="imagem de registro" />

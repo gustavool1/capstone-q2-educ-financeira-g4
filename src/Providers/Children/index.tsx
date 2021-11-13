@@ -38,6 +38,7 @@ export const ChildrenProvider = ({ children }:ChildrenProviderProps) =>{
             }
          })
     }
+    
     return(
         <ChildrenContext.Provider value={{updateWallet}}>
             {children}
