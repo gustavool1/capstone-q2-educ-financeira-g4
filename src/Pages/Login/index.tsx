@@ -26,7 +26,7 @@ export const Login = () => {
 
   const schema = yup.object().shape({
     email: yup.string().required("Campo obrigatório!").email("Email inválido"),
-    password: yup.string().min(6, "Mínimo de 6 dígitos"),
+    password: yup.string(),
   });
 
   const { Login } = useUser();
@@ -60,7 +60,7 @@ export const Login = () => {
             <>
               <FormContainer>
                 <h1>Login</h1>
-                <span onClick={() => setIsChoosed(!isChoosed)}>voltar</span>
+                <h3 onClick={() => setIsChoosed(!isChoosed)}>voltar</h3>
                 <Form onClick={handleSubmit(onSubmit)}>
                   <TextField
                     margin="dense"
