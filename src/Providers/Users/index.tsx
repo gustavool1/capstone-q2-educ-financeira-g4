@@ -27,17 +27,29 @@ interface RegisterUserData {
   balance?: [];
 }
 
+interface UserDataResponse {
+  email: string;
+  name: string;
+  children?: [];
+  wallet?: [];
+  type: string;
+  wishList?: [];
+  balance?: [];
+  parentId?: number;
+  id: number;
+}
+
 interface UserProviderData {
   Login: (userData: UserData) => void;
   Logout: () => void;
   Register: (userData: RegisterUserData) => void;
   UserToken: string;
-  UserName: string;
+  userData: UserDataResponse;
 }
 
 export const UserProvider = ({ children }: UserProps) => {
   toast.configure();
-  const [UserName, setUserName] = useState('')
+  const [userData, setUserData] = useState<UserDataResponse>({} as UserDataResponse)
   const history = useHistory();
   const [UserToken, setUserToken] = useState(
     () => localStorage.getItem("token") || ""
@@ -51,7 +63,7 @@ export const UserProvider = ({ children }: UserProps) => {
         localStorage.setItem("token", response.data.accessToken);
         toast.success("Parabéns, você esta logado!");
         setUserToken(response.data.accessToken);
-        setUserName(response.data.user.name);
+        setUserData(response.data.user);
         history.push('/dashboardparents')
       })
       .catch((err) => {
@@ -80,7 +92,7 @@ export const UserProvider = ({ children }: UserProps) => {
   };
 
   return (
-    <UserContext.Provider value={{ UserToken, Login, Logout, Register, UserName }}>
+    <UserContext.Provider value={{ UserToken, Login, Logout, Register, userData }}>
       {children}
     </UserContext.Provider>
   );

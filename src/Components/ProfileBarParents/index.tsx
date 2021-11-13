@@ -7,7 +7,7 @@ import { UserContext } from '../../Providers/Users'
 
 const ProfileBarParents = () => {
     const { getAmountToPay, amountToPay } = useContext(ActivitiesContext)
-    const { UserName } = useContext(UserContext)
+    const { userData } = useContext(UserContext)
 
     useEffect(() => {
         getAmountToPay()
@@ -17,7 +17,7 @@ const ProfileBarParents = () => {
         <ProfileContainer>
             <div className='profideDescription'>
                 <img src={profile} alt='profile face'/>
-                <h1>{UserName}</h1>
+                <h1>{userData.name}</h1>
                 <Link to=''>Editar Perfil</Link>                
             </div>
             <p>A pagar R${amountToPay.toFixed(2)}</p>
