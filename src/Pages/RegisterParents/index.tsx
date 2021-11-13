@@ -12,7 +12,6 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField } from "@material-ui/core";
 import { useUser } from "../../Providers/Users";
-import NavbarHome from "../../Components/NavbarHome";
 
 interface RegisterUserData {
   name: string;

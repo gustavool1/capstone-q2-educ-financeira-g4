@@ -1,31 +1,41 @@
 
-import { MenuMobile, NavContainer, NavSubContainer } from "./style"
+import { MenuDesktop, MenuMobile, NavContainer, NavSubContainer } from "./style"
 import { GiHamburgerMenu } from "react-icons/gi";
 import MenuList from "./menuList";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../../Providers/Users";
+import MenuParentsLogin from "./menuParentsLogin";
+import MenuChildrensLogin from "./menuChildrensLogin";
 
 
 
 const NavbarHome = () => {
     const [showMenu, setshowMenu] = useState<boolean>(false)
-    
+    const { UserToken, userData } = useContext(UserContext)
+
     return (
         <NavContainer>
 
             <NavSubContainer>
                 <h1>FinanceKids</h1>
-
-                <span className='desktop'>
-                    <MenuList/>
-                </span>
+                
+                <MenuDesktop>
+                    {!UserToken && <MenuList/>}
+                    {UserToken && userData.type === 'parent' && <MenuParentsLogin/>}
+                    {UserToken && userData.type === 'children' && <MenuChildrensLogin/>}
+                </MenuDesktop>
+                
 
                 {showMenu && <MenuMobile 
                         initial={{opacity:0 , x:-300}}
                         transition={{ duration: 1}}
                         animate={{opacity:1, x: 0}}
                     >
-                        <MenuList/>
-                </MenuMobile>
+                    {!UserToken && <MenuList/>}
+                    {UserToken && userData.type === 'parent' && <MenuParentsLogin/>}
+                    {UserToken && userData.type === 'children' && <MenuChildrensLogin/>}
+                    
+                    </MenuMobile>
                 }
 
             </NavSubContainer>
