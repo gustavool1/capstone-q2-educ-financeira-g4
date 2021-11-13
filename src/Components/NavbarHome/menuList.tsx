@@ -1,23 +1,41 @@
 import { Link } from "react-router-dom"
 import React from 'react'
 import { MenuListContainter } from "./style"
+import { useHistory } from 'react-router-dom'
 
-const MenuList = () => {
+interface MenuListProps {
+    initial?: {};
+    transition?: {};
+    animate?: {};
+}
+
+const MenuList = ({initial, transition, animate}: MenuListProps) => {
+    const history = useHistory();
+
     return (
         <MenuListContainter>
             <div className='links'>
+                <Link to=''>Saiba mais</Link>
                 <Link to=''>Serviços</Link>
-                <Link to=''>Sobre</Link>
-                <Link to='/dashboardparents'>Comunidade</Link>
-                <Link to=''>Suporte</Link>
+
+                <Link to=''>Quem somos</Link>
+
             </div>
+
             <div className='btnContainer'>
-                <button className='btnLogin'>
-                    Log in
+                <button 
+                    onClick={() => history.push('/registerparents')}
+                    className='btnRegister'
+                >
+                    <Link to='/registerparents'>Registrar</Link>
                 </button>
-                <button className='btnRegister'>
-                    Register
-                </button>
+
+                <button 
+                    className='btnLogin'
+                    onClick={() => history.push('/login')}
+                >
+                    <Link to='/login'>Login</Link>
+                </button>                
             </div>
         </MenuListContainter>
     )
