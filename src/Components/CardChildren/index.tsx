@@ -4,6 +4,7 @@ import { Container, InfoContainer, ActivitiesContainer, Achivied, NotAchivied }f
 import api from '../../Services/api'
 import { IoIosCreate } from "react-icons/io";
 import { ChildrenContext } from "../../Providers/Children"
+import { ModalContext } from "../../Providers/Modal";
 interface Children{
     balance:[],
     email:string,
@@ -31,6 +32,8 @@ const CardChildren = ({children}:CardChildrenProps) =>{
        
     const [childrenActivies, setChildrenActivities] = useState<Activities[]>([])
     const { updateActivitie, getYourChildrens } = useContext(ActivitiesContext)
+    const { handleModal } = useContext(ModalContext)
+    
     const { updateWallet } = useContext(ChildrenContext)
     const FinishingTask = (e:any,task:Activities) =>{
         task.achivied=false
@@ -89,7 +92,7 @@ const CardChildren = ({children}:CardChildrenProps) =>{
                        </div>
                     ))}
                 </NotAchivied>
-                <button className='create-activity'>Criar Atividade</button>
+                <button className='create-activity' onClick={handleModal}>Criar Atividade</button>
             </ActivitiesContainer>
         </Container>
     )
