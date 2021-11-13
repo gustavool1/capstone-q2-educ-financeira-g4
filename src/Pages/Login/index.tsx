@@ -43,7 +43,6 @@ export const Login = () => {
 
   return (
     <>
-      <NavbarHome />
       <Container>
         <ImageContainer>
           <LottieMaker
