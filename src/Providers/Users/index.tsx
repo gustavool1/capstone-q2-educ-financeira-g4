@@ -5,7 +5,7 @@ import api from "../../Services/api";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const UserContext = createContext<UserProviderData>({} as UserProviderData);
+export const UserContext = createContext<UserProviderData>({} as UserProviderData);
 
 interface UserProps {
   children: ReactNode;
@@ -32,11 +32,12 @@ interface UserProviderData {
   Logout: () => void;
   Register: (userData: RegisterUserData) => void;
   UserToken: string;
+  UserName: string;
 }
 
 export const UserProvider = ({ children }: UserProps) => {
   toast.configure();
-
+  const [UserName, setUserName] = useState('')
   const history = useHistory();
   const [UserToken, setUserToken] = useState(
     () => localStorage.getItem("token") || ""
@@ -45,11 +46,13 @@ export const UserProvider = ({ children }: UserProps) => {
   const Login = (userData: UserData) => {
     api
       .post("login", userData)
-      .then((response) => {
+      .then((response) => {        
         localStorage.setItem("userId", response.data.user.id)
         localStorage.setItem("token", response.data.accessToken);
         toast.success("Parabéns, você esta logado!");
         setUserToken(response.data.accessToken);
+        setUserName(response.data.user.name);
+        history.push('/dashboardparents')
       })
       .catch((err) => {
         console.log(err);
@@ -77,7 +80,7 @@ export const UserProvider = ({ children }: UserProps) => {
   };
 
   return (
-    <UserContext.Provider value={{ UserToken, Login, Logout, Register }}>
+    <UserContext.Provider value={{ UserToken, Login, Logout, Register, UserName }}>
       {children}
     </UserContext.Provider>
   );

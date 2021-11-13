@@ -10,6 +10,9 @@ export const NavContainer = styled.nav`
     align-items: center;
     justify-content: center;
     color: #FFFFFF;
+    position: fixed;
+    top: 0;
+    z-index: 2;
 
 
     .btnMenu {        
