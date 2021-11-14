@@ -149,7 +149,10 @@ export const UserProvider = ({ children }: UserProps) => {
       .then((reponse) => {
         setUserData(reponse.data);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e)
+        localStorage.clear()
+      });
   };
 
   return (

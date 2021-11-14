@@ -64,7 +64,10 @@ export const ActivitiesProvider = ({ children }:ActivitiesProviderProps) =>{
              }
          })
           .then((response)=> setChildrenArr([ ...response.data]))
-           .catch((err)=>console.log('getyourChildrens', err))
+           .catch((err)=>{
+               console.log('getyourChildrens', err)
+               localStorage.clear();
+            })
            
     }
     const updateActivitie = (task:Activities) =>{

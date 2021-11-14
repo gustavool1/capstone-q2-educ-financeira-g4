@@ -3,9 +3,8 @@ import { motion } from 'framer-motion';
 
 
 export const NavContainer = styled.nav`
-    height: 80px;
+    min-height: 80px;
     width: 100%;
-    background: #302F4D;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,6 +12,16 @@ export const NavContainer = styled.nav`
     position: fixed;
     top: 0;
     z-index: 2;
+
+    .logOff, .isLog {
+        min-height: 80px;
+        width: 100%;
+        background: #302F4D;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #FFFFFF;
+    }
 
 
     .btnMenu {        
@@ -43,6 +52,15 @@ export const NavContainer = styled.nav`
 
         .desktop {
             display: none;
+        }
+
+        .isLog {
+            background: #7879F1;
+            border-radius: 10px;
+            
+            h1 {
+                display: none;
+            }
         }
     }
 
@@ -210,4 +228,10 @@ export const MenuListContainer = styled(motion.div)`
 
     }
     
+`
+
+export const MobileMenu = styled.div`
+    height: 120px;
+
+
 `
