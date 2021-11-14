@@ -9,7 +9,9 @@ interface ActivitiesProviderData{
     updateActivitie: (task:Activities) => void,
     createActivie: (task:Activities) => void,
     actualActivitieId:number
-    changingActualIdActivitie: (activitieId:number ) => void
+    changingActualIdActivitie: (activitieId:number ) => void,
+    getAmountToPay: () => void
+    amountToPay: number
 } 
 interface ActivitiesProviderProps{
     children:ReactNode
@@ -33,6 +35,15 @@ interface Activities {
     userId: number,
     id?:number
 }
+interface ChildrenObj {
+    achivied: boolean,
+    childrenId: number,
+    frequency: string,
+    id: number,
+    name: string,
+    reward: 1000,
+    userId: 2
+}
 
 
 export const ActivitiesContext = createContext<ActivitiesProviderData>({} as ActivitiesProviderData)
@@ -41,7 +52,7 @@ export const ActivitiesProvider = ({ children }:ActivitiesProviderProps) =>{
     toast.configure()
     const [ childrenArr, setChildrenArr ] = useState<Children[]>([])
     const [ actualActivitieId, setActualActivitieId ]  = useState(0) 
-
+    const [amountToPay, setAmountToPay] = useState<number>(0)
     const [ userId ] = useState(
         () => localStorage.getItem("userId") || ""
     )
@@ -63,9 +74,7 @@ export const ActivitiesProvider = ({ children }:ActivitiesProviderProps) =>{
                 Authorization:`Bearer ${localStorage.getItem('token')}`
             }
         })
-         .then((response)=>{
-             toast.success("Atividade editada com sucesso")
-         })
+         .then(()=> toast.success(("Atividade editada com sucesso")))
          
     }
     const createActivie = (task:Activities) =>{
@@ -75,9 +84,26 @@ export const ActivitiesProvider = ({ children }:ActivitiesProviderProps) =>{
                 Authorization:`Bearer ${localStorage.getItem('token')}`
             }
         })
-         .then((response)=>{
-            toast.success("Atividade criada com sucesso")
+         .then(()=>{
+             toast.success("Atividade adicionada com sucesso")
          })
+    }
+
+    const getAmountToPay = () => {
+        api
+        .get(`/activities?userId=${userId}`, {
+            headers:{
+                Authorization:`Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        .then(response => {
+            setAmountToPay(response.data.filter((el: ChildrenObj) => el.achivied === true)
+            .reduce((acc: number, val: ChildrenObj) => acc + val.reward, 0))
+        })
+        .catch(e => {
+            console.log(e)
+        })
+        
     }
 
     const changingActualIdActivitie = (activitieId:number) =>{
@@ -85,7 +111,7 @@ export const ActivitiesProvider = ({ children }:ActivitiesProviderProps) =>{
     }
     
     return(
-        <ActivitiesContext.Provider value={{getYourChildrens, userId, childrenArr,updateActivitie, createActivie, changingActualIdActivitie, actualActivitieId}}>
+        <ActivitiesContext.Provider value={{getYourChildrens, userId, childrenArr,updateActivitie, createActivie, changingActualIdActivitie, actualActivitieId, getAmountToPay, amountToPay}}>
             { children }
         </ActivitiesContext.Provider>
     )

@@ -10,6 +10,9 @@ export const NavContainer = styled.nav`
     align-items: center;
     justify-content: center;
     color: #FFFFFF;
+    position: fixed;
+    top: 0;
+    z-index: 2;
 
 
     .btnMenu {        
@@ -31,13 +34,7 @@ export const NavContainer = styled.nav`
     .mobile {
         display: none;
     }
-
-    .desktop {
-        display: flex;
-        justify-content: space-between;
-        width: 75%;
-    }
-    
+     
     @media screen and (max-width:768px) {
 
         .btnMenu {
@@ -56,7 +53,7 @@ export const NavSubContainer = styled.div`
     max-width: 1600px;
     display: flex;
     justify-content: space-between;
-    padding: 0 15px;
+    padding: 0 20px;
 
     h1 {
         font-size: 36px;
@@ -92,8 +89,17 @@ export const MenuMobile = styled(motion.div)`
     }
 
 `
+export const MenuDesktop = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
 
-export const MenuListContainter = styled(motion.div)`
+    @media screen and (max-width:768px) { 
+        display: none;
+    }
+`
+
+export const MenuListContainer = styled(motion.div)`
     width: 100%;
     display: flex;
     align-items: center;
@@ -108,6 +114,7 @@ export const MenuListContainter = styled(motion.div)`
             margin-left: 20px;
             font-weight: 500;
         }
+
     }
     
     .btnContainer {
@@ -127,6 +134,8 @@ export const MenuListContainter = styled(motion.div)`
             font-weight: 500; 
             transition: 1s;
             cursor: pointer;
+            color: #FFFFFF;
+            font-size: 16px;
 
             a {
                 margin: 0;
@@ -153,11 +162,15 @@ export const MenuListContainter = styled(motion.div)`
         }
     }
 
+    .btnContainer.parents {
+        justify-content: flex-end;
+    }
+
     @media screen and (max-width:930px) {
 
         .links a {
             font-size: 16px;
-            margin: 0 5px;;
+            margin: 0 5px;
         }
 
         .btnContainer {
@@ -167,12 +180,21 @@ export const MenuListContainter = styled(motion.div)`
     }
 
     @media screen and (max-width:768px) {
-        flex-direction: column;
+        flex-direction: column;       
 
         .links {
             flex-direction: column;
             justify-content: space-between;
-            height: 100px;
+            align-items: center;
+            height: 100px;           
+        }
+
+        div.links.parents {
+            height: 65px;
+        }
+
+        div.links.children {
+            height: 65px;
         }
 
         .btnContainer {
@@ -180,23 +202,12 @@ export const MenuListContainter = styled(motion.div)`
             width: fit-content;
 
             button {
-               font-size: 16px;
-               height: 37px;
-               width: 82px;
-               margin: 0;          
-            }
-
-            .btnLogin {
-                background: transparent;
-                margin-right: 56px;
-            }
-
-            .btnRegister {
-                margin-top: 12px;
-                background: transparent;
-                margin-right: 36px;
+                margin-top: 20px;
+                font-size: 16px;
+                font-weight: 500px;
             }
         }
+
     }
     
 `

@@ -1,11 +1,12 @@
-
 import { createContext, ReactNode, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import api from "../../Services/api";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const UserContext = createContext<UserProviderData>({} as UserProviderData);
+export const UserContext = createContext<UserProviderData>(
+  {} as UserProviderData
+);
 
 interface UserProps {
   children: ReactNode;
@@ -16,27 +17,48 @@ interface UserData {
   password: string;
 }
 
-interface RegisterUserData {
+interface UserDataItens {
   name: string;
   email: string;
   password: string;
   type: string;
-  children?: [];
-  wallet?: string;
-  wishList?: [];
-  balance?: [];
+  wallet: number;
+  wishList: Wish[];
+  balance: Balance;
+  children: Children[];
+  parentId: number;
+  id?: number;
+}
+
+interface Wish {
+  name: string;
+  value: number;
+}
+
+interface Balance {
+  received: number[];
+  spend: number[];
+}
+
+interface Children {
+  childrenId: number;
 }
 
 interface UserProviderData {
   Login: (userData: UserData) => void;
   Logout: () => void;
-  Register: (userData: RegisterUserData) => void;
+  Register: (userData: UserDataItens) => void;
   UserToken: string;
+  userData: UserDataItens;
+  AddWishList: (data: UserDataItens, wish: Wish) => void;
+  SpendBalance: (data: UserDataItens, number: number) => void;
+  ReceivedBalance: (data: UserDataItens, number: number) => void;
+  getUserData: () => void;
 }
 
 export const UserProvider = ({ children }: UserProps) => {
   toast.configure();
-
+  const [userData, setUserData] = useState<UserDataItens>({} as UserDataItens);
   const history = useHistory();
   const [UserToken, setUserToken] = useState(
     () => localStorage.getItem("token") || ""
@@ -46,10 +68,15 @@ export const UserProvider = ({ children }: UserProps) => {
     api
       .post("login", userData)
       .then((response) => {
-        localStorage.setItem("userId", response.data.user.id)
+        console.log(response);
+        localStorage.setItem("userId", response.data.user.id);
         localStorage.setItem("token", response.data.accessToken);
         toast.success("Parabéns, você esta logado!");
         setUserToken(response.data.accessToken);
+        setUserData(response.data.user);
+        response.data.user.type === "parent"
+          ? history.push("/dashboardparents")
+          : history.push("/dashboardkids");
       })
       .catch((err) => {
         console.log(err);
@@ -63,7 +90,7 @@ export const UserProvider = ({ children }: UserProps) => {
     setUserToken("");
   };
 
-  const Register = (ParentUserData: RegisterUserData) => {
+  const Register = (ParentUserData: UserDataItens) => {
     api
       .post("register", ParentUserData)
       .then(() => {
@@ -76,8 +103,69 @@ export const UserProvider = ({ children }: UserProps) => {
       });
   };
 
+  const AddWishList = (data: UserDataItens, wish: Wish) => {
+    data.wishList.push(wish);
+    api
+      .patch(`user/${data.id}`)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const ReceivedBalance = (data: UserDataItens, value: number) => {
+    data.balance.received.push(value);
+    api
+      .patch(`user/${data.id}`)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const SpendBalance = (data: UserDataItens, value: number) => {
+    data.balance.spend.push(value);
+    api
+      .patch(`user/${data.id}`)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getUserData = () => {
+    api
+      .get(`users/${localStorage.getItem("userId")}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((reponse) => {
+        setUserData(reponse.data);
+      })
+      .catch((e) => console.log(e));
+  };
+
   return (
-    <UserContext.Provider value={{ UserToken, Login, Logout, Register }}>
+    <UserContext.Provider
+      value={{
+        UserToken,
+        Login,
+        Logout,
+        Register,
+        userData,
+        AddWishList,
+        SpendBalance,
+        ReceivedBalance,
+        getUserData,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

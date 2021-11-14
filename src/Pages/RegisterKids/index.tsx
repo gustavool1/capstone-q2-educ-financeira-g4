@@ -12,7 +12,6 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField } from "@material-ui/core";
 import { useUser } from "../../Providers/Users";
-import NavbarHome from "../../Components/NavbarHome";
 
 interface RegisterUserData {
   name: string;
@@ -41,13 +40,22 @@ export const RegisterKids = () => {
 
   const onSubmit = (data: RegisterUserData) => {
     const { email, name, password } = data;
-    const ParentUserData = { name, email, password, type: "children" };
+    const ParentUserData = {
+      name,
+      email,
+      password,
+      type: "children",
+      wallet: 0,
+      wishList: [],
+      balance: { spend: [], received: [] },
+      children: [],
+      parentId: 0,
+    };
     Register(ParentUserData);
   };
 
   return (
     <>
-      <NavbarHome />
       <Container>
         <FormContainer>
           <Form onClick={handleSubmit(onSubmit)}>

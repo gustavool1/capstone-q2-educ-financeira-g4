@@ -1,18 +1,15 @@
 import { createContext, ReactNode, useState } from "react";
 import api from "../../Services/api";
 
-
-interface ChildrenUser{
-    email:string,
-    name: string,
-    wallet: number,
-    type: string,
-    wishlist?: [],
-    balance?: [],
-    id: number,
-    parentId: number
-
-    
+interface ChildrenUser {
+  email: string;
+  name: string;
+  wallet: number;
+  type: string;
+  wishlist?: [];
+  balance?: [];
+  id: number;
+  parentId: number;
 }
 
 interface ChildrenProviderData{
@@ -21,8 +18,8 @@ interface ChildrenProviderData{
     changingActualChildren: (childrenId:number) => void
 }
 
-interface ChildrenProviderProps{
-    children: ReactNode
+interface ChildrenProviderProps {
+  children: ReactNode;
 }
 
 

@@ -7,6 +7,7 @@ import {Container, EditingContainer } from './style'
 import { ModalContext } from "../../Providers/Modal";
 import FormEditingActivity from "../../Components/FormEditingActivity";
 
+import ProfileBarParents from "../../Components/ProfileBarParents";
 
 export const DashboardParents = () => {
   const { getYourChildrens, childrenArr } = useContext(ActivitiesContext)
@@ -32,10 +33,12 @@ export const DashboardParents = () => {
             </EditingContainer>
           }
 
+      <ProfileBarParents/>
       {childrenArr.length &&
         <ListChildren children={childrenArr}/>
       }
 
     </Container>
   )
+
 };
