@@ -34,13 +34,14 @@ const CardChildren = ({children}:CardChildrenProps) =>{
     const { updateActivitie, getYourChildrens, createActivie } = useContext(ActivitiesContext)
     const { handleAdding, handleEditing} = useContext(ModalContext)
     const { updateWallet } = useContext(ChildrenContext)
+    
     const FinishingTask = (e:any,task:Activities) =>{
         task.achivied=true
         updateActivitie(task)
         updateWallet(children,task.reward)
         getYourChildrens()
         getYourActivities(children.id)
-        e.target.checked=true
+        e.target.checked=false
 
         
 
@@ -55,11 +56,10 @@ const CardChildren = ({children}:CardChildrenProps) =>{
           .then((response)=>{
               setChildrenActivities(response.data)
           })
-           .catch((err)=>console.log('geyourActivies', err))
+           .catch((err)=>console.log('getyourActivies', err))
     }
     useEffect(()=>{
         getYourActivities(children.id)
-        console.log('a')
     },[createActivie])
     return(
         <Container>
@@ -75,20 +75,20 @@ const CardChildren = ({children}:CardChildrenProps) =>{
                     <h2>Tarefas Concluídas: {childrenActivies.filter((item)=>item.achivied === true).length}</h2>
                     {childrenActivies.filter((item)=>item.achivied === true).map((achivied,key)=>(
                         <div key={key}>
-                            <p>{achivied.name}</p>
+                            <p title={achivied.name}>{achivied.name}</p>
                             <p>R${achivied.reward}</p>
-                            <button onClick={()=>handleEditing(achivied.id)}><IoIosCreate/></button>
 
                         </div>
                     ))}
                 </Achivied>
                 <NotAchivied>
                     <h2>Tarefas a concluir: {childrenActivies.filter((item)=>item.achivied === false).length}</h2>
-                    {childrenActivies.filter((item)=>item.achivied === false).map((achivied,key)=>(
+                    {childrenActivies.filter((item)=>item.achivied === false).map((notAchivied,key)=>(
                        <div key={key}>
-                            <p>{achivied.name}</p>
-                            <p>R${achivied.reward}</p>
-                            <input type="checkbox"  onClick={(e)=>FinishingTask(e,achivied)}/>
+                            <p title={notAchivied.name}>{notAchivied.name}</p>
+                            <p>R${notAchivied.reward}</p>
+                            <button onClick={()=>handleEditing(notAchivied.id)}><IoIosCreate/></button>
+                            <input type="checkbox"  onClick={(e)=>FinishingTask(e,notAchivied)}/>
 
                        </div>
                     ))}

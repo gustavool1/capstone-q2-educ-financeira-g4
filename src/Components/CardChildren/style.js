@@ -14,8 +14,13 @@ export const Container = styled.div`
         border-radius:50%;
     }
     p{
-        font-size:22px;
+        max-width: 15ch;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        
     }
+   
     color: white;
     .create-activity {
       padding: 10px;
@@ -65,19 +70,7 @@ export const Achivied = styled.div`
         justify-content: space-between;
         align-items: center;
         margin:5px;
-        button{
-            width: 20px; 
-            height: 20px;
-            transition: 3s;
-            border: none;
-            background-color: transparent;
-
-            svg{
-                color: white;
-                font-size: 20px;
-            }
-        }
-        
+       
         p:nth-child(1){
             width: 50%;
         }
@@ -101,13 +94,28 @@ export const NotAchivied = styled.div`
             width: 20px; 
             height: 20px;
             transition: 3s;
+            cursor: pointer;
         }
         input:checked{
             opacity: 0;
         }
         p:nth-child(1){
             width: 50%;
+        } 
+        button{
+            width: 20px; 
+            height: 20px;
+            transition: 3s;
+            border: none;
+            background-color: transparent;
+
+            svg{
+                color: white;
+                font-size: 30px;
+                margin-top: -8px;
+            }
         }
+        
       
     }
 `

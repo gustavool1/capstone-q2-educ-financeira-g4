@@ -18,8 +18,8 @@ const ListChildren = ({children}:ListChildrenProps) =>{
     return(
         <Container>
             {children.map((child, key)=>(
-                <div>
-                   <CardChildren key={key} children={child}/>
+                <div key={key} >
+                   <CardChildren children={child}/>
                 </div>
             ))}
         </Container>

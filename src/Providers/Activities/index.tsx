@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useState } from "react";
+import { toast } from "react-toastify";
 import api from '../../Services/api'
 
 interface ActivitiesProviderData{
@@ -37,6 +38,7 @@ interface Activities {
 export const ActivitiesContext = createContext<ActivitiesProviderData>({} as ActivitiesProviderData)
 
 export const ActivitiesProvider = ({ children }:ActivitiesProviderProps) =>{
+    toast.configure()
     const [ childrenArr, setChildrenArr ] = useState<Children[]>([])
     const [ actualActivitieId, setActualActivitieId ]  = useState(0) 
 
@@ -61,6 +63,9 @@ export const ActivitiesProvider = ({ children }:ActivitiesProviderProps) =>{
                 Authorization:`Bearer ${localStorage.getItem('token')}`
             }
         })
+         .then((response)=>{
+             toast.success("Atividade editada com sucesso")
+         })
          
     }
     const createActivie = (task:Activities) =>{
@@ -70,7 +75,9 @@ export const ActivitiesProvider = ({ children }:ActivitiesProviderProps) =>{
                 Authorization:`Bearer ${localStorage.getItem('token')}`
             }
         })
-         .then((response)=>console.log(response))
+         .then((response)=>{
+            toast.success("Atividade criada com sucesso")
+         })
     }
 
     const changingActualIdActivitie = (activitieId:number) =>{
