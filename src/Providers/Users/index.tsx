@@ -53,6 +53,7 @@ interface UserProviderData {
   AddWishList: (data: UserDataItens, wish: Wish) => void;
   SpendBalance: (data: UserDataItens, number: number) => void;
   ReceivedBalance: (data: UserDataItens, number: number) => void;
+  getUserData: () => void;
 }
 
 export const UserProvider = ({ children }: UserProps) => {
@@ -73,7 +74,9 @@ export const UserProvider = ({ children }: UserProps) => {
         toast.success("Parabéns, você esta logado!");
         setUserToken(response.data.accessToken);
         setUserData(response.data.user);
-        history.push("/dashboardparents");
+        response.data.user.type === "parent"
+          ? history.push("/dashboardparents")
+          : history.push("/dashboardkids");
       })
       .catch((err) => {
         console.log(err);
@@ -136,6 +139,19 @@ export const UserProvider = ({ children }: UserProps) => {
       });
   };
 
+  const getUserData = () => {
+    api
+      .get(`users/${localStorage.getItem("userId")}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((reponse) => {
+        setUserData(reponse.data);
+      })
+      .catch((e) => console.log(e));
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -147,6 +163,7 @@ export const UserProvider = ({ children }: UserProps) => {
         AddWishList,
         SpendBalance,
         ReceivedBalance,
+        getUserData,
       }}
     >
       {children}
