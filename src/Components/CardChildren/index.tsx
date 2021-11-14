@@ -4,6 +4,7 @@ import { Container, InfoContainer, ActivitiesContainer, Achivied, NotAchivied }f
 import api from '../../Services/api'
 import { IoIosCreate } from "react-icons/io";
 import { ChildrenContext } from "../../Providers/Children"
+import { ModalContext } from "../../Providers/Modal";
 interface Children{
     balance:[],
     email:string,
@@ -30,18 +31,19 @@ interface Activities {
 const CardChildren = ({children}:CardChildrenProps) =>{
        
     const [childrenActivies, setChildrenActivities] = useState<Activities[]>([])
-    const { updateActivitie, getYourChildrens } = useContext(ActivitiesContext)
+    const { updateActivitie, getYourChildrens, createActivie } = useContext(ActivitiesContext)
+    const { handleAdding, handleEditing} = useContext(ModalContext)
     const { updateWallet } = useContext(ChildrenContext)
+    
     const FinishingTask = (e:any,task:Activities) =>{
-        task.achivied=false
+        task.achivied=true
         updateActivitie(task)
         updateWallet(children,task.reward)
         getYourChildrens()
-        setTimeout(()=>{
-            getYourActivities(children.id)
-            e.target.checked=false
+        getYourActivities(children.id)
+        e.target.checked=false
 
-        }, 500)
+        
 
     }
     const getYourActivities = (userId:number) =>{
@@ -54,11 +56,11 @@ const CardChildren = ({children}:CardChildrenProps) =>{
           .then((response)=>{
               setChildrenActivities(response.data)
           })
-           .catch((err)=>console.log('geyourActivies', err))
+           .catch((err)=>console.log('getyourActivies', err))
     }
     useEffect(()=>{
         getYourActivities(children.id)
-    },[])
+    },[createActivie])
     return(
         <Container>
             <InfoContainer>
@@ -73,23 +75,25 @@ const CardChildren = ({children}:CardChildrenProps) =>{
                     <h2>Tarefas Concluídas: {childrenActivies.filter((item)=>item.achivied === true).length}</h2>
                     {childrenActivies.filter((item)=>item.achivied === true).map((achivied,key)=>(
                         <div key={key}>
-                            <p>{achivied.name}</p>
+                            <p title={achivied.name}>{achivied.name}</p>
                             <p>R${achivied.reward}</p>
-                            <button><IoIosCreate/></button>
+
                         </div>
                     ))}
                 </Achivied>
                 <NotAchivied>
                     <h2>Tarefas a concluir: {childrenActivies.filter((item)=>item.achivied === false).length}</h2>
-                    {childrenActivies.filter((item)=>item.achivied === false).map((achivied,key)=>(
+                    {childrenActivies.filter((item)=>item.achivied === false).map((notAchivied,key)=>(
                        <div key={key}>
-                            <p>{achivied.name}</p>
-                            <p>R${achivied.reward}</p>
-                            <input type="checkbox"  onClick={(e)=>FinishingTask(e,achivied)}/>
+                            <p title={notAchivied.name}>{notAchivied.name}</p>
+                            <p>R${notAchivied.reward}</p>
+                            <button onClick={()=>handleEditing(notAchivied.id)}><IoIosCreate/></button>
+                            <input type="checkbox"  onClick={(e)=>FinishingTask(e,notAchivied)}/>
+
                        </div>
                     ))}
                 </NotAchivied>
-                <button className='create-activity'>Criar Atividade</button>
+                <button className='create-activity' onClick={()=>handleAdding(children.id)}>Criar Atividade</button>
             </ActivitiesContainer>
         </Container>
     )
