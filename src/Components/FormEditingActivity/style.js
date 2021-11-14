@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
 import styled from "styled-components";
+import { motion } from 'framer-motion'
+
 export const Form = styled(motion.form)`
     background-color: white;
     margin: 0 auto;
@@ -49,16 +50,13 @@ export const Form = styled(motion.form)`
             }
         }
     }
-      .input-container{
-        display: flex;
-        flex-direction: column;
+      
         p{
             padding: 0px 20px;
             margin: 0px;
             color: red;
             height: 19px;
         }
-      }
      .add-button{
         background: var(--color-primary);
         font-size:18px;
@@ -68,5 +66,4 @@ export const Form = styled(motion.form)`
         margin: 10px 0px 20px;
         border: none;
         border-radius: 5px;
-    }
-`
+    }`

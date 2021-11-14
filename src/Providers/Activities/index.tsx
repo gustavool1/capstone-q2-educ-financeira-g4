@@ -5,7 +5,10 @@ interface ActivitiesProviderData{
     getYourChildrens: ()=> void,
     userId:string,
     childrenArr: Children[],
-    updateActivitie: (task:Activities) => void
+    updateActivitie: (task:Activities) => void,
+    createActivie: (task:Activities) => void,
+    actualActivitieId:number
+    changingActualIdActivitie: (activitieId:number ) => void
 } 
 interface ActivitiesProviderProps{
     children:ReactNode
@@ -27,7 +30,7 @@ interface Activities {
     name: string
     reward: number
     userId: number,
-    id:number
+    id?:number
 }
 
 
@@ -35,6 +38,8 @@ export const ActivitiesContext = createContext<ActivitiesProviderData>({} as Act
 
 export const ActivitiesProvider = ({ children }:ActivitiesProviderProps) =>{
     const [ childrenArr, setChildrenArr ] = useState<Children[]>([])
+    const [ actualActivitieId, setActualActivitieId ]  = useState(0) 
+
     const [ userId ] = useState(
         () => localStorage.getItem("userId") || ""
     )
@@ -58,9 +63,22 @@ export const ActivitiesProvider = ({ children }:ActivitiesProviderProps) =>{
         })
          
     }
+    const createActivie = (task:Activities) =>{
+        api
+         .post('activities',  task, {
+            headers:{
+                Authorization:`Bearer ${localStorage.getItem('token')}`
+            }
+        })
+         .then((response)=>console.log(response))
+    }
 
+    const changingActualIdActivitie = (activitieId:number) =>{
+        setActualActivitieId(activitieId)
+    }
+    
     return(
-        <ActivitiesContext.Provider value={{getYourChildrens, userId, childrenArr,updateActivitie }}>
+        <ActivitiesContext.Provider value={{getYourChildrens, userId, childrenArr,updateActivitie, createActivie, changingActualIdActivitie, actualActivitieId}}>
             { children }
         </ActivitiesContext.Provider>
     )

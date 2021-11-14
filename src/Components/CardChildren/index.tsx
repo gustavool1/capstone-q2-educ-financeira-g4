@@ -31,20 +31,18 @@ interface Activities {
 const CardChildren = ({children}:CardChildrenProps) =>{
        
     const [childrenActivies, setChildrenActivities] = useState<Activities[]>([])
-    const { updateActivitie, getYourChildrens } = useContext(ActivitiesContext)
-    const { handleModal } = useContext(ModalContext)
-    
+    const { updateActivitie, getYourChildrens, createActivie } = useContext(ActivitiesContext)
+    const { handleAdding, handleEditing} = useContext(ModalContext)
     const { updateWallet } = useContext(ChildrenContext)
     const FinishingTask = (e:any,task:Activities) =>{
-        task.achivied=false
+        task.achivied=true
         updateActivitie(task)
         updateWallet(children,task.reward)
         getYourChildrens()
-        setTimeout(()=>{
-            getYourActivities(children.id)
-            e.target.checked=false
+        getYourActivities(children.id)
+        e.target.checked=true
 
-        }, 500)
+        
 
     }
     const getYourActivities = (userId:number) =>{
@@ -61,7 +59,8 @@ const CardChildren = ({children}:CardChildrenProps) =>{
     }
     useEffect(()=>{
         getYourActivities(children.id)
-    },[])
+        console.log('a')
+    },[createActivie])
     return(
         <Container>
             <InfoContainer>
@@ -78,7 +77,8 @@ const CardChildren = ({children}:CardChildrenProps) =>{
                         <div key={key}>
                             <p>{achivied.name}</p>
                             <p>R${achivied.reward}</p>
-                            <button><IoIosCreate/></button>
+                            <button onClick={()=>handleEditing(achivied.id)}><IoIosCreate/></button>
+
                         </div>
                     ))}
                 </Achivied>
@@ -89,10 +89,11 @@ const CardChildren = ({children}:CardChildrenProps) =>{
                             <p>{achivied.name}</p>
                             <p>R${achivied.reward}</p>
                             <input type="checkbox"  onClick={(e)=>FinishingTask(e,achivied)}/>
+
                        </div>
                     ))}
                 </NotAchivied>
-                <button className='create-activity' onClick={handleModal}>Criar Atividade</button>
+                <button className='create-activity' onClick={()=>handleAdding(children.id)}>Criar Atividade</button>
             </ActivitiesContainer>
         </Container>
     )

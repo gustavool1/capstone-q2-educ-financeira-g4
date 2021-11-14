@@ -1,5 +1,5 @@
 import CardChildren from "../CardChildren"
-
+import { Container }from './style.js'
 interface Children{
     balance:[],
     email:string,
@@ -16,11 +16,13 @@ interface ListChildrenProps{
 }
 const ListChildren = ({children}:ListChildrenProps) =>{
     return(
-        <div>
+        <Container>
             {children.map((child, key)=>(
-               <CardChildren key={key} children={child}/>
+                <div>
+                   <CardChildren key={key} children={child}/>
+                </div>
             ))}
-        </div>
+        </Container>
     )
 }
 export default ListChildren
