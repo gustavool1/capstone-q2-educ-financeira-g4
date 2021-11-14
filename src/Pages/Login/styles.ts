@@ -52,7 +52,7 @@ export const FormContainer = styled.div`
     top: 1rem;
     left: 1rem;
   }
-  span {
+  h3 {
     position: absolute;
     font-weight: 500;
     top: 1.5rem;

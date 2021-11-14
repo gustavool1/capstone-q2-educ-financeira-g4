@@ -40,7 +40,17 @@ export const RegisterParents = () => {
 
   const onSubmit = (data: RegisterUserData) => {
     const { email, name, password } = data;
-    const ParentUserData = { name, email, password, type: "parent" };
+    const ParentUserData = {
+      name,
+      email,
+      password,
+      type: "parent",
+      wallet: 0,
+      wishList: [],
+      balance: { spend: [], received: [] },
+      children: [],
+      parentId: 0,
+    };
     Register(ParentUserData);
   };
 
