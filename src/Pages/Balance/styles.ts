@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100vw;
-  height: Calc(100vh - 80px);
+  height: Calc(100vh);
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -79,6 +79,10 @@ export const WishListHeader = styled.div`
   text-align: center;
   justify-content: center;
   padding-top: 15px;
+  h3 {
+    margin: auto;
+    font-size: 24px;
+  }
 `;
 
 export const Chart = styled.div`
@@ -131,13 +135,18 @@ export const ModalWish = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   border-radius: 10px;
   border: 2px solid black;
   position: absolute;
   z-index: 1;
   margin-top: -80px;
   input {
-    margin-top: 20%;
     border: 1px solid var(--gray-100);
+    padding: 1rem;
+    font-size: 18px;
+  }
+  button {
+    margin-bottom: 80px;
   }
 `;

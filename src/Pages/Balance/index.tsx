@@ -1,5 +1,4 @@
 import React from "react";
-import { HiInformationCircle } from "react-icons/hi";
 import { BsFillPencilFill } from "react-icons/bs";
 import {
   Container,
@@ -15,6 +14,7 @@ import {
   ModalWish,
 } from "./styles";
 import { useState } from "react";
+import { CardWish } from "../../Components/CardWish";
 
 export const Balance = () => {
   const [isOpenBalance, setIsOpenBalance] = useState(false);
@@ -54,18 +54,7 @@ export const Balance = () => {
           <WishListHeader>
             <h3>Lista de desejos</h3>
           </WishListHeader>
-          <ul>
-            <li>
-              <HiInformationCircle />
-              <h3>Skate</h3>
-              <h4>R$200,00</h4>
-            </li>
-            <li>
-              <HiInformationCircle />
-              <h3>playstation 5</h3>
-              <h4>R$5.000,00</h4>
-            </li>
-          </ul>
+          <ul>{/* {<CardWish item={item}/>} */}</ul>
         </WishList>
         {isOpenWish && (
           <ModalWish>

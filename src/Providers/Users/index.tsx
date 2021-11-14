@@ -1,11 +1,12 @@
-
 import { createContext, ReactNode, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import api from "../../Services/api";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export const UserContext = createContext<UserProviderData>({} as UserProviderData);
+export const UserContext = createContext<UserProviderData>(
+  {} as UserProviderData
+);
 
 interface UserProps {
   children: ReactNode;
@@ -16,40 +17,47 @@ interface UserData {
   password: string;
 }
 
-interface RegisterUserData {
+interface UserDataItens {
   name: string;
   email: string;
   password: string;
   type: string;
-  children?: [];
-  wallet?: string;
-  wishList?: [];
-  balance?: [];
+  wallet: number;
+  wishList: Wish[];
+  balance: Balance;
+  children: Children[];
+  parentId: number;
+  id?: number;
 }
 
-interface UserDataResponse {
-  email: string;
+interface Wish {
   name: string;
-  children?: [];
-  wallet?: [];
-  type: string;
-  wishList?: [];
-  balance?: [];
-  parentId?: number;
-  id: number;
+  value: number;
+}
+
+interface Balance {
+  received: number[];
+  spend: number[];
+}
+
+interface Children {
+  childrenId: number;
 }
 
 interface UserProviderData {
   Login: (userData: UserData) => void;
   Logout: () => void;
-  Register: (userData: RegisterUserData) => void;
+  Register: (userData: UserDataItens) => void;
   UserToken: string;
-  userData: UserDataResponse;
+  userData: UserDataItens;
+  AddWishList: (data: UserDataItens, wish: Wish) => void;
+  SpendBalance: (data: UserDataItens, number: number) => void;
+  ReceivedBalance: (data: UserDataItens, number: number) => void;
 }
 
 export const UserProvider = ({ children }: UserProps) => {
   toast.configure();
-  const [userData, setUserData] = useState<UserDataResponse>({} as UserDataResponse)
+  const [userData, setUserData] = useState<UserDataItens>({} as UserDataItens);
   const history = useHistory();
   const [UserToken, setUserToken] = useState(
     () => localStorage.getItem("token") || ""
@@ -58,13 +66,14 @@ export const UserProvider = ({ children }: UserProps) => {
   const Login = (userData: UserData) => {
     api
       .post("login", userData)
-      .then((response) => {        
-        localStorage.setItem("userId", response.data.user.id)
+      .then((response) => {
+        console.log(response);
+        localStorage.setItem("userId", response.data.user.id);
         localStorage.setItem("token", response.data.accessToken);
         toast.success("Parabéns, você esta logado!");
         setUserToken(response.data.accessToken);
         setUserData(response.data.user);
-        history.push('/dashboardparents')
+        history.push("/dashboardparents");
       })
       .catch((err) => {
         console.log(err);
@@ -78,7 +87,7 @@ export const UserProvider = ({ children }: UserProps) => {
     setUserToken("");
   };
 
-  const Register = (ParentUserData: RegisterUserData) => {
+  const Register = (ParentUserData: UserDataItens) => {
     api
       .post("register", ParentUserData)
       .then(() => {
@@ -91,8 +100,55 @@ export const UserProvider = ({ children }: UserProps) => {
       });
   };
 
+  const AddWishList = (data: UserDataItens, wish: Wish) => {
+    data.wishList.push(wish);
+    api
+      .patch(`user/${data.id}`)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const ReceivedBalance = (data: UserDataItens, value: number) => {
+    data.balance.received.push(value);
+    api
+      .patch(`user/${data.id}`)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const SpendBalance = (data: UserDataItens, value: number) => {
+    data.balance.spend.push(value);
+    api
+      .patch(`user/${data.id}`)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
-    <UserContext.Provider value={{ UserToken, Login, Logout, Register, userData }}>
+    <UserContext.Provider
+      value={{
+        UserToken,
+        Login,
+        Logout,
+        Register,
+        userData,
+        AddWishList,
+        SpendBalance,
+        ReceivedBalance,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
