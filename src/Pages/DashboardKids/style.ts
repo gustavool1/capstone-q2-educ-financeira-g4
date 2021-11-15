@@ -1,10 +1,14 @@
 import styled from "styled-components";
-export const Container = styled.div`
+export const ContainerDesktop = styled.div`
+  display: none;
   h2 {
     font-size: 40px;
     text-align: center;
     margin: 20px;
     margin-top: 100px;
+  }
+  @media (min-width: 768px) {
+    display: initial;
   }
 `;
 
@@ -21,7 +25,7 @@ export const CardList = styled.ul`
 
     h2 {
       color: #ffffff;
-      margin-top: 50px;
+      margin: 50px 0 0 0;
     }
   }
 `;
@@ -56,5 +60,43 @@ export const ActivitiesList = styled.ul`
     .trashIcon {
       color: red;
     }
+  }
+  h3 + div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    svg {
+      font-size: 24px;
+      color: green;
+      margin: 0 auto;
+      margin: 15px;
+    }
+    p {
+      color: green;
+      font-weight: bold;
+    }
+  }
+
+  h3 + div {
+    .sadIcon {
+      color: red;
+      font-size: 34px;
+    }
+    .nothingDone {
+      color: red;
+    }
+  }
+`;
+
+export const ContainerMobile = styled.div`
+  h2 {
+    font-size: 40px;
+    text-align: center;
+    margin: 20px;
+    margin-top: 100px;
+  }
+
+  @media (min-width: 768px) {
+    display: none;
   }
 `;
