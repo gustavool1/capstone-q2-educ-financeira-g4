@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from "react"
 import { ActivitiesContext } from "../../Providers/Activities"
-import { Container, InfoContainer, ActivitiesContainer, Achivied, NotAchivied }from "./style.js"
+import { Container, Achivied, NotAchivied , Front, Back, ButtonsContainer}from "./style.js"
 import api from '../../Services/api'
+import ReactCardFlip from 'react-card-flip';
 import { IoIosCreate } from "react-icons/io";
 import { ChildrenContext } from "../../Providers/Children"
+import { ModalContext } from "../../Providers/Modal";
 interface Children{
     balance:[],
     email:string,
@@ -27,21 +29,24 @@ interface Activities {
     userId: number,
     id:number
 }
+
 const CardChildren = ({children}:CardChildrenProps) =>{
        
     const [childrenActivies, setChildrenActivities] = useState<Activities[]>([])
-    const { updateActivitie, getYourChildrens } = useContext(ActivitiesContext)
+    const [ isFlipped, setIsFlipped ] = useState(false)
+    const { updateActivitie, getYourChildrens, createActivie } = useContext(ActivitiesContext)
+    const { handleAdding, handleEditing} = useContext(ModalContext)
     const { updateWallet } = useContext(ChildrenContext)
+    
     const FinishingTask = (e:any,task:Activities) =>{
-        task.achivied=false
+        task.achivied=true
         updateActivitie(task)
         updateWallet(children,task.reward)
         getYourChildrens()
-        setTimeout(()=>{
-            getYourActivities(children.id)
-            e.target.checked=false
+        getYourActivities(children.id)
+        e.target.checked=false
 
-        }, 500)
+        
 
     }
     const getYourActivities = (userId:number) =>{
@@ -54,44 +59,49 @@ const CardChildren = ({children}:CardChildrenProps) =>{
           .then((response)=>{
               setChildrenActivities(response.data)
           })
-           .catch((err)=>console.log('geyourActivies', err))
+           .catch((err)=>console.log('getyourActivies', err))
     }
+    
     useEffect(()=>{
         getYourActivities(children.id)
-    },[])
+    },[createActivie])
     return(
-        <Container>
-            <InfoContainer>
-                <img src='https://d3ugyf2ht6aenh.cloudfront.net/stores/001/829/347/themes/amazonas/img-1347263166-1629736427-e77800fdb2094c2bcc4fb6f44d82ce1d1629736428.jpg?1211721950' alt='img'/>
-                <div>
+            <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+                <Front>
+                    <img src='https://d3ugyf2ht6aenh.cloudfront.net/stores/001/829/347/themes/amazonas/img-1347263166-1629736427-e77800fdb2094c2bcc4fb6f44d82ce1d1629736428.jpg?1211721950' alt='img'/>
                     <p>{children.name}</p>
-                    <p>R${children.wallet}</p>
-                </div>
-            </InfoContainer>
-            <ActivitiesContainer>
-                <Achivied>
-                    <h2>Tarefas Concluídas: {childrenActivies.filter((item)=>item.achivied === true).length}</h2>
-                    {childrenActivies.filter((item)=>item.achivied === true).map((achivied,key)=>(
+                    <p>Saldo: R${children.wallet}</p>
+                    <button className='create-activity' onClick={()=>setIsFlipped(!isFlipped)}>Ver mais</button>
+                </Front>
+                <Back>
+                    <Achivied>
+                        <h2>Tarefas Concluídas: {childrenActivies.filter((item)=>item.achivied === true).length}</h2>
+                        {childrenActivies.filter((item)=>item.achivied === true).map((achivied,key)=>(
+                            <div key={key}>
+                                <p title={achivied.name}>{achivied.name}</p>
+                                <p>R${achivied.reward}</p>
+
+                            </div>
+                        ))}
+                    </Achivied>
+                    <NotAchivied>
+                        <h2>Tarefas a concluir: {childrenActivies.filter((item)=>item.achivied === false).length}</h2>
+                        {childrenActivies.filter((item)=>item.achivied === false).map((notAchivied,key)=>(
                         <div key={key}>
-                            <p>{achivied.name}</p>
-                            <p>R${achivied.reward}</p>
-                            <button><IoIosCreate/></button>
+                                <p title={notAchivied.name}>{notAchivied.name}</p>
+                                <p>R${notAchivied.reward}</p>
+                                <button onClick={()=>handleEditing(notAchivied.id)}><IoIosCreate/></button>
+                                <input type="checkbox"  onClick={(e)=>FinishingTask(e,notAchivied)}/>
+
                         </div>
-                    ))}
-                </Achivied>
-                <NotAchivied>
-                    <h2>Tarefas a concluir: {childrenActivies.filter((item)=>item.achivied === false).length}</h2>
-                    {childrenActivies.filter((item)=>item.achivied === false).map((achivied,key)=>(
-                       <div key={key}>
-                            <p>{achivied.name}</p>
-                            <p>R${achivied.reward}</p>
-                            <input type="checkbox"  onClick={(e)=>FinishingTask(e,achivied)}/>
-                       </div>
-                    ))}
-                </NotAchivied>
-                <button className='create-activity'>Criar Atividade</button>
-            </ActivitiesContainer>
-        </Container>
+                        ))}
+                    </NotAchivied>
+                    <ButtonsContainer>
+                        <button className='create-activity' onClick={()=>setIsFlipped(!isFlipped)}>Virar</button>
+                        <button className='create-activity' onClick={()=>handleAdding(children.id)}>Criar Atividade</button>
+                    </ButtonsContainer>
+                </Back>
+            </ReactCardFlip>
     )
 }
 export default CardChildren

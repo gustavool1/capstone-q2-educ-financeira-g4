@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 export const VideoContainer = styled.div`
   height: fit-content;
   background-color: #9b5de5;
+  margin-top: 80px;
 `;
 
 export const HowItWorks = styled.div`

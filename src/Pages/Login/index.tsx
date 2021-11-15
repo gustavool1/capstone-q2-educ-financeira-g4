@@ -24,7 +24,7 @@ export const Login = () => {
 
   const schema = yup.object().shape({
     email: yup.string().required("Campo obrigatório!").email("Email inválido"),
-    password: yup.string(),
+    password: yup.string().required("Campo obrigatório!"),
   });
 
   const { Login } = useUser();
@@ -35,7 +35,7 @@ export const Login = () => {
     formState: { errors },
   } = useForm<RegisterUserData>({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data: RegisterUserData) => {
+  const onSubmitFunction = (data: RegisterUserData) => {
     Login(data);
   };
 
@@ -57,7 +57,7 @@ export const Login = () => {
             <FormContainer>
               <h1>Login</h1>
               <h3 onClick={() => setIsChoosed(!isChoosed)}>voltar</h3>
-              <Form onClick={handleSubmit(onSubmit)}>
+              <Form onSubmit={handleSubmit(onSubmitFunction)}>
                 <TextField
                   margin="dense"
                   type="text"
