@@ -8,6 +8,7 @@ export const Container = styled.div`
         margin-bottom: 20px;
         font-size: 28px;
     }
+    margin-top: 80px;
 
 `
 export const IntroduceContainer = styled.div`

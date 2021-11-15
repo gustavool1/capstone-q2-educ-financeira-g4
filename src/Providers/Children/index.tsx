@@ -1,27 +1,25 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode, useState } from "react";
 import api from "../../Services/api";
 
-
-interface ChildrenUser{
-    email:string,
-    password: string,
-    name: string,
-    wallet: number,
-    type: string,
-    wishlist?: [],
-    balance?: [],
-    id: number,
-    parentId: number
-
-    
+interface ChildrenUser {
+  email: string;
+  name: string;
+  wallet: number;
+  type: string;
+  wishlist?: [];
+  balance?: [];
+  id: number;
+  parentId: number;
 }
 
 interface ChildrenProviderData{
-    updateWallet: (childrenUser:ChildrenUser, amount:number) => void
+    updateWallet: (childrenUser:ChildrenUser, amount:number) => void,
+    actualChildren: number,
+    changingActualChildren: (childrenId:number) => void
 }
 
-interface ChildrenProviderProps{
-    children: ReactNode
+interface ChildrenProviderProps {
+  children: ReactNode;
 }
 
 
@@ -29,9 +27,10 @@ export const ChildrenContext = createContext<ChildrenProviderData>({} as Childre
 
 export const ChildrenProvider = ({ children }:ChildrenProviderProps) =>{
     
+    const [actualChildren, setActualChildren] = useState(0)
     const updateWallet = (childrenUser:ChildrenUser, amount:number) =>{
         const { id } = childrenUser
-        childrenUser.wallet+=amount
+        childrenUser.wallet+=Number(amount)
         api
          .patch(`users/${id}`, childrenUser,{
              headers:{
@@ -39,8 +38,13 @@ export const ChildrenProvider = ({ children }:ChildrenProviderProps) =>{
             }
          })
     }
+    const changingActualChildren = (childrenId:number) =>{
+        setActualChildren(childrenId)
+    }
+    
+    
     return(
-        <ChildrenContext.Provider value={{updateWallet}}>
+        <ChildrenContext.Provider value={{updateWallet, actualChildren, changingActualChildren}}>
             {children}
         </ChildrenContext.Provider>
     )

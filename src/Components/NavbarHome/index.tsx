@@ -1,43 +1,91 @@
-
-import { MenuMobile, NavContainer, NavSubContainer } from "./style"
+import {
+  MenuDesktop,
+  MenuMobile,
+  MobileMenu,
+  NavContainer,
+  NavSubContainer,
+} from "./style";
 import { GiHamburgerMenu } from "react-icons/gi";
 import MenuList from "./menuList";
-import { useState } from "react";
-
-
+import { Children, useContext, useState } from "react";
+import { UserContext } from "../../Providers/Users";
+import MenuParentsLogin from "./menuParentsLogin";
+import MenuChildrensLogin from "./menuChildrensLogin";
+import icon from "../../assets/images/iconProfile.jpg";
+import { motion } from "framer-motion";
+import { ActivitiesContext } from "../../Providers/Activities";
 
 const NavbarHome = () => {
-    const [showMenu, setshowMenu] = useState<boolean>(false)
-    
-    return (
-        <NavContainer>
+  const [showMenu, setshowMenu] = useState<boolean>(false);
+  const { UserToken, userData } = useContext(UserContext);
+  const { amountToPay } = useContext(ActivitiesContext)
 
-            <NavSubContainer>
-                <h1>FinanceKids</h1>
+  return (
+    <NavContainer>
+      <div className={!!UserToken ? "isLog" : "logOff"}>
+        <NavSubContainer>
+          <h1>FinanceKids</h1>
 
-                <span className='desktop'>
-                    <MenuList/>
+          <MenuDesktop>
+            {!!UserToken ? (
+              userData.type === "parent" ? (
+                <MenuParentsLogin />
+              ) : (
+                <MenuChildrensLogin />
+              )
+            ) : (
+              <MenuList />
+            )}
+          </MenuDesktop>
+
+          {!!UserToken && <MobileMenu>
+            {userData.type === "children" ? (
+              <div className="userLog">
+                <img src={icon} alt="profile face" />
+
+                <span>
+                  <h3>{userData.name}</h3>
+                  <p>Saldo: R$ {Number(userData.wallet).toFixed(2)} </p>
                 </span>
+              </div>
+            ) : (
+              <div className="userLog">
+                <img src={icon} alt="profile face" />
 
-                {showMenu && <MenuMobile 
-                        initial={{opacity:0 , x:-300}}
-                        transition={{ duration: 1}}
-                        animate={{opacity:1, x: 0}}
-                    >
-                        <MenuList/>
-                </MenuMobile>
-                }
+                <span>
+                  <h3>{userData.name}</h3>
+                  <p>A pagar: R$ {Number(amountToPay).toFixed(2)} </p>
+                </span>
+              </div>
+            )}
+          </MobileMenu>}
 
-            </NavSubContainer>
+          {showMenu && (
+            <MenuMobile
+              
+            >
+              <motion.div className={!!UserToken ? "menuMobLogin" : "menuMobOff"}
+              initial={{ opacity: 0, x: -300 }}
+              transition={{ duration: 1 }}
+              animate={{ opacity: 1, x: 0 }}>
+                {!UserToken && <MenuList />}
+                {UserToken && userData.type === "parent" && (
+                  <MenuParentsLogin />
+                )}
+                {UserToken && userData.type === "children" && (
+                  <MenuChildrensLogin />
+                )}
+              </motion.div>
+            </MenuMobile>
+          )}
+        </NavSubContainer>
 
-            <button 
-                className='btnMenu'
-                onClick={() => setshowMenu(!showMenu)}
-            >                
-                <GiHamburgerMenu/>
-            </button>
-        </NavContainer>
-    )
-}
+        <button className="btnMenu" onClick={() => setshowMenu(!showMenu)}>
+          <GiHamburgerMenu />
+        </button>
+      </div>
+    </NavContainer>
+  );
+};
 
-export default NavbarHome
+export default NavbarHome;

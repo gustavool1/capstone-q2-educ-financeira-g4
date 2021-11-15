@@ -2,6 +2,7 @@
 import { ReactNode } from "react";
 import { ActivitiesProvider } from "./Activities";
 import { ChildrenProvider } from "./Children";
+import { ModalProvider } from "./Modal";
 import { UserProvider } from "./Users";
 
 interface UserProps {
@@ -13,7 +14,9 @@ export const Provider = ({ children }: UserProps) => {
     <UserProvider>
       <ActivitiesProvider>
         <ChildrenProvider>
-          {children}
+          <ModalProvider>
+            {children}
+          </ModalProvider>
         </ChildrenProvider>
       </ActivitiesProvider>
     </UserProvider>

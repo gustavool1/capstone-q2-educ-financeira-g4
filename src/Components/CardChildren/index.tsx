@@ -8,13 +8,14 @@ import {
   NotAchivied,
 } from "./style.js";
 import api from "../../Services/api";
+import { IoIosCreate } from "react-icons/io";
 import { ChildrenContext } from "../../Providers/Children";
+import { ModalContext } from "../../Providers/Modal";
 interface Children {
   balance: [];
   email: string;
   id: number;
   parentId: number;
-  password: string;
   wallet: number;
   wishlist: [];
   name: string;
@@ -35,17 +36,18 @@ interface Activities {
 }
 const CardChildren = ({ children }: CardChildrenProps) => {
   const [childrenActivies, setChildrenActivities] = useState<Activities[]>([]);
-  const { updateActivitie, getYourChildrens } = useContext(ActivitiesContext);
+  const { updateActivitie, getYourChildrens, createActivie } =
+    useContext(ActivitiesContext);
+  const { handleAdding, handleEditing } = useContext(ModalContext);
   const { updateWallet } = useContext(ChildrenContext);
+
   const FinishingTask = (e: any, task: Activities) => {
-    task.achivied = false;
+    task.achivied = true;
     updateActivitie(task);
     updateWallet(children, task.reward);
     getYourChildrens();
-    setTimeout(() => {
-      getYourActivities(children.id);
-      e.target.checked = false;
-    }, 500);
+    getYourActivities(children.id);
+    e.target.checked = false;
   };
   const getYourActivities = (userId: number) => {
     api
@@ -57,15 +59,18 @@ const CardChildren = ({ children }: CardChildrenProps) => {
       .then((response) => {
         setChildrenActivities(response.data);
       })
-      .catch((err) => console.log("geyourActivies", err));
+      .catch((err) => console.log("getyourActivies", err));
   };
   useEffect(() => {
     getYourActivities(children.id);
-  }, [children.id]);
+  }, [createActivie]);
   return (
     <Container>
       <InfoContainer>
-        <img src="https://d3ugyf2ht6aenh.cloudfront.net/stores/001/829/347/themes/amazonas/img-1347263166-1629736427-e77800fdb2094c2bcc4fb6f44d82ce1d1629736428.jpg?1211721950" />
+        <img
+          src="https://d3ugyf2ht6aenh.cloudfront.net/stores/001/829/347/themes/amazonas/img-1347263166-1629736427-e77800fdb2094c2bcc4fb6f44d82ce1d1629736428.jpg?1211721950"
+          alt="img"
+        />
         <div>
           <p>{children.name}</p>
           <p>R${children.wallet}</p>
@@ -81,12 +86,8 @@ const CardChildren = ({ children }: CardChildrenProps) => {
             .filter((item) => item.achivied === true)
             .map((achivied, key) => (
               <div key={key}>
-                <p>{achivied.name}</p>
-                <p>{achivied.reward}</p>
-                <input
-                  type="checkbox"
-                  onClick={(e) => FinishingTask(e, achivied)}
-                />
+                <p title={achivied.name}>{achivied.name}</p>
+                <p>R${achivied.reward}</p>
               </div>
             ))}
         </Achivied>
@@ -97,10 +98,26 @@ const CardChildren = ({ children }: CardChildrenProps) => {
           </h2>
           {childrenActivies
             .filter((item) => item.achivied === false)
-            .map((achivied, key) => (
-              <p key={key}>{achivied.name}</p>
+            .map((notAchivied, key) => (
+              <div key={key}>
+                <p title={notAchivied.name}>{notAchivied.name}</p>
+                <p>R${notAchivied.reward}</p>
+                <button onClick={() => handleEditing(notAchivied.id)}>
+                  <IoIosCreate />
+                </button>
+                <input
+                  type="checkbox"
+                  onClick={(e) => FinishingTask(e, notAchivied)}
+                />
+              </div>
             ))}
         </NotAchivied>
+        <button
+          className="create-activity"
+          onClick={() => handleAdding(children.id)}
+        >
+          Criar Atividade
+        </button>
       </ActivitiesContainer>
     </Container>
   );

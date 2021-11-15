@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100vw;
-  height: Calc(100vh - 80px);
+  min-height: Calc(100vh - 80px);
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   align-content: center;
+  margin-top: 80px;
 `;
 
 export const ImageContainer = styled.div`
@@ -52,7 +53,7 @@ export const FormContainer = styled.div`
     top: 1rem;
     left: 1rem;
   }
-  span {
+  h3 {
     position: absolute;
     font-weight: 500;
     top: 1.5rem;

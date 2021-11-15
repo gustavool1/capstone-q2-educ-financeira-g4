@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Container,
   Form,
@@ -11,8 +11,8 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField } from "@material-ui/core";
-import { useUser } from "../../Providers/Users";
-import NavbarHome from "../../Components/NavbarHome";
+import { UserContext, useUser } from "../../Providers/Users";
+import { useHistory } from "react-router";
 
 interface RegisterUserData {
   name: string;
@@ -22,6 +22,15 @@ interface RegisterUserData {
 }
 
 export const RegisterKids = () => {
+  const history = useHistory();
+  const { userData } = useContext(UserContext)
+
+  useEffect(() => {
+    if (userData.type !== 'parent') {
+        history.push('/')
+    }
+  })
+
   const schema = yup.object().shape({
     name: yup.string().required("Campo obrigatório!"),
     email: yup.string().required("Campo obrigatório!").email("Email inválido"),
@@ -39,18 +48,27 @@ export const RegisterKids = () => {
     formState: { errors },
   } = useForm<RegisterUserData>({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data: RegisterUserData) => {
+  const onSubmitFunction = (data: RegisterUserData) => {
     const { email, name, password } = data;
-    const ParentUserData = { name, email, password, type: "children" };
+    const ParentUserData = {
+      name,
+      email,
+      password,
+      type: "children",
+      wallet: 0,
+      wishList: [],
+      balance: { spend: [], received: [] },
+      children: [],
+      parentId: Number(userData.id),
+    };
     Register(ParentUserData);
   };
 
   return (
     <>
-      <NavbarHome />
       <Container>
         <FormContainer>
-          <Form onClick={handleSubmit(onSubmit)}>
+          <Form onSubmit={handleSubmit(onSubmitFunction)}>
             <h1>Cadastrar dependente</h1>
             <TextField
               margin="dense"
