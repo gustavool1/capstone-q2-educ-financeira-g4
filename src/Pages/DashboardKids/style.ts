@@ -10,7 +10,7 @@ export const Container = styled.div`
 export const CardList = styled.ul`
   display: flex;
   justify-content: space-evenly;
-  li {
+  .card {
     width: 300px;
     height: 587px;
     background-color: #302f4d;
@@ -21,6 +21,16 @@ export const CardList = styled.ul`
     h2 {
       color: #ffffff;
       margin: 50px 0;
+    }
+  }
+`;
+
+export const ActivitiesList = styled.ul`
+  li {
+    margin: 20px 0;
+    p {
+      color: #fff;
+      margin-left: 10px;
     }
   }
 `;
