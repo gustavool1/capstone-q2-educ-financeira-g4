@@ -21,6 +21,9 @@ export const NavContainer = styled.nav`
         align-items: center;
         justify-content: center;
         color: #FFFFFF;
+        position: fixed;
+        top: 0;
+        z-index: 2;
     }
 
 
@@ -57,6 +60,13 @@ export const NavContainer = styled.nav`
         .isLog {
             background: #7879F1;
             border-radius: 10px;
+
+            .btnMenu {
+                position: fixed;
+                z-index: 1;
+                top: 5px;
+                right: 10px;
+            }
             
             h1 {
                 display: none;
@@ -94,16 +104,38 @@ export const NavSubContainer = styled.div`
 export const MenuMobile = styled(motion.div)`
     display: none;
 
+    .menuMobOff {
+        display: none;
+    }
+
     @media screen and (max-width:768px) {
         display: block;
-        background: #302F4D;
-        position: absolute;
-        color: #FFFFFF;
-        top: 80px;
-        left: 0;
-        width: 100%;
-        z-index: 1;
-        padding: 20px ;
+
+        .menuMobOff {
+            display: block;
+            background: #302F4D;
+            position: absolute;
+            color: #FFFFFF;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            z-index: 1;
+            padding: 20px ; 
+        }
+
+        .menuMobLogin {
+            display: block;
+            background: #7879F1;
+            position: absolute;
+            color: #FFFFFF;
+            top: 160px;
+            left: 0;
+            width: 100%;
+            z-index: 1;
+            padding: 20px ;  
+            border-top: 1px dashed #FFFFFF;
+        }
+        
     }
 
 `
@@ -231,7 +263,44 @@ export const MenuListContainer = styled(motion.div)`
 `
 
 export const MobileMenu = styled.div`
-    height: 120px;
+    display: none;
+    
+    @media screen and (max-width: 768px) {
+        height: 170px;
+        width: 100%;
+        display: flex;
+
+        .userLog {
+            display: flex;
+            flex-direction: column;
+            margin: auto 0;
+            width: 100%;
+            padding-left: 20px;
+        
+
+            img {
+                width: 100px;
+                height: 100px;
+                border-radius: 100%;
+            } 
+
+            span {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                h3 {
+                    margin-top: 5px;
+                    margin-left: 10px;
+                }
+
+                p {
+                    font-weight: 500;
+                }
+            }
+        }
+
+    }
 
 
 `
