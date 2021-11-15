@@ -11,19 +11,53 @@ import {
   RightSide,
   WishList,
   WishListHeader,
-  ModalWish,
+  WishListContent,
 } from "./styles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CardWish } from "../../Components/CardWish";
+import { useUser } from "../../Providers/Users";
+
+interface BalanceProp {
+  date?: string;
+  move?: number;
+}
+
+interface Wish {
+  name: string;
+  value: number;
+}
 
 export const Balance = () => {
   const [isOpenBalance, setIsOpenBalance] = useState(false);
   const [isOpenWish, setIsOpenWish] = useState(false);
 
-  const [moves, setMoves] = useState("");
+  const { userData, getUserData, ReceivedBalance, SpendBalance, AddWishList } =
+    useUser();
 
-  const HandleClick = () => {};
+  const [received, setReceived] = useState(0);
+  const [spend, setSpend] = useState(0);
+  const [wishName, setWishName] = useState("");
+  const [wishPrice, setWishPrice] = useState(0);
 
+  const HandleClickBalance = () => {
+    spend !== 0 && SpendBalance(userData, spend);
+    received !== 0 && ReceivedBalance(userData, received);
+    setSpend(0);
+    setReceived(0);
+    getUserData();
+  };
+
+  const HandleClickWish = () => {
+    const wish = { name: wishName, value: wishPrice };
+    console.log(wish);
+    AddWishList(userData, wish);
+  };
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
+  console.log(userData);
   return (
     <Container>
       <LeftSide>
@@ -35,14 +69,38 @@ export const Balance = () => {
         {isOpenBalance && (
           <ModalBalance>
             <h2>Balanço Financeiras</h2>
-            <BankStatement></BankStatement>
-            <h2>Total </h2>
+            <BankStatement>
+              {userData.balance ? (
+                userData.balance.map((item: BalanceProp, index: number) => (
+                  <li key={index}>
+                    <span>{item.date && item.date}</span>
+                    <strong>
+                      {" R$ "}
+                      {item.move && item.move.toFixed(2).replace(".", ",")}
+                    </strong>
+                  </li>
+                ))
+              ) : (
+                <p>"Sem movimentações!"</p>
+              )}
+            </BankStatement>
+            <h2>{`Total:   ${userData.wallet
+              .toFixed(2)
+              .replace(".", ",")}`}</h2>
+            <label>Recebido</label>
             <Input
-              placeholder="entrada"
-              onChange={(e) => setMoves(e.target.value)}
+              placeholder="Recebido"
+              onChange={(e) => {
+                setReceived(Number(e.target.value));
+                console.log(e.target.value);
+              }}
             />
-            <Input placeholder="saida" />
-            <Button onClick={() => HandleClick()}>Enviar</Button>
+            <label className="secondLabel">Pago</label>
+            <Input
+              placeholder="Pago"
+              onChange={(e) => setSpend(Number(e.target.value) * -1)}
+            />
+            <Button onClick={() => HandleClickBalance()}>Enviar</Button>
             <Button onClick={() => setIsOpenBalance(!isOpenBalance)}>
               Sair
             </Button>
@@ -52,23 +110,34 @@ export const Balance = () => {
       <RightSide>
         <WishList>
           <WishListHeader>
-            <h3>Lista de desejos</h3>
-          </WishListHeader>
-          <ul>{/* {<CardWish item={item}/>} */}</ul>
-        </WishList>
-        {isOpenWish && (
-          <ModalWish>
-            <WishListHeader>
+            {isOpenWish ? (
               <h3>Criar novo desejo</h3>
-            </WishListHeader>
-            <Input
-              placeholder="nome"
-              onChange={(e) => setMoves(e.target.value)}
-            />
-            <Input placeholder="valor" />
-            <Button onClick={() => HandleClick()}>Enviar</Button>
-          </ModalWish>
-        )}
+            ) : (
+              <h3>Lista de desejos</h3>
+            )}
+          </WishListHeader>
+          {isOpenWish ? (
+            <WishListContent>
+              <label>Nome do item</label>
+              <Input
+                placeholder="nome"
+                onChange={(e) => setWishName(e.target.value)}
+              />
+              <label>Valor do item</label>
+              <Input
+                placeholder="valor"
+                onChange={(e) => setWishPrice(Number(e.target.value))}
+              />
+              <Button onClick={() => HandleClickWish()}>Enviar</Button>
+            </WishListContent>
+          ) : (
+            <WishListContent>
+              {userData.wishlist.map((item: Wish, index: number) => (
+                <CardWish key={index} item={item} />
+              ))}
+            </WishListContent>
+          )}
+        </WishList>
         <Button onClick={() => setIsOpenWish(!isOpenWish)}>
           {isOpenWish ? "Fechar criar desejo" : "Criar desejo"}
         </Button>
