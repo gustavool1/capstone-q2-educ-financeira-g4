@@ -23,8 +23,8 @@ interface UserDataItens {
   password: string;
   type: string;
   wallet: number;
-  wishList: Wish[];
-  balance: Balance;
+  wishlist: Wish[];
+  balance: Balance[];
   children: Children[];
   parentId: number;
   id?: number;
@@ -36,8 +36,8 @@ interface Wish {
 }
 
 interface Balance {
-  received: number[];
-  spend: number[];
+  date?: string;
+  move?: number;
 }
 
 interface Children {
@@ -68,7 +68,6 @@ export const UserProvider = ({ children }: UserProps) => {
     api
       .post("login", userData)
       .then((response) => {
-        console.log(response);
         localStorage.setItem("userId", response.data.user.id);
         localStorage.setItem("token", response.data.accessToken);
         toast.success("Parabéns, você esta logado!");
@@ -104,9 +103,14 @@ export const UserProvider = ({ children }: UserProps) => {
   };
 
   const AddWishList = (data: UserDataItens, wish: Wish) => {
-    data.wishList.push(wish);
+    data.wishlist.push(wish);
+    console.log(data);
     api
-      .patch(`user/${data.id}`)
+      .patch(`users/${data.id}`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((response) => {
         console.log(response.data);
       })
@@ -116,9 +120,15 @@ export const UserProvider = ({ children }: UserProps) => {
   };
 
   const ReceivedBalance = (data: UserDataItens, value: number) => {
-    data.balance.received.push(value);
+    const send = { date: new Date().toLocaleString(), move: value };
+    data.balance.push(send);
+    data.wallet += value;
     api
-      .patch(`user/${data.id}`)
+      .patch(`users/${data.id}`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((response) => {
         console.log(response.data);
       })
@@ -128,9 +138,15 @@ export const UserProvider = ({ children }: UserProps) => {
   };
 
   const SpendBalance = (data: UserDataItens, value: number) => {
-    data.balance.spend.push(value);
+    const send = { date: new Date().toLocaleString(), move: value };
+    data.balance.push(send);
+    data.wallet += value;
     api
-      .patch(`user/${data.id}`)
+      .patch(`users/${data.id}`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((response) => {
         console.log(response.data);
       })

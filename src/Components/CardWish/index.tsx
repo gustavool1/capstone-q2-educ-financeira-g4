@@ -1,11 +1,16 @@
 import { HiInformationCircle } from "react-icons/hi";
+import { Li } from "./styles";
 
-export const CardWish = () => {
+interface WishProps {
+  item: { name: string; value: number };
+}
+
+export const CardWish = ({ item }: WishProps) => {
   return (
-    <li>
+    <Li>
       <HiInformationCircle />
-      {/* <h3>{item.name}</h3>
-      <h4>R${item.value}</h4> */}
-    </li>
+      <h3>{item.name}</h3>
+      <h4>R${item.value.toFixed(2).replace(".", ",")}</h4>
+    </Li>
   );
 };

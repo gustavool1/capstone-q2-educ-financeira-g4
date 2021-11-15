@@ -46,8 +46,8 @@ export const RegisterParents = () => {
       password,
       type: "parent",
       wallet: 0,
-      wishList: [],
-      balance: { spend: [], received: [] },
+      wishlist: [],
+      balance: [],
       children: [],
       parentId: 0,
     };
