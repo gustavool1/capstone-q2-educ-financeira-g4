@@ -3,13 +3,13 @@ import { UserContext } from '../Providers/Users'
 import { Redirect, Route as ReactDOMRoute } from 'react-router-dom'
 
 interface RoutesProps {
-    isPrivate?: boolean,
+    isChildren?: boolean,
     exact?: true,
     path?: string,
     component: () => JSX.Element;
 }
 
-const Route = ({ isPrivate = false, component: Component, ...rest }: RoutesProps) => {
+const RoutesChildren = ({ isChildren = false, component: Component, ...rest }: RoutesProps) => {
     const { UserToken, userData } = useContext(UserContext)
 
     return (
@@ -17,11 +17,10 @@ const Route = ({ isPrivate = false, component: Component, ...rest }: RoutesProps
         <ReactDOMRoute 
             {...rest}
             render={() => {
-                return isPrivate === !!UserToken?  <Component/>  :  <Redirect to='/'/>
-            
+                return isChildren === (userData.type === 'children')?  <Component/>  :  <Redirect to='/'/>            
             }}
         />
     )
 }
 
-export default Route
+export default RoutesChildren

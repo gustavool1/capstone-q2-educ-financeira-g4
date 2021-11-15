@@ -9,6 +9,8 @@ import { Login } from "../Pages/Login";
 import { RegisterKids } from "../Pages/RegisterKids";
 import { RegisterParents } from "../Pages/RegisterParents";
 import Route from "./routes";
+import RoutesChildren from "./routesChildren";
+import RoutesParents from "./routesParents";
 
 export const Routes = () => {
   return (
@@ -16,12 +18,12 @@ export const Routes = () => {
       <Route exact path="/" component={Home} />
       <Route path="/login" component={Login} />
       <Route path="/balance" component={Balance} isPrivate/>
-      <Route path="/registerkids" component={RegisterKids} isPrivate/>
+      <RoutesParents path="/registerkids" component={RegisterKids} isParent/>
       <Route path="/registerparents" component={RegisterParents} />
-      <Route path="/dashboardkids" component={DashboardKids} isPrivate />
+      <RoutesChildren path="/dashboardkids" component={DashboardKids} isChildren />
       <Route path="/contenthome" component={ContentHome} />
-      <Route path="/dashboardparents" component={DashboardParents} isPrivate />
-      <Route component={Home} />
+      <RoutesParents path="/dashboardparents" component={DashboardParents} isParent />
+    
     </Switch>
   );
 };

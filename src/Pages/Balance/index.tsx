@@ -132,9 +132,9 @@ export const Balance = () => {
             </WishListContent>
           ) : (
             <WishListContent>
-              {userData.wishlist.map((item: Wish, index: number) => (
+              {/* {userData.wishlist.map((item: Wish, index: number) => (
                 <CardWish key={index} item={item} />
-              ))}
+              ))} */}
             </WishListContent>
           )}
         </WishList>
