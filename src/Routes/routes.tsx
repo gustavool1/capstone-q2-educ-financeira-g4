@@ -5,7 +5,7 @@ import { Redirect, Route as ReactDOMRoute } from 'react-router-dom'
 interface RoutesProps {
     isPrivate?: boolean,
     exact?: true,
-    path: string,
+    path?: string,
     component: () => JSX.Element;
 }
 

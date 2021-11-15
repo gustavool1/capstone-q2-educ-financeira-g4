@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import React from 'react'
 import { MenuListContainer } from "./style"
 import { useHistory } from 'react-router-dom'
+import { HashLink } from "react-router-hash-link"
 
 const MenuList = () => {
     const history = useHistory();
@@ -9,10 +10,19 @@ const MenuList = () => {
     return (
         <MenuListContainer>
             <div className='links'>
-                <Link to=''>Saiba mais</Link>
-                <Link to='/dashboardparents'>Serviços</Link>
-
-                <Link to=''>Quem somos</Link>
+                <Link to='/contenthome'>Saiba mais</Link>
+                <HashLink 
+                    to='/#myServices'
+                    scroll={(el) => el.scrollIntoView({ behavior: 'auto', block: 'end' })}
+                >
+                    Serviços
+                </HashLink>
+                <HashLink 
+                    to='/#whoWeAre'
+                    scroll={(el) => el.scrollIntoView({ behavior: 'auto', block: 'end' })}
+                >
+                    Quem somos
+                </HashLink>
 
             </div>
 

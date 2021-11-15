@@ -212,7 +212,7 @@ export const MenuListContainer = styled(motion.div)`
         }
     }
 
-    .btnContainer.parents {
+    .btnContainer.parents, .btnChildren {
         justify-content: flex-end;
     }
 

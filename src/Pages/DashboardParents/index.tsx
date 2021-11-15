@@ -8,14 +8,24 @@ import { ModalContext } from "../../Providers/Modal";
 import FormEditingActivity from "../../Components/FormEditingActivity";
 
 import ProfileBarParents from "../../Components/ProfileBarParents";
+import { useHistory } from "react-router";
+import { UserContext } from "../../Providers/Users";
 
 export const DashboardParents = () => {
   const { getYourChildrens, childrenArr } = useContext(ActivitiesContext)
   const { isEditing, isAdding } = useContext(ModalContext) 
+  const { userData } = useContext(UserContext)
+  const history = useHistory();
 
   useEffect(()=>{
     getYourChildrens()
   },[])
+
+  useEffect(() => {
+    if (userData.type !== 'parent') {
+        history.push('/')
+    }
+  })
 
   return(
     

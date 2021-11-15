@@ -14,8 +14,9 @@ import Dollar from "../../assets/images/Dollar.svg";
 import LottieMaker from "../../Components/LottieMaker";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect } from "react";
+import { useEffect} from "react";
 import Video from "../../assets/Videos/HomePage.mp4";
+import React from "react";
 
 export const Home = () => {
   useEffect(() => {
@@ -165,7 +166,7 @@ export const Home = () => {
 
       <Content>
         <h2>Conteúdos</h2>
-        <div>
+        <div >
           <h3 className="visibleAnimation1">Atividades</h3>
           <p className="visibleAnimation1">
             Você cria atividades para seus filhos e valores a serem dados pela
@@ -178,7 +179,7 @@ export const Home = () => {
             colocaria o valor estipulado do item.
           </p>
         </div>
-        <div>
+        <div >
           <h3 className="visibleAnimation1">Balanço economico</h3>
           <p className="visibleAnimation1">
             No site o seu filho registraria o dinheiro recebido e os próprios
@@ -186,7 +187,7 @@ export const Home = () => {
           </p>
 
           <h3 className="visibleAnimation1">Tutorial básico de finanças</h3>
-          <p className="visibleAnimation1">
+          <p className="visibleAnimation1" id='myServices'>
             Uma página interativa ensinando o básico de economia.
           </p>
         </div>
@@ -240,7 +241,7 @@ export const Home = () => {
 
       <WhoWeAre>
         <h2>Quem somos</h2>
-        <p>
+        <p >
           Uma equipe de desenvolvedores comprometidos com a sociedade buscando
           um mundo melhor e mais justo por meio da democratização do
           conhecimento
@@ -252,6 +253,7 @@ export const Home = () => {
               scale: [1, 1.2, 1],
               transition: { duration: 3, repeat: Infinity },
             }}
+            id='whoWeAre'
           >
             <img
               src="https://ca.slack-edge.com/TQZR39SET-U022FLKLUGK-44a5f12ab113-512"
