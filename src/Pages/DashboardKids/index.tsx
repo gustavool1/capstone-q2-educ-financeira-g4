@@ -5,7 +5,7 @@ const DashboardKids = () => {
   const userId = localStorage.getItem("userId");
   console.log("a");
 
-  // GetActivities(4);
+  GetActivities(Number(userId));
   return (
     <Container>
       <h2>Atividades</h2>
@@ -14,9 +14,9 @@ const DashboardKids = () => {
         <li>
           <h2>Diárias</h2>
           <ul>
-            {/* {activities.map((item, index) => (
+            {activities.map((item, index) => (
               <p key={index}>{item.name}</p>
-            ))} */}
+            ))}
           </ul>
         </li>
 
