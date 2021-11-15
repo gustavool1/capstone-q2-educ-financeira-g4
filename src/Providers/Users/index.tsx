@@ -1,4 +1,3 @@
-
 import { createContext, ReactNode, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import api from "../../Services/api";
@@ -26,12 +25,21 @@ interface RegisterUserData {
   wishList?: [];
   balance?: [];
 }
+interface activity {
+  name: string;
+  reward: number;
+  frequency: string;
+  userId: number;
+  id: number;
+}
 
 interface UserProviderData {
   Login: (userData: UserData) => void;
   Logout: () => void;
   Register: (userData: RegisterUserData) => void;
   UserToken: string;
+  activities: activity[];
+  GetActivities: (userId: number) => void;
 }
 
 export const UserProvider = ({ children }: UserProps) => {
@@ -41,12 +49,13 @@ export const UserProvider = ({ children }: UserProps) => {
   const [UserToken, setUserToken] = useState(
     () => localStorage.getItem("token") || ""
   );
+  const [activities, setActivities] = useState([] as activity[]);
 
   const Login = (userData: UserData) => {
     api
       .post("login", userData)
       .then((response) => {
-        localStorage.setItem("userId", response.data.user.id)
+        localStorage.setItem("userId", response.data.user.id);
         localStorage.setItem("token", response.data.accessToken);
         toast.success("Parabéns, você esta logado!");
         setUserToken(response.data.accessToken);
@@ -76,8 +85,22 @@ export const UserProvider = ({ children }: UserProps) => {
       });
   };
 
+  const GetActivities = (userId: number) => {
+    api
+      .get(`activities/?childrenId=${userId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((response) => {
+        setActivities(response.data);
+      });
+  };
+
   return (
-    <UserContext.Provider value={{ UserToken, Login, Logout, Register }}>
+    <UserContext.Provider
+      value={{ UserToken, Login, Logout, Register, activities, GetActivities }}
+    >
       {children}
     </UserContext.Provider>
   );

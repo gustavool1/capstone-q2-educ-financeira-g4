@@ -2,7 +2,7 @@ import * as React from "react";
 import { Route, Switch } from "react-router-dom";
 import { Balance } from "../Pages/Balance";
 import { ContentHome } from "../Pages/ContentHome";
-import { DashboardKids } from "../Pages/DashboardKids";
+import DashboardKids from "../Pages/DashboardKids";
 import { DashboardParents } from "../Pages/DashboardParents";
 import { Home } from "../Pages/Home";
 import { Login } from "../Pages/Login";
