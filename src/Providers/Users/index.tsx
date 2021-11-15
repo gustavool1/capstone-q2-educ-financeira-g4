@@ -44,6 +44,7 @@ interface Children {
   childrenId: number;
 }
 interface activity {
+  achivied: boolean;
   name: string;
   reward: number;
   frequency: string;
@@ -166,7 +167,7 @@ export const UserProvider = ({ children }: UserProps) => {
 
   const GetActivities = (userId: number) => {
     api
-      .get(`activities/?childrenId=${userId}`, {
+      .get(`activities/?userId=${userId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

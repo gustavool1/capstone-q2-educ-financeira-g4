@@ -3,7 +3,8 @@ export const Container = styled.div`
   h2 {
     font-size: 40px;
     text-align: center;
-    margin: 50px;
+    margin: 20px;
+    margin-top: 100px;
   }
 `;
 
@@ -20,17 +21,40 @@ export const CardList = styled.ul`
 
     h2 {
       color: #ffffff;
-      margin: 50px 0;
+      margin-top: 50px;
     }
   }
 `;
 
 export const ActivitiesList = styled.ul`
+  h3 {
+    color: #fff;
+    text-align: center;
+    margin-top: 30px;
+  }
   li {
-    margin: 20px 0;
+    margin: 20px 10px;
+    display: flex;
+    justify-content: space-between;
     p {
       color: #fff;
-      margin-left: 10px;
+    }
+    b {
+      color: #fff;
+    }
+    button {
+      background-color: transparent;
+      margin: 0;
+      border: none;
+      width: fit-content;
+    }
+    svg {
+      color: green;
+      font-size: 24px;
+    }
+
+    .trashIcon {
+      color: red;
     }
   }
 `;
