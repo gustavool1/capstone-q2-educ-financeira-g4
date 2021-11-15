@@ -15,7 +15,7 @@ const MenuChildrensLogin = () => {
 
             </div>
 
-            <div className='btnContainer'>
+            <div className={userData.type === 'children'?  'btnContainer btnChildren' : 'btnContainer'}>
                 <button 
                     className='btnLogin'
                     onClick={Logout}

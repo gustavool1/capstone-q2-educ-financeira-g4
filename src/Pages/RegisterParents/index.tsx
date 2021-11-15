@@ -38,7 +38,7 @@ export const RegisterParents = () => {
     formState: { errors },
   } = useForm<RegisterUserData>({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data: RegisterUserData) => {
+  const onSubmitFunction = (data: RegisterUserData) => {
     const { email, name, password } = data;
     const ParentUserData = {
       name,
@@ -61,7 +61,7 @@ export const RegisterParents = () => {
           <img src={Image} alt="imagem de registro" />
         </ImageContainer>
         <FormContainer>
-          <Form onClick={handleSubmit(onSubmit)}>
+          <Form onSubmit={handleSubmit(onSubmitFunction)}>
             <h1>Cadastrar </h1>
             <TextField
               margin="dense"

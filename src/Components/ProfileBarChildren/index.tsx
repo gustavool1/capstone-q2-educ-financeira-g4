@@ -15,6 +15,12 @@ const ProfileBarChildren = () => {
         getUserData()
     }, [])
 
+    useEffect(() => {
+        if (userData.type !== 'children') {
+            history.push('/')
+        }
+    })
+
     return (
         <ProfileContainerChildren>
             <div className='profileDescriptions'>
