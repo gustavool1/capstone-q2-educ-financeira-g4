@@ -35,9 +35,9 @@ interface Wish {
   value: number;
 }
 
-interface Balance {
-  date?: string;
-  move?: number;
+export interface Balance {
+  date: string;
+  move: number;
 }
 
 interface Children {
