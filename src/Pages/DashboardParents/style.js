@@ -11,4 +11,5 @@ export const EditingContainer = styled.div`
     align-items: center;
     position: fixed;
     z-index: 3;
+
 `

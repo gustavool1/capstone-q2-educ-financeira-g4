@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react"
 import { ActivitiesContext } from "../../Providers/Activities"
-import { Container, Achivied, NotAchivied , Front, Back, ButtonsContainer}from "./style.js"
+import {  Achivied, NotAchivied , Front, Back, ButtonsContainer, MobileCard, ChildrenData, ChildrenActivities}from "./style.js"
 import api from '../../Services/api'
 import ReactCardFlip from 'react-card-flip';
-import { IoIosCreate } from "react-icons/io";
+import { IoIosCreate, IoIosArrowForward,  IoIosArrowDown} from "react-icons/io";
 import { ChildrenContext } from "../../Providers/Children"
 import { ModalContext } from "../../Providers/Modal";
 interface Children{
@@ -31,7 +31,7 @@ interface Activities {
 }
 
 const CardChildren = ({children}:CardChildrenProps) =>{
-       
+    const [ toggle, setToggle ] = useState(false)
     const [childrenActivies, setChildrenActivities] = useState<Activities[]>([])
     const [ isFlipped, setIsFlipped ] = useState(false)
     const { updateActivitie, getYourChildrens, createActivie } = useContext(ActivitiesContext)
@@ -66,6 +66,7 @@ const CardChildren = ({children}:CardChildrenProps) =>{
         getYourActivities(children.id)
     },[createActivie])
     return(
+            <>
             <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
                 <Front>
                     <img src='https://d3ugyf2ht6aenh.cloudfront.net/stores/001/829/347/themes/amazonas/img-1347263166-1629736427-e77800fdb2094c2bcc4fb6f44d82ce1d1629736428.jpg?1211721950' alt='img'/>
@@ -102,6 +103,59 @@ const CardChildren = ({children}:CardChildrenProps) =>{
                     </ButtonsContainer>
                 </Back>
             </ReactCardFlip>
+
+            <MobileCard>
+                <ChildrenData>
+                    <img src='https://d3ugyf2ht6aenh.cloudfront.net/stores/001/829/347/themes/amazonas/img-1347263166-1629736427-e77800fdb2094c2bcc4fb6f44d82ce1d1629736428.jpg?1211721950' alt='a'/>
+                    <div>
+                        <h2>{children.name}</h2>
+                        <p>Atividades concluídas:{childrenActivies.filter((act)=> act.achivied=== true).length}</p>
+                        <p>Atividades a concluir:{childrenActivies.filter((act)=> act.achivied=== false).length}</p>
+                    </div>
+                    {toggle ?(
+                        <button onClick={()=> setToggle(!toggle)}>
+                            <IoIosArrowDown/>
+                        </button>
+                    ):(
+                        <button onClick={()=> setToggle(!toggle)}>
+                            <IoIosArrowForward/>
+                        </button>
+                    )}
+                    
+                </ChildrenData>
+                
+                {toggle && 
+                <ChildrenActivities
+                    initial={{ opacity:0}}
+                    animate={{ opacity: 1 }}
+                    transition={{duration:2}}
+               >
+                   <Achivied>
+                        <h2>Tarefas Concluídas: {childrenActivies.filter((item)=>item.achivied === true).length}</h2>
+                        {childrenActivies.filter((item)=>item.achivied === true).map((achivied,key)=>(
+                            <div key={key}>
+                                <p title={achivied.name}>{achivied.name}</p>
+                                <p>R${achivied.reward}</p>
+
+                            </div>
+                        ))}
+                    </Achivied>
+                    <NotAchivied>
+                        <h2>Tarefas a concluir: {childrenActivies.filter((item)=>item.achivied === false).length}</h2>
+                        {childrenActivies.filter((item)=>item.achivied === false).map((notAchivied,key)=>(
+                        <div key={key}>
+                                <p title={notAchivied.name}>{notAchivied.name}</p>
+                                <p>R${notAchivied.reward}</p>
+                                <button onClick={()=>handleEditing(notAchivied.id)}><IoIosCreate/></button>
+                                <input type="checkbox"  onClick={(e)=>FinishingTask(e,notAchivied)}/>
+
+                        </div>
+                        ))}
+                    </NotAchivied>
+                </ChildrenActivities> 
+                }
+            </MobileCard>
+            </ >
     )
 }
 export default CardChildren
