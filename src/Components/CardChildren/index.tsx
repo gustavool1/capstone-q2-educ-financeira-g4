@@ -2,12 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { ActivitiesContext } from "../../Providers/Activities";
 import {
   Container,
-  InfoContainer,
-  ActivitiesContainer,
   Achivied,
   NotAchivied,
+  Front,
+  Back,
+  ButtonsContainer,
 } from "./style.js";
 import api from "../../Services/api";
+import ReactCardFlip from "react-card-flip";
 import { IoIosCreate } from "react-icons/io";
 import { ChildrenContext } from "../../Providers/Children";
 import { ModalContext } from "../../Providers/Modal";
@@ -34,8 +36,10 @@ interface Activities {
   userId: number;
   id: number;
 }
+
 const CardChildren = ({ children }: CardChildrenProps) => {
   const [childrenActivies, setChildrenActivities] = useState<Activities[]>([]);
+  const [isFlipped, setIsFlipped] = useState(false);
   const { updateActivitie, getYourChildrens, createActivie } =
     useContext(ActivitiesContext);
   const { handleAdding, handleEditing } = useContext(ModalContext);
@@ -61,22 +65,27 @@ const CardChildren = ({ children }: CardChildrenProps) => {
       })
       .catch((err) => console.log("getyourActivies", err));
   };
+
   useEffect(() => {
     getYourActivities(children.id);
   }, [createActivie]);
   return (
-    <Container>
-      <InfoContainer>
+    <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+      <Front>
         <img
           src="https://d3ugyf2ht6aenh.cloudfront.net/stores/001/829/347/themes/amazonas/img-1347263166-1629736427-e77800fdb2094c2bcc4fb6f44d82ce1d1629736428.jpg?1211721950"
           alt="img"
         />
-        <div>
-          <p>{children.name}</p>
-          <p>R${children.wallet}</p>
-        </div>
-      </InfoContainer>
-      <ActivitiesContainer>
+        <p>{children.name}</p>
+        <p>Saldo: R${children.wallet}</p>
+        <button
+          className="create-activity"
+          onClick={() => setIsFlipped(!isFlipped)}
+        >
+          Ver mais
+        </button>
+      </Front>
+      <Back>
         <Achivied>
           <h2>
             Tarefas Concluídas:{" "}
@@ -112,14 +121,22 @@ const CardChildren = ({ children }: CardChildrenProps) => {
               </div>
             ))}
         </NotAchivied>
-        <button
-          className="create-activity"
-          onClick={() => handleAdding(children.id)}
-        >
-          Criar Atividade
-        </button>
-      </ActivitiesContainer>
-    </Container>
+        <ButtonsContainer>
+          <button
+            className="create-activity"
+            onClick={() => setIsFlipped(!isFlipped)}
+          >
+            Virar
+          </button>
+          <button
+            className="create-activity"
+            onClick={() => handleAdding(children.id)}
+          >
+            Criar Atividade
+          </button>
+        </ButtonsContainer>
+      </Back>
+    </ReactCardFlip>
   );
 };
 export default CardChildren;
