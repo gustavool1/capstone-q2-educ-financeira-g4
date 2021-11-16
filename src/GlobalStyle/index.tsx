@@ -1,8 +1,27 @@
 import { createGlobalStyle } from "styled-components"
-
-
+import 'react-toastify/dist/ReactToastify.minimal.css';
 export const GlobalStyle = createGlobalStyle`
+.Toastify__toast--success {
+   border: 1px solid #1de71d ;
+   background: #b1e2b1 ;
 
+   color: black ;
+ 
+}
+
+.Toastify__toast--error {
+    border: 1px solid #EB5757;
+    background: #FAE1E2 ;
+   color: black ;
+
+}
+
+.Toastify__toast--warning {
+    border: 1px solid #f7d706;
+    background: #ebde8d ;
+   color: black ;
+
+}
 :root {
     --color-primary: #9B5DE5;
     --color-secondary: #f15bb5;
