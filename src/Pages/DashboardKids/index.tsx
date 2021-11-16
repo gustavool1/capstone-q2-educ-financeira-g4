@@ -5,6 +5,7 @@ import {
   CardList,
   ActivitiesList,
   ContainerMobile,
+  MobileContent,
 } from "./style";
 import { AiOutlineCheck } from "react-icons/ai";
 import { FaTrash, FaAngellist } from "react-icons/fa";
@@ -14,7 +15,6 @@ import api from "../../Services/api";
 const DashboardKids = () => {
   const { activities, GetActivities } = useUser();
   const userId = localStorage.getItem("userId");
-  const carrouselBase = [1, 2, 3];
   const [carrouselNumber, setCarrouselNumber] = useState(0);
   useEffect(() => {
     GetActivities(Number(userId));
@@ -52,6 +52,21 @@ const DashboardKids = () => {
         GetActivities(Number(userId));
       });
   };
+  const getNextCard = () => {
+    if (carrouselNumber !== 2) {
+      setCarrouselNumber(carrouselNumber + 1);
+    } else {
+      setCarrouselNumber(0);
+    }
+  };
+
+  const getLastCard = () => {
+    if (carrouselNumber !== 0) {
+      setCarrouselNumber(carrouselNumber - 1);
+    } else {
+      setCarrouselNumber(2);
+    }
+  };
 
   return (
     <>
@@ -75,7 +90,7 @@ const DashboardKids = () => {
                     <li key={index}>
                       <p>{item.name} </p>
                       <b>R$ {item.reward.toFixed(2)}</b>
-                      <button onClick={() => AchiviedFunction(item.id)}>
+                      <button onClick={getLastCard}>
                         <AiOutlineCheck />
                       </button>
                     </li>
@@ -230,6 +245,196 @@ const DashboardKids = () => {
 
       <ContainerMobile>
         <h2>Atividades</h2>
+        <MobileContent>
+          <button
+            onClick={() => setCarrouselNumber(1)}
+            className="passLeft navegateButton"
+          >
+            &lt;
+          </button>
+
+          <CardList>
+            <li className="cardMobile">
+              {carrouselNumber === 0 && (
+                <ActivitiesList>
+                  <h2>Diária</h2>
+
+                  <h3>Tarefas a concluir:</h3>
+                  {activities.filter(
+                    (item) =>
+                      item.frequency === "Diaria" && item.achivied === false
+                  ).length > 0 ? (
+                    activities
+                      .filter(
+                        (item) =>
+                          item.frequency === "Diaria" && item.achivied === false
+                      )
+                      .map((item, index) => (
+                        <li key={index}>
+                          <p>{item.name} </p>
+                          <b>R$ {item.reward.toFixed(2)}</b>
+                          <button onClick={() => AchiviedFunction(item.id)}>
+                            <AiOutlineCheck />
+                          </button>
+                        </li>
+                      ))
+                  ) : (
+                    <div>
+                      <FaAngellist />
+                      <p>Tudo concluído !!</p>
+                    </div>
+                  )}
+
+                  <h3>Tarefas Concluídas: </h3>
+                  {activities.filter(
+                    (item) =>
+                      item.frequency === "Diaria" && item.achivied === true
+                  ).length > 0 ? (
+                    activities
+                      .filter(
+                        (item) =>
+                          item.frequency === "Diaria" && item.achivied === true
+                      )
+                      .map((item, index) => (
+                        <li key={index}>
+                          <p>{item.name} </p>
+                          <b>R$ {item.reward.toFixed(2)}</b>
+                          <button onClick={() => UnachiviedFunction(item.id)}>
+                            <FaTrash className="trashIcon" />
+                          </button>
+                        </li>
+                      ))
+                  ) : (
+                    <div>
+                      <RiEmotionSadLine className="sadIcon" />
+                      <p className="nothingDone">Nada concluído</p>
+                    </div>
+                  )}
+                </ActivitiesList>
+              )}
+
+              {carrouselNumber === 1 && (
+                <ActivitiesList>
+                  <h2>Semanal</h2>
+
+                  <h3>Tarefas a concluir:</h3>
+                  {activities.filter(
+                    (item) =>
+                      item.frequency === "Semanal" && item.achivied === false
+                  ).length > 0 ? (
+                    activities
+                      .filter(
+                        (item) =>
+                          item.frequency === "Semanal" &&
+                          item.achivied === false
+                      )
+                      .map((item, index) => (
+                        <li key={index}>
+                          <p>{item.name} </p>
+                          <b>R$ {item.reward.toFixed(2)}</b>
+                          <button onClick={() => AchiviedFunction(item.id)}>
+                            <AiOutlineCheck />
+                          </button>
+                        </li>
+                      ))
+                  ) : (
+                    <div>
+                      <FaAngellist />
+                      <p>Tudo concluído !!</p>
+                    </div>
+                  )}
+
+                  <h3>Tarefas Concluídas: </h3>
+                  {activities.filter(
+                    (item) =>
+                      item.frequency === "Semanal" && item.achivied === true
+                  ).length > 0 ? (
+                    activities
+                      .filter(
+                        (item) =>
+                          item.frequency === "Semanal" && item.achivied === true
+                      )
+                      .map((item, index) => (
+                        <li key={index}>
+                          <p>{item.name} </p>
+                          <b>R$ {item.reward.toFixed(2)}</b>
+                          <button onClick={() => UnachiviedFunction(item.id)}>
+                            <FaTrash className="trashIcon" />
+                          </button>
+                        </li>
+                      ))
+                  ) : (
+                    <div>
+                      <RiEmotionSadLine className="sadIcon" />
+                      <p className="nothingDone">Nada concluído</p>
+                    </div>
+                  )}
+                </ActivitiesList>
+              )}
+
+              {carrouselNumber === 2 && (
+                <ActivitiesList>
+                  <h2>Mensal</h2>
+
+                  <h3>Tarefas a concluir:</h3>
+                  {activities.filter(
+                    (item) =>
+                      item.frequency === "Mensal" && item.achivied === false
+                  ).length > 0 ? (
+                    activities
+                      .filter(
+                        (item) =>
+                          item.frequency === "Mensal" && item.achivied === false
+                      )
+                      .map((item, index) => (
+                        <li key={index}>
+                          <p>{item.name} </p>
+                          <b>R$ {item.reward.toFixed(2)}</b>
+                          <button onClick={() => AchiviedFunction(item.id)}>
+                            <AiOutlineCheck />
+                          </button>
+                        </li>
+                      ))
+                  ) : (
+                    <div>
+                      <FaAngellist />
+                      <p>Tudo concluído !!</p>
+                    </div>
+                  )}
+
+                  <h3>Tarefas Concluídas: </h3>
+                  {activities.filter(
+                    (item) =>
+                      item.frequency === "Mensal" && item.achivied === true
+                  ).length > 0 ? (
+                    activities
+                      .filter(
+                        (item) =>
+                          item.frequency === "Mensal" && item.achivied === true
+                      )
+                      .map((item, index) => (
+                        <li key={index}>
+                          <p>{item.name} </p>
+                          <b>R$ {item.reward.toFixed(2)}</b>
+                          <button onClick={() => UnachiviedFunction(item.id)}>
+                            <FaTrash className="trashIcon" />
+                          </button>
+                        </li>
+                      ))
+                  ) : (
+                    <div>
+                      <RiEmotionSadLine className="sadIcon" />
+                      <p className="nothingDone">Nada concluído</p>
+                    </div>
+                  )}
+                </ActivitiesList>
+              )}
+            </li>
+          </CardList>
+          <button onClick={getNextCard} className="passRight navegateButton">
+            &gt;
+          </button>
+        </MobileContent>
       </ContainerMobile>
     </>
   );

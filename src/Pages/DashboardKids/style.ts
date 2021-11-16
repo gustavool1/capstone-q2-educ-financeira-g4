@@ -93,10 +93,37 @@ export const ContainerMobile = styled.div`
     font-size: 40px;
     text-align: center;
     margin: 20px;
-    margin-top: 100px;
+    margin-top: 200px;
   }
-
+  .cardMobile {
+    width: 300px;
+    height: 400px;
+    background-color: #302f4d;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-between;
+    h2 {
+      font-size: 40px;
+      text-align: center;
+      margin: 20px;
+      color: #fff;
+    }
+  }
+  .navegateButton {
+    font-size: 44px;
+    background-color: transparent;
+    border: none;
+  }
+  .passLeft {
+  }
   @media (min-width: 768px) {
     display: none;
   }
+`;
+export const MobileContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 `;
