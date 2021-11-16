@@ -7,7 +7,7 @@ import {
 } from "./style";
 import { GiHamburgerMenu } from "react-icons/gi";
 import MenuList from "./menuList";
-import { Children, useContext, useState } from "react";
+import { Children, useContext, useEffect, useState } from "react";
 import { UserContext } from "../../Providers/Users";
 import MenuParentsLogin from "./menuParentsLogin";
 import MenuChildrensLogin from "./menuChildrensLogin";
@@ -17,8 +17,16 @@ import { ActivitiesContext } from "../../Providers/Activities";
 
 const NavbarHome = () => {
   const [showMenu, setshowMenu] = useState<boolean>(false);
-  const { UserToken, userData } = useContext(UserContext);
+  const { UserToken, userData, getUserData } = useContext(UserContext);
   const { amountToPay } = useContext(ActivitiesContext)
+
+  // useEffect(() => {
+  //   getUserData()
+
+  //   if (!UserToken || userData) {
+  //     history.push('')
+  //   }
+  // }, [])
 
   return (
     <NavContainer>
@@ -27,7 +35,7 @@ const NavbarHome = () => {
           <h1>FinanceKids</h1>
 
           <MenuDesktop>
-            {!!UserToken ? (
+            {!!UserToken? (
               userData.type === "parent" ? (
                 <MenuParentsLogin />
               ) : (

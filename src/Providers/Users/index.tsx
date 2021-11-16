@@ -162,12 +162,11 @@ export const UserProvider = ({ children }: UserProps) => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
-      .then((reponse) => {
-        setUserData(reponse.data);
+      .then((response) => {
+        setUserData(response.data);
       })
       .catch((e) => {
         console.log(e)
-        localStorage.clear()
       });
   };
 

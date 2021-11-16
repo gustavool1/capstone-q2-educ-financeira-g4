@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../Providers/Users'
 import { Redirect, Route as ReactDOMRoute } from 'react-router-dom'
 
@@ -12,19 +12,37 @@ interface RoutesProps {
 const Route = ({ isPrivate = false, component: Component, ...rest }: RoutesProps) => {
     const { UserToken, userData } = useContext(UserContext)
 
+
+
     return (
+        <>
+        {/* <ReactDOMRoute 
+            {...rest}
+            render={() => {
+                return isPrivate === !!UserToken?  <Component/>  :  <Redirect to={isPrivate? 
+                    '/'
+                    : userData.type==='parent'? ('/dashboardparents') : (userData.type === 'children'? '/dashboardkids': '/') 
+                    }/>
+            }}
+        /> */}
+
         
         <ReactDOMRoute 
             {...rest}
             render={() => {
-                return isPrivate === !!UserToken?  <Component/>  :  <Redirect to={isPrivate? ('/'
-                    ):(
-                        userData.type==='parent'? '/dashboardparents' : '/dashboardkids'
-                    )}/>
-            
+               if (isPrivate === !!UserToken) {
+                   return <Component/>
+               }     
+               
+               
+               return <Redirect to='/contenthome' />
+                
+                
             }}
         />
+        
+        </>
     )
 }
-
+//  
 export default Route

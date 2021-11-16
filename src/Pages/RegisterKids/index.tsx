@@ -23,7 +23,7 @@ interface RegisterUserData {
 
 export const RegisterKids = () => {
   const history = useHistory();
-  const { userData } = useContext(UserContext)
+  const { userData, UserToken } = useContext(UserContext)
 
   useEffect(() => {
     if (userData.type !== 'parent') {
@@ -119,6 +119,7 @@ export const RegisterKids = () => {
             playerAreVisible={false}
           />
         </ImageContainer>
+        
       </Container>
     </>
   );
