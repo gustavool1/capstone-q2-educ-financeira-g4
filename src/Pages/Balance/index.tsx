@@ -15,7 +15,8 @@ import {
 import { useState, useEffect } from "react";
 import { CardWish } from "../../Components/CardWish";
 import { useUser } from "../../Providers/Users";
-
+import { CardWishDetails } from "../../Components/CardWishDetails";
+import { useModal } from "../../Providers/Modal";
 interface BalanceProp {
   date?: string;
   move?: number;
@@ -36,7 +37,8 @@ export const Balance = () => {
   const [spend, setSpend] = useState(0);
   const [wishName, setWishName] = useState("");
   const [wishPrice, setWishPrice] = useState(0);
-
+  const { isWish, setIsWish } = useModal();
+  
   const HandleClickBalance = () => {
     spend !== 0 && SpendBalance(userData, spend);
     received !== 0 && ReceivedBalance(userData, received);
@@ -53,10 +55,10 @@ export const Balance = () => {
   useEffect(() => {
     getUserData();
   }, []);
-
-  console.log(userData);
   return (
     <Container>
+      {isWish &&  <CardWishDetails />}
+
       <LeftSide>
         <h2>Patrimônio Total Acumulado</h2>
         <Chart></Chart>
@@ -110,7 +112,7 @@ export const Balance = () => {
             {isOpenWish ? (
               <h3>Criar novo desejo</h3>
             ) : (
-              <h3>Lista de desejos</h3>
+              <h3>Lista de desejsssos</h3>
             )}
           </WishListHeader>
           {isOpenWish ? (
@@ -130,7 +132,11 @@ export const Balance = () => {
           ) : (
             <WishListContent>
               {userData.wishlist.map((item: Wish, index: number) => (
+                <>
                 <CardWish id="wishlist" key={index} item={item} />
+               
+                
+                </>
               ))}
             </WishListContent>
           )}

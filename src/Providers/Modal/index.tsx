@@ -21,6 +21,8 @@ interface ModalProviderData {
   HandleClickDetails: (item: Wish) => void;
   isWish: boolean;
   setIsWish: (isWish: boolean) => void;
+
+  wish: Wish
 }
 
 interface Children {
@@ -41,6 +43,7 @@ export const ModalContext = createContext<ModalProviderData>(
 export const ModalProvider = ({ children }: ModalProviderProps) => {
   const { changingActualChildren } = useContext(ChildrenContext);
   const { changingActualIdActivitie } = useContext(ActivitiesContext);
+  const [ wish, setWish ] = useState <Wish>({} as Wish)
   const [isEditing, setIsEditing] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
   const [isWish, setIsWish] = useState(false);
@@ -56,7 +59,9 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
   };
 
   const HandleClickDetails = (item: Wish) => {
+
     setIsWish(!isWish);
+    setWish(item)
   };
 
   return (
@@ -69,6 +74,7 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
         HandleClickDetails,
         setIsWish,
         isWish,
+        wish
       }}
     >
       {children}

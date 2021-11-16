@@ -9,6 +9,7 @@ interface WishProps {
 }
 
 export const CardWish = ({ item }: WishProps) => {
+  
   const { isWish, HandleClickDetails } = useModal();
 
   return (
@@ -20,9 +21,8 @@ export const CardWish = ({ item }: WishProps) => {
       >
         <HiInformationCircle />
       </button>
-      <h3>{item.name}</h3>
+      <h3>{item.name}aa</h3>
       <h4>R${item.value.toFixed(2).replace(".", ",")}</h4>
-      {isWish && <CardWishDetails item={item} />}
     </Li>
   );
 };
