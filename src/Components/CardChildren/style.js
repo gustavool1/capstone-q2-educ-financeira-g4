@@ -168,20 +168,55 @@ export const MobileCard = styled.div`
     transition: 3s;
     @media screen and (max-width:768px){
         display: block;
+        .isOpen{
+        @keyframes slidein{
+            from{
+                height: 0px;
+            }
+            to{
+                height: 400px;
+            }
+
+        }
+        animation:slidein 3s  ;
+
+    }
+    .isClosed{
+        height: 0px;
+       
+        @keyframes slideout{
+            from{
+                height: 400px;
+                display: block;
+            }
+            to{
+                height: 0px;
+                display: none;
+            }
+
+        }
+       
+        animation:slideout 3s  ;
+
+    }
+
+    
     }
 `
      
 
 
-export const ChildrenData = styled.div`
+export const ChildrenData = styled(motion.div)`
+    
     height: 100px;
     width: 100%;
+    box-sizing:border-box;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    background-color: lightgrey;
-    margin: 0 10px;
+    background-color:  #302F4D;
+    margin: 0 ;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     img{
         width: 100px;
         height: 100px;
@@ -194,6 +229,7 @@ export const ChildrenData = styled.div`
         border: 0;
         svg{
             font-size: 20px;
+
             color: white;
         }
     }
@@ -201,16 +237,41 @@ export const ChildrenData = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
+        margin-left: 10px;
     }
+    color: white;
 `
 
 export const ChildrenActivities = styled(motion.div)`
     height: 400px;
     width: 100%;
-    background-color: lightgrey;
-    margin: 0 10px;
+    background-color:  #302F4D;
+    margin: 0 ;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-
+    color: white;
+    padding: 20px;
     
+    p{
+        max-width: 15ch;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .closed{
+        @keyframes closed{
+            from{
+                opacity: 1;
+            }
+
+            to{
+                opacity: 0;
+                
+            }
+        }
+        animation:closed 2s  ;
+        display: none;
+    }
+    
+    transition: 3s;
 `

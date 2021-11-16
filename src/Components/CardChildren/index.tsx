@@ -104,13 +104,15 @@ const CardChildren = ({children}:CardChildrenProps) =>{
                 </Back>
             </ReactCardFlip>
 
+
+
             <MobileCard>
-                <ChildrenData>
+                <ChildrenData >
                     <img src='https://d3ugyf2ht6aenh.cloudfront.net/stores/001/829/347/themes/amazonas/img-1347263166-1629736427-e77800fdb2094c2bcc4fb6f44d82ce1d1629736428.jpg?1211721950' alt='a'/>
                     <div>
                         <h2>{children.name}</h2>
-                        <p>Atividades concluídas:{childrenActivies.filter((act)=> act.achivied=== true).length}</p>
-                        <p>Atividades a concluir:{childrenActivies.filter((act)=> act.achivied=== false).length}</p>
+                        <p>Atividades concluídas: <strong>{childrenActivies.filter((act)=> act.achivied=== true).length}</strong></p>
+                        <p>Atividades a concluir: <strong>{childrenActivies.filter((act)=> act.achivied=== false).length} </strong></p>
                     </div>
                     {toggle ?(
                         <button onClick={()=> setToggle(!toggle)}>
@@ -124,13 +126,12 @@ const CardChildren = ({children}:CardChildrenProps) =>{
                     
                 </ChildrenData>
                 
-                {toggle && 
+                
                 <ChildrenActivities
-                    initial={{ opacity:0}}
-                    animate={{ opacity: 1 }}
-                    transition={{duration:2}}
-               >
-                   <Achivied>
+                    className={toggle ? 'isOpen': 'isClosed'}
+                    
+                >
+                   <Achivied className={toggle ? 'open' : 'closed'}>
                         <h2>Tarefas Concluídas: {childrenActivies.filter((item)=>item.achivied === true).length}</h2>
                         {childrenActivies.filter((item)=>item.achivied === true).map((achivied,key)=>(
                             <div key={key}>
@@ -140,7 +141,7 @@ const CardChildren = ({children}:CardChildrenProps) =>{
                             </div>
                         ))}
                     </Achivied>
-                    <NotAchivied>
+                    <NotAchivied className={toggle ? 'open' : 'closed'} >
                         <h2>Tarefas a concluir: {childrenActivies.filter((item)=>item.achivied === false).length}</h2>
                         {childrenActivies.filter((item)=>item.achivied === false).map((notAchivied,key)=>(
                         <div key={key}>
@@ -153,7 +154,6 @@ const CardChildren = ({children}:CardChildrenProps) =>{
                         ))}
                     </NotAchivied>
                 </ChildrenActivities> 
-                }
             </MobileCard>
             </ >
     )
