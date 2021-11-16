@@ -60,16 +60,13 @@ export const UserProvider = ({ children }: UserProps) => {
   toast.configure();
   const [userData, setUserData] = useState<UserDataItens>({} as UserDataItens);
   const history = useHistory();
-  const [UserToken, setUserToken] = useState(
-    () => localStorage.getItem("token") || ""
-  );
+  const [UserToken, setUserToken] = useState("");
 
   const Login = (userData: UserData) => {
     api
       .post("login", userData)
       .then((response) => {
         localStorage.setItem("userId", response.data.user.id);
-        localStorage.setItem("token", response.data.accessToken);
         toast.success("Parabéns, você esta logado!");
         setUserToken(response.data.accessToken);
         setUserData(response.data.user);
@@ -108,7 +105,7 @@ export const UserProvider = ({ children }: UserProps) => {
     api
       .patch(`users/${data.id}`, data, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${UserToken}`,
         },
       })
       .then((response) => {
@@ -126,10 +123,11 @@ export const UserProvider = ({ children }: UserProps) => {
     api
       .patch(`users/${data.id}`, data, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${UserToken}`,
         },
       })
       .then((response) => {
+        getUserData();
         console.log(response.data);
       })
       .catch((err) => {
@@ -144,10 +142,11 @@ export const UserProvider = ({ children }: UserProps) => {
     api
       .patch(`users/${data.id}`, data, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${UserToken}`,
         },
       })
       .then((response) => {
+        getUserData();
         console.log(response.data);
       })
       .catch((err) => {
@@ -159,15 +158,15 @@ export const UserProvider = ({ children }: UserProps) => {
     api
       .get(`users/${localStorage.getItem("userId")}`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${UserToken}`,
         },
       })
       .then((reponse) => {
         setUserData(reponse.data);
       })
       .catch((e) => {
-        console.log(e)
-        localStorage.clear()
+        console.log(e);
+        localStorage.clear();
       });
   };
 

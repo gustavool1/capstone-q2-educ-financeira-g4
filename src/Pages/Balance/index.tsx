@@ -1,5 +1,4 @@
 import React from "react";
-import { BsFillPencilFill } from "react-icons/bs";
 import {
   Container,
   ModalBalance,
@@ -30,7 +29,6 @@ interface Wish {
 export const Balance = () => {
   const [isOpenBalance, setIsOpenBalance] = useState(false);
   const [isOpenWish, setIsOpenWish] = useState(false);
-
   const { userData, getUserData, ReceivedBalance, SpendBalance, AddWishList } =
     useUser();
 
@@ -44,7 +42,6 @@ export const Balance = () => {
     received !== 0 && ReceivedBalance(userData, received);
     setSpend(0);
     setReceived(0);
-    getUserData();
   };
 
   const HandleClickWish = () => {
@@ -73,7 +70,7 @@ export const Balance = () => {
               {userData.balance ? (
                 userData.balance.map((item: BalanceProp, index: number) => (
                   <li key={index}>
-                    <span>{item.date && item.date}</span>
+                    <span>{item.date}</span>
                     <strong>
                       {" R$ "}
                       {item.move && item.move.toFixed(2).replace(".", ",")}
@@ -84,7 +81,7 @@ export const Balance = () => {
                 <p>"Sem movimentações!"</p>
               )}
             </BankStatement>
-            <h2>{`Total:   ${userData.wallet
+            <h2>{`Saldo:   ${userData.wallet
               .toFixed(2)
               .replace(".", ",")}`}</h2>
             <label>Recebido</label>
@@ -133,7 +130,7 @@ export const Balance = () => {
           ) : (
             <WishListContent>
               {userData.wishlist.map((item: Wish, index: number) => (
-                <CardWish key={index} item={item} />
+                <CardWish id="wishlist" key={index} item={item} />
               ))}
             </WishListContent>
           )}
