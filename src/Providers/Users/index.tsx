@@ -23,8 +23,8 @@ interface UserDataItens {
   password: string;
   type: string;
   wallet: number;
-  wishList: Wish[];
-  balance: Balance;
+  wishlist: Wish[];
+  balance: Balance[];
   children: Children[];
   parentId: number;
   id?: number;
@@ -36,12 +36,20 @@ interface Wish {
 }
 
 interface Balance {
-  received: number[];
-  spend: number[];
+  date?: string;
+  move?: number;
 }
 
 interface Children {
   childrenId: number;
+}
+interface activity {
+  achivied: boolean;
+  name: string;
+  reward: number;
+  frequency: string;
+  userId: number;
+  id: number;
 }
 
 interface UserProviderData {
@@ -49,6 +57,8 @@ interface UserProviderData {
   Logout: () => void;
   Register: (userData: UserDataItens) => void;
   UserToken: string;
+  activities: activity[];
+  GetActivities: (userId: number) => void;
   userData: UserDataItens;
   AddWishList: (data: UserDataItens, wish: Wish) => void;
   SpendBalance: (data: UserDataItens, number: number) => void;
@@ -63,12 +73,12 @@ export const UserProvider = ({ children }: UserProps) => {
   const [UserToken, setUserToken] = useState(
     () => localStorage.getItem("token") || ""
   );
+  const [activities, setActivities] = useState([] as activity[]);
 
   const Login = (userData: UserData) => {
     api
       .post("login", userData)
       .then((response) => {
-        console.log(response);
         localStorage.setItem("userId", response.data.user.id);
         localStorage.setItem("token", response.data.accessToken);
         toast.success("Parabéns, você esta logado!");
@@ -104,9 +114,14 @@ export const UserProvider = ({ children }: UserProps) => {
   };
 
   const AddWishList = (data: UserDataItens, wish: Wish) => {
-    data.wishList.push(wish);
+    data.wishlist.push(wish);
+    console.log(data);
     api
-      .patch(`user/${data.id}`)
+      .patch(`users/${data.id}`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((response) => {
         console.log(response.data);
       })
@@ -116,9 +131,15 @@ export const UserProvider = ({ children }: UserProps) => {
   };
 
   const ReceivedBalance = (data: UserDataItens, value: number) => {
-    data.balance.received.push(value);
+    const send = { date: new Date().toLocaleString(), move: value };
+    data.balance.push(send);
+    data.wallet += value;
     api
-      .patch(`user/${data.id}`)
+      .patch(`users/${data.id}`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((response) => {
         console.log(response.data);
       })
@@ -128,9 +149,15 @@ export const UserProvider = ({ children }: UserProps) => {
   };
 
   const SpendBalance = (data: UserDataItens, value: number) => {
-    data.balance.spend.push(value);
+    const send = { date: new Date().toLocaleString(), move: value };
+    data.balance.push(send);
+    data.wallet += value;
     api
-      .patch(`user/${data.id}`)
+      .patch(`users/${data.id}`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((response) => {
         console.log(response.data);
       })
@@ -150,8 +177,20 @@ export const UserProvider = ({ children }: UserProps) => {
         setUserData(reponse.data);
       })
       .catch((e) => {
-        console.log(e)
-        localStorage.clear()
+        console.log(e);
+        localStorage.clear();
+      });
+  };
+
+  const GetActivities = (userId: number) => {
+    api
+      .get(`activities/?userId=${userId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((response) => {
+        setActivities(response.data);
       });
   };
 
@@ -167,6 +206,8 @@ export const UserProvider = ({ children }: UserProps) => {
         SpendBalance,
         ReceivedBalance,
         getUserData,
+        activities,
+        GetActivities,
       }}
     >
       {children}

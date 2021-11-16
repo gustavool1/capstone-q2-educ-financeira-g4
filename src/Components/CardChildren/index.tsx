@@ -6,28 +6,28 @@ import ReactCardFlip from 'react-card-flip';
 import { IoIosCreate, IoIosArrowForward,  IoIosArrowDown} from "react-icons/io";
 import { ChildrenContext } from "../../Providers/Children"
 import { ModalContext } from "../../Providers/Modal";
-interface Children{
-    balance:[],
-    email:string,
-    id:number,
-    parentId:number,
-    wallet:number,
-    wishlist:[],
-    name:string,
-    type: string
+interface Children {
+  balance: [];
+  email: string;
+  id: number;
+  parentId: number;
+  wallet: number;
+  wishlist: [];
+  name: string;
+  type: string;
 }
 
-interface CardChildrenProps{
-    children:Children
+interface CardChildrenProps {
+  children: Children;
 }
 
 interface Activities {
-    achivied: boolean
-    frequency: string
-    name: string
-    reward: number
-    userId: number,
-    id:number
+  achivied: boolean;
+  frequency: string;
+  name: string;
+  reward: number;
+  userId: number;
+  id: number;
 }
 
 const CardChildren = ({children}:CardChildrenProps) =>{
@@ -38,6 +38,18 @@ const CardChildren = ({children}:CardChildrenProps) =>{
     const { handleAdding, handleEditing} = useContext(ModalContext)
     const { updateWallet } = useContext(ChildrenContext)
     
+    const getYourActivities = (userId: number) => {
+        api
+          .get(`activities/?userId=${userId}`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          })
+          .then((response) => {
+            setChildrenActivities(response.data);
+          })
+          .catch((err) => console.log("getyourActivies", err));
+      };
     const FinishingTask = (e:any,task:Activities) =>{
         task.achivied=true
         updateActivitie(task)
@@ -46,20 +58,16 @@ const CardChildren = ({children}:CardChildrenProps) =>{
         getYourActivities(children.id)
         e.target.checked=false
 
-        
+  const FinishingTask = (e: any, task: Activities) => {
+    task.achivied = true;
+    updateActivitie(task);
+    updateWallet(children, task.reward);
+    getYourChildrens();
+    getYourActivities(children.id);
+    e.target.checked = false;
+  };
+ 
 
-    }
-    const getYourActivities = (userId:number) =>{
-        api
-         .get(`activities/?userId=${userId}`,{
-            headers:{
-                Authorization:`Bearer ${localStorage.getItem('token')}`
-            }
-        })
-          .then((response)=>{
-              setChildrenActivities(response.data)
-          })
-           .catch((err)=>console.log('getyourActivies', err))
     }
     
     useEffect(()=>{
