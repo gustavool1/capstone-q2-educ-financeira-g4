@@ -59,7 +59,6 @@ export const NavContainer = styled.nav`
 
         .isLog {
             background: #7879F1;
-            border-radius: 10px;
 
             .btnMenu {
                 position: fixed;
@@ -259,6 +258,7 @@ export const MenuListContainer = styled(motion.div)`
         }
 
     }
+
     
 `
 
@@ -299,7 +299,6 @@ export const MobileMenu = styled.div`
                 }
             }
         }
-
     }
 
 
