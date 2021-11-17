@@ -2,15 +2,16 @@ import LottieMaker from "../../Components/LottieMaker";
 import { Container, Nav, NavButton } from "./style";
 import SpaceShip from "../../assets/images/foguete.gif";
 import { useState } from "react";
+import barChart from "../../assets/images/bar-chart.png";
+import profits from "../../assets/images/profits.png";
+import openBook from "../../assets/images/open-book.png";
 
 const ContentPage = () => {
   const [navegationIsOpen, setNavegationIsOpen] = useState(false);
   return (
     <>
-      <Container background="#9B5DE5" color="#fff">
-        <h2 className="first" id="ofertaEprocura">
-          A lei da oferta e da procura !
-        </h2>
+      <Container background="#9B5DE5" color="#fff" id="ofertaEprocura">
+        <h2 className="first">A lei da oferta e da procura !</h2>
         <div className="content">
           <div className="textContent">
             <p>
@@ -32,8 +33,8 @@ const ContentPage = () => {
           </div>
           <LottieMaker
             lottieImage="https://assets10.lottiefiles.com/packages/lf20_s5aOgS.json"
-            width={400}
-            height={400}
+            width={375}
+            height={375}
             playerAreVisible={false}
           />
         </div>
@@ -59,8 +60,8 @@ const ContentPage = () => {
           </div>
           <LottieMaker
             lottieImage="https://assets9.lottiefiles.com/packages/lf20_ys2X9P.json"
-            width={400}
-            height={400}
+            width={375}
+            height={375}
             playerAreVisible={false}
           />
         </div>
@@ -70,8 +71,8 @@ const ContentPage = () => {
         <div className="content">
           <LottieMaker
             lottieImage="https://assets4.lottiefiles.com/packages/lf20_SyUX5x.json"
-            width={400}
-            height={400}
+            width={375}
+            height={375}
             playerAreVisible={false}
           />
           <div className="textContent">
@@ -114,8 +115,8 @@ const ContentPage = () => {
           </div>
           <LottieMaker
             lottieImage="https://assets8.lottiefiles.com/packages/lf20_R5I6iR.json"
-            width={400}
-            height={400}
+            width={375}
+            height={375}
             playerAreVisible={false}
           />
         </div>
@@ -126,8 +127,8 @@ const ContentPage = () => {
         <div className="content">
           <LottieMaker
             lottieImage="https://assets3.lottiefiles.com/packages/lf20_de909vf3.json"
-            width={400}
-            height={400}
+            width={375}
+            height={375}
             playerAreVisible={false}
           />
           <div className="textContent">
@@ -162,40 +163,55 @@ const ContentPage = () => {
           </div>
           <LottieMaker
             lottieImage="https://assets4.lottiefiles.com/private_files/lf30_aXRkcv.json"
-            width={400}
-            height={400}
+            width={375}
+            height={375}
             playerAreVisible={false}
           />
         </div>
       </Container>
-      {!navegationIsOpen && (
-        <NavButton onClick={() => setNavegationIsOpen(true)}>
-          <img src={SpaceShip} alt="SpaceShip" />
-        </NavButton>
-      )}
 
-      {navegationIsOpen && (
-        <Nav className="NAVBAR">
-          <button className="exit" onClick={() => setNavegationIsOpen(false)}>
-            <img
-              alt="exit"
-              src="https://img.icons8.com/color/48/000000/delete-sign--v2.png"
-            />
-          </button>
+      <NavButton
+        onClick={() => setNavegationIsOpen(true)}
+        isOpen={!navegationIsOpen}
+      >
+        <img src={SpaceShip} alt="SpaceShip" />
+      </NavButton>
 
-          <a href="#ofertaEprocura" onClick={() => setNavegationIsOpen(false)}>
-            Lei da oferta o procura
-          </a>
+      <Nav isOpen={navegationIsOpen}>
+        <button className="exit" onClick={() => setNavegationIsOpen(false)}>
+          <img
+            alt="exit"
+            src="https://img.icons8.com/color/48/000000/delete-sign--v2.png"
+          />
+        </button>
 
-          <a href="#inflacao" onClick={() => setNavegationIsOpen(false)}>
-            Inflação
-          </a>
+        <a
+          href="#ofertaEprocura"
+          className="Oferta"
+          onClick={() => setNavegationIsOpen(false)}
+        >
+          <img src={barChart} alt="barChartRepresentation" />
+          <p>Oferta e procura</p>
+        </a>
 
-          <a href="#juros" onClick={() => setNavegationIsOpen(false)}>
-            Juros
-          </a>
-        </Nav>
-      )}
+        <a
+          href="#inflacao"
+          className="Inflacao"
+          onClick={() => setNavegationIsOpen(false)}
+        >
+          <img src={openBook} alt="barChartRepresentation" />
+          <p>Inflação</p>
+        </a>
+
+        <a
+          href="#juros"
+          className={"Juros"}
+          onClick={() => setNavegationIsOpen(false)}
+        >
+          <img src={profits} alt="barChartRepresentation" />
+          <p>Juros</p>
+        </a>
+      </Nav>
     </>
   );
 };
