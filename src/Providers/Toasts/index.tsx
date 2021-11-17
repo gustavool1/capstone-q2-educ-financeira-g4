@@ -20,6 +20,7 @@ export const ToastProvider = ({ children }:ToastProviderProps) =>{
         toast.success(`${text}`, {
             icon: () =>  <img src={svgHappy} alt='happy kid'/>
           });
+        console.log("aaaaaaaaa")
     }
     const toastError = (text:string) =>{
         toast.error(`${text}`, {

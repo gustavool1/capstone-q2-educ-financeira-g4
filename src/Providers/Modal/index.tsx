@@ -11,6 +11,9 @@ interface ModalProviderData{
 
     handleAdding : (childrenId:number) => void
     isAdding: boolean 
+
+    isEditingProfile: boolean
+    handleEditingProfile: () => void
 }
 interface Children{
     email:string,
@@ -32,7 +35,7 @@ export const ModalProvider = ({ children }: ModalProviderProps) =>{
     const { changingActualIdActivitie} = useContext(ActivitiesContext)
     const [ isEditing, setIsEditing ] = useState(false)
     const [ isAdding, setIsAdding ] = useState(false)
-    
+    const [ isEditingProfile, setIsEditingProfile ] = useState(false)
     const handleEditing = (activitieId:number) =>{
         changingActualIdActivitie(activitieId)
         setIsEditing(!isEditing)
@@ -42,8 +45,12 @@ export const ModalProvider = ({ children }: ModalProviderProps) =>{
         changingActualChildren(childrenId)
         setIsAdding(!isAdding)
     }
+
+    const handleEditingProfile = () =>{
+        setIsEditingProfile(!isEditingProfile)
+    }
     return(
-        <ModalContext.Provider value={{ handleEditing, isEditing, handleAdding, isAdding}}>
+        <ModalContext.Provider value={{ handleEditing, isEditing, handleAdding, isAdding, handleEditingProfile, isEditingProfile }}>
             { children }
         </ModalContext.Provider>
     )

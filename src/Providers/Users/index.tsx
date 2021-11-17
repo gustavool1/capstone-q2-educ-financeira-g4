@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import api from "../../Services/api";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ToastContext } from "../Toasts/index";
 
 export const UserContext = createContext<UserProviderData>(
   {} as UserProviderData
@@ -52,6 +53,10 @@ interface activity {
   id: number;
 }
 
+interface EditProfileData{
+  name?:string,
+  password?:string,
+}
 interface UserProviderData {
   Login: (userData: UserData) => void;
   Logout: () => void;
@@ -65,10 +70,11 @@ interface UserProviderData {
   ReceivedBalance: (data: UserDataItens, number: number) => void;
   getUserData: () => void;
   userId:string
+  EditProfile : (data:EditProfileData) => void
 }
 
 export const UserProvider = ({ children }: UserProps) => {
-  toast.configure();
+  const {toastSuccess,toastError,toastWarning} = useContext(ToastContext)
   const [userData, setUserData] = useState<UserDataItens>({} as UserDataItens);
   const history = useHistory();
   const [UserToken, setUserToken] = useState(
@@ -199,6 +205,19 @@ export const UserProvider = ({ children }: UserProps) => {
       });
   };
 
+  const EditProfile = (data:EditProfileData) =>{
+        api
+         .patch(`/users/${userData.id}`, data, {
+           headers:{
+             Authorization: `Bearer ${localStorage.getItem("token")}`
+           }
+         })
+          .then((response)=> {
+            setUserData(response.data)
+            toast.success('Perfil editado')
+          })
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -213,7 +232,8 @@ export const UserProvider = ({ children }: UserProps) => {
         getUserData,
         activities,
         GetActivities,
-        userId
+        userId,
+        EditProfile
       }}
     >
       {children}
