@@ -16,11 +16,11 @@ export const Routes = () => {
       <Route exact path="/" component={Home} />
       <Route path="/login" component={Login} />
       <Route path="/balance" component={Balance} isPrivate/>
-      <Route path="/registerkids" component={RegisterKids} isPrivate/>
+      <Route path="/registerkids" component={RegisterKids} isParent/>
       <Route path="/registerparents" component={RegisterParents} />
-      <Route path="/dashboardkids" component={DashboardKids} isPrivate />
+      <Route path="/dashboardkids" component={DashboardKids}  isChildren />
       <Route path="/contenthome" component={ContentHome} />
-      <Route path="/dashboardparents" component={DashboardParents} isPrivate />
+      <Route path="/dashboardparents" component={DashboardParents} isParent/>
       <Route component={Home} />
     </Switch>
   );

@@ -6,19 +6,25 @@ import {
   ActivitiesList,
   ContainerMobile,
   MobileContent,
+  ContainerPage,
 } from "./style";
 import { AiOutlineCheck } from "react-icons/ai";
 import { FaTrash, FaAngellist } from "react-icons/fa";
 import { RiEmotionSadLine } from "react-icons/ri";
 import api from "../../Services/api";
+import ProfileBarChildren from "../../Components/ProfileBarChildren";
 
 const DashboardKids = () => {
-  const { activities, GetActivities } = useUser();
+  const { activities, GetActivities, isTokenValid } = useUser();
   const userId = localStorage.getItem("userId");
   const [carrouselNumber, setCarrouselNumber] = useState(0);
   useEffect(() => {
     GetActivities(Number(userId));
   }, []);
+
+  useEffect(() => {
+    isTokenValid()
+   }, [])
 
   const AchiviedFunction = (id: number) => {
     const body = {
@@ -69,10 +75,12 @@ const DashboardKids = () => {
   };
 
   return (
-    <>
-      <ContainerDesktop>
+    <>       
+      <ContainerPage> 
+        <ProfileBarChildren/>
+      <ContainerDesktop>  
+     
         <h2>Atividades</h2>
-
         <CardList>
           <li className="card">
             <h2>Diárias</h2>
@@ -242,6 +250,8 @@ const DashboardKids = () => {
           </li>
         </CardList>
       </ContainerDesktop>
+      </ContainerPage>
+      
 
       <ContainerMobile>
         <h2>Atividades</h2>

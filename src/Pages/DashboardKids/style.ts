@@ -8,7 +8,8 @@ export const ContainerDesktop = styled.div`
     margin-top: 100px;
   }
   @media (min-width: 768px) {
-    display: initial;
+    display: block;
+    width: 100%;
   }
 `;
 
@@ -127,3 +128,18 @@ export const MobileContent = styled.div`
   align-items: center;
   justify-content: space-around;
 `;
+
+
+export const ContainerPage = styled.div`
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+
+  
+
+  @media (max-width: 768px) {
+    display: none;
+  } 
+
+`

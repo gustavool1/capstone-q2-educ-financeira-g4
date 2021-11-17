@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BsFillPencilFill } from "react-icons/bs";
 import {
   Container,
@@ -15,8 +15,9 @@ import {
 } from "./styles";
 import { useState, useEffect } from "react";
 import { CardWish } from "../../Components/CardWish";
-import { useUser } from "../../Providers/Users";
+import { UserContext, useUser } from "../../Providers/Users";
 import Demo from "../../Components/Chart";
+import { isToastIdValid } from "react-toastify/dist/utils";
 
 interface BalanceProp {
   date?: string;
@@ -31,8 +32,9 @@ interface Wish {
 export const Balance = () => {
   const [isOpenBalance, setIsOpenBalance] = useState(false);
   const [isOpenWish, setIsOpenWish] = useState(false);
+  const { isValidToken } = useContext(UserContext)
 
-  const { userData, getUserData, ReceivedBalance, SpendBalance, AddWishList } =
+  const { userData, getUserData, ReceivedBalance, SpendBalance, AddWishList, isTokenValid } =
     useUser();
 
   const [received, setReceived] = useState(0);
@@ -57,6 +59,10 @@ export const Balance = () => {
   useEffect(() => {
     getUserData();
   }, []);
+
+  useEffect(() => {
+    isTokenValid()
+   }, [])
 
   console.log(userData);
   return (
@@ -135,7 +141,7 @@ export const Balance = () => {
             </WishListContent>
           ) : (
             <WishListContent>
-              {userData.wishlist.map((item: Wish, index: number) => (
+              {userData.wishlist?.map((item: Wish, index: number) => (
                 <CardWish key={index} item={item} />
               ))}
             </WishListContent>

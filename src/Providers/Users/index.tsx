@@ -21,7 +21,6 @@ interface UserDataItens {
   name: string;
   email: string;
   password: string;
-  type: string;
   wallet: number;
   wishlist: Wish[];
   balance: Balance[];
@@ -64,7 +63,10 @@ interface UserProviderData {
   SpendBalance: (data: UserDataItens, number: number) => void;
   ReceivedBalance: (data: UserDataItens, number: number) => void;
   getUserData: () => void;
-  userId:string
+  userId:string;
+  isValidToken: boolean;
+  isTokenValid: () => void;
+  typeUser: string;
 }
 
 export const UserProvider = ({ children }: UserProps) => {
@@ -78,6 +80,10 @@ export const UserProvider = ({ children }: UserProps) => {
     () => localStorage.getItem("userId") || ""
 )
   const [activities, setActivities] = useState([] as activity[]);
+    const [isValidToken, setIsValidToken] = useState<boolean>(false)
+    const [typeUser, setTypeUser] = useState(
+      () => localStorage.getItem("typeUser") || ""
+  )
 
   const Login = (userData: UserData) => {
     api
@@ -85,13 +91,15 @@ export const UserProvider = ({ children }: UserProps) => {
       .then((response) => {
         localStorage.setItem("userId", response.data.user.id);
         setUserId(response.data.user.id)
+        localStorage.setItem('typeUser', response.data.user.type)
+        setTypeUser(response.data.user.type)
         localStorage.setItem("token", response.data.accessToken);
         toast.success("Parabéns, você esta logado!");
         setUserToken(response.data.accessToken);
         setUserData(response.data.user);
         response.data.user.type === "parent"
           ? history.push("/dashboardparents")
-          : history.push("/dashboardkids");
+          : history.push("/dashboardkids");        
       })
       .catch((err) => {
         console.log(err);
@@ -103,6 +111,7 @@ export const UserProvider = ({ children }: UserProps) => {
     localStorage.clear();
     toast.success("Você esta deslogado!");
     setUserToken("");
+    history.push('/')
   };
 
   const Register = (ParentUserData: UserDataItens) => {
@@ -183,7 +192,6 @@ export const UserProvider = ({ children }: UserProps) => {
       })
       .catch((e) => {
         console.log(e);
-        localStorage.clear();
       });
   };
 
@@ -199,6 +207,22 @@ export const UserProvider = ({ children }: UserProps) => {
       });
   };
 
+  const isTokenValid = () => {
+    api
+      .get(`users/${localStorage.getItem("userId")}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then(resp => {
+        console.log('chamou a função')
+      })
+      .catch((e) => {
+        console.log('token expirado');
+        Logout()
+      });
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -213,7 +237,10 @@ export const UserProvider = ({ children }: UserProps) => {
         getUserData,
         activities,
         GetActivities,
-        userId
+        userId,
+        isValidToken,
+        isTokenValid, 
+        typeUser
       }}
     >
       {children}

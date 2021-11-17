@@ -4,17 +4,17 @@ import { UserContext } from '../../Providers/Users'
 import { MenuListContainer } from './style'
 
 const MenuParentsLogin = () => {
-    const { Logout, userData } = useContext(UserContext)
+    const { Logout, userData, typeUser } = useContext(UserContext)
     return (
        <MenuListContainer>
-           <div className={userData.type === 'parent'?  'links parents' : 'links'}>
+           <div className={typeUser === 'parent'?  'links parents' : 'links'}>
                 <Link to='/dashboardparents'>Dashboard</Link>
 
                 <Link to='/registerkids'>Cadastrar Dependente</Link>
 
             </div>
 
-            <div className={userData.type === 'parent'?  'btnContainer parents' : 'btnContainer'}>
+            <div className={typeUser === 'parent'?  'btnContainer parents' : 'btnContainer'}>
                 <button 
                     className='btnLogin'
                     onClick={Logout}
