@@ -59,7 +59,8 @@ export const NavContainer = styled.nav`
 
         .isLog {
             background: #7879F1;
-
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
             .btnMenu {
                 position: fixed;
                 z-index: 1;
@@ -269,14 +270,13 @@ export const MobileMenu = styled.div`
         height: 170px;
         width: 100%;
         display: flex;
-
         .userLog {
             display: flex;
             flex-direction: column;
             margin: auto 0;
             width: 100%;
             padding-left: 20px;
-        
+            border-radius:50px;
 
             img {
                 width: 100px;

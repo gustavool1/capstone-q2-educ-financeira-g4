@@ -64,6 +64,7 @@ interface UserProviderData {
   SpendBalance: (data: UserDataItens, number: number) => void;
   ReceivedBalance: (data: UserDataItens, number: number) => void;
   getUserData: () => void;
+  userId:string
 }
 
 export const UserProvider = ({ children }: UserProps) => {
@@ -73,6 +74,9 @@ export const UserProvider = ({ children }: UserProps) => {
   const [UserToken, setUserToken] = useState(
     () => localStorage.getItem("token") || ""
   );
+  const [ userId, setUserId ] = useState(
+    () => localStorage.getItem("userId") || ""
+)
   const [activities, setActivities] = useState([] as activity[]);
 
   const Login = (userData: UserData) => {
@@ -80,6 +84,7 @@ export const UserProvider = ({ children }: UserProps) => {
       .post("login", userData)
       .then((response) => {
         localStorage.setItem("userId", response.data.user.id);
+        setUserId(response.data.user.id)
         localStorage.setItem("token", response.data.accessToken);
         toast.success("Parabéns, você esta logado!");
         setUserToken(response.data.accessToken);
@@ -208,6 +213,7 @@ export const UserProvider = ({ children }: UserProps) => {
         getUserData,
         activities,
         GetActivities,
+        userId
       }}
     >
       {children}
