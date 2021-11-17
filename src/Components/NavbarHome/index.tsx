@@ -20,12 +20,14 @@ const NavbarHome = () => {
   const { UserToken, userData, typeUser } = useContext(UserContext);
   const { amountToPay } = useContext(ActivitiesContext)
 
+  const handleClick = () =>{
+  }
   return (
     <NavContainer>
+      
       <div className={!!UserToken ? "isLog" : "logOff"}>
         <NavSubContainer>
           <h1>FinanceKids</h1>
-
           <MenuDesktop>
             {!!UserToken ? (
               typeUser === "parent" ? (

@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useState } from "react";
 import { toast } from "react-toastify";
+import { showToast } from "../../Components/Toast/style";
 import api from '../../Services/api'
 import { useUser } from "../Users";
 
@@ -78,7 +79,7 @@ export const ActivitiesProvider = ({ children }:ActivitiesProviderProps) =>{
                 Authorization:`Bearer ${localStorage.getItem('token')}`
             }
         })
-         .then(()=> toast.success(("Atividade editada com sucesso")))
+         .then(()=> showToast({type:"success", message:"Atividade concluída com sucesso"}))
          
     }
     const createActivie = (task:Activities) =>{
@@ -89,7 +90,7 @@ export const ActivitiesProvider = ({ children }:ActivitiesProviderProps) =>{
             }
         })
          .then(()=>{
-             toast.success("Atividade adicionada com sucesso")
+             showToast({type:"success", message:"Atividade adicionada com sucesso"})
          })
     }
 

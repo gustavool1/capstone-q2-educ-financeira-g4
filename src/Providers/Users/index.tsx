@@ -1,13 +1,10 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import api from "../../Services/api";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContext } from "../Toasts/index";
+import { showToast } from "../../Components/Toast/style";
 
-export const UserContext = createContext<UserProviderData>(
-  {} as UserProviderData
-);
+
 
 interface UserProps {
   children: ReactNode;
@@ -75,9 +72,10 @@ interface UserProviderData {
   EditProfile : (data:EditProfileData) => void
 
 }
+export const UserContext = createContext<UserProviderData>({} as UserProviderData);
+
 
 export const UserProvider = ({ children }: UserProps) => {
-  const {toastSuccess,toastError,toastWarning} = useContext(ToastContext)
   const [userData, setUserData] = useState<UserDataItens>({} as UserDataItens);
   const history = useHistory();
   const [UserToken, setUserToken] = useState(
@@ -101,7 +99,7 @@ export const UserProvider = ({ children }: UserProps) => {
         localStorage.setItem('typeUser', response.data.user.type)
         setTypeUser(response.data.user.type)
         localStorage.setItem("token", response.data.accessToken);
-        toast.success("Parabéns, você esta logado!");
+        showToast({type:"success", message:"Sucesso ao logar"})
         setUserToken(response.data.accessToken);
         setUserData(response.data.user);
         response.data.user.type === "parent"
@@ -110,13 +108,14 @@ export const UserProvider = ({ children }: UserProps) => {
       })
       .catch((err) => {
         console.log(err);
-        toast.error("Erro, ao tentar logar!");
+        showToast({type:"error", message:"Erro, ao tentar logar!"})
+       
       });
   };
 
   const Logout = () => {
     localStorage.clear();
-    toast.success("Você esta deslogado!");
+    showToast({type:"success", message:"Você esta deslogado!"})
     setUserToken("");
     history.push('/')
   };
@@ -126,11 +125,11 @@ export const UserProvider = ({ children }: UserProps) => {
       .post("register", ParentUserData)
       .then(() => {
         history.push("/login");
-        toast.success("Parabéns, você criou uma conta!");
+        showToast({type:"success", message:"Parabéns, você criou uma conta!"})
       })
       .catch((err) => {
         console.log(err);
-        toast.error("Erro, ao criar logar!");
+        showToast({type:"error", message:"Erro, ao criar logar!"})
       });
   };
 
@@ -229,7 +228,7 @@ export const UserProvider = ({ children }: UserProps) => {
         console.log('token expirado');
         Logout()
       });
-
+  }
   const EditProfile = (data:EditProfileData) =>{
         api
          .patch(`/users/${userData.id}`, data, {
@@ -239,7 +238,7 @@ export const UserProvider = ({ children }: UserProps) => {
          })
           .then((response)=> {
             setUserData(response.data)
-            toast.success('Perfil editado')
+            showToast({type:"success", message:"Perfil editado"})
           })
 
   }
@@ -270,5 +269,6 @@ export const UserProvider = ({ children }: UserProps) => {
     </UserContext.Provider>
   );
 };
+
 
 export const useUser = () => useContext(UserContext);
