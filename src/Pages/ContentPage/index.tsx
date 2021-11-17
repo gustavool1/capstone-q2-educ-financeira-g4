@@ -1,10 +1,16 @@
 import LottieMaker from "../../Components/LottieMaker";
-import { Container } from "./style";
+import { Container, Nav, NavButton } from "./style";
+import SpaceShip from "../../assets/images/foguete.gif";
+import { useState } from "react";
+
 const ContentPage = () => {
+  const [navegationIsOpen, setNavegationIsOpen] = useState(false);
   return (
     <>
       <Container background="#9B5DE5" color="#fff">
-        <h2 className="first">A lei da oferta e da procura !</h2>
+        <h2 className="first" id="ofertaEprocura">
+          A lei da oferta e da procura !
+        </h2>
         <div className="content">
           <div className="textContent">
             <p>
@@ -33,7 +39,7 @@ const ContentPage = () => {
         </div>
       </Container>
 
-      <Container background="#302F4D" color="#ffffff">
+      <Container background="#302F4D" color="#ffffff" id="inflacao">
         <h2 className="title"> O que é a inflação ?</h2>
         <div className="content">
           <div className="textContent">
@@ -89,7 +95,7 @@ const ContentPage = () => {
           </div>
         </div>
       </Container>
-      <Container background="#8C218E" color="#ffffff">
+      <Container background="#8C218E" color="#ffffff" id="juros">
         <h2>O poder dos Juros !</h2>
         <div className="content">
           <div className="textContent">
@@ -162,6 +168,34 @@ const ContentPage = () => {
           />
         </div>
       </Container>
+      {!navegationIsOpen && (
+        <NavButton onClick={() => setNavegationIsOpen(true)}>
+          <img src={SpaceShip} alt="SpaceShip" />
+        </NavButton>
+      )}
+
+      {navegationIsOpen && (
+        <Nav className="NAVBAR">
+          <button className="exit" onClick={() => setNavegationIsOpen(false)}>
+            <img
+              alt="exit"
+              src="https://img.icons8.com/color/48/000000/delete-sign--v2.png"
+            />
+          </button>
+
+          <a href="#ofertaEprocura" onClick={() => setNavegationIsOpen(false)}>
+            Lei da oferta o procura
+          </a>
+
+          <a href="#inflacao" onClick={() => setNavegationIsOpen(false)}>
+            Inflação
+          </a>
+
+          <a href="#juros" onClick={() => setNavegationIsOpen(false)}>
+            Juros
+          </a>
+        </Nav>
+      )}
     </>
   );
 };
