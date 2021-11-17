@@ -5,16 +5,25 @@ import { useEffect, useState } from "react";
 import { BiSend } from "react-icons/bi";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { useUser } from "../../Providers/Users";
+import api from "../../Services/api";
 
 export const CardWishDetails = () => {
-  const { isWish, setIsWish, wish } = useModal();
 
-  const { AddtoKitty } = useUser();
+
+  const { isWish, setIsWish, wish, changingWish, AddtoKitty } = useModal();
+
+  const {getUserData } = useUser()
+
+
 
   const percentage = (wish.kitty / wish.value) * 100;
 
   const [valuekitty, setValueKitty] = useState(0);
 
+
+  const handleClick = () =>{
+    AddtoKitty(wish, valuekitty)
+  }
   return (
     <ModalWish>
       <WishListHeader>
@@ -22,7 +31,7 @@ export const CardWishDetails = () => {
         <button onClick={() => setIsWish(!isWish)}>x</button>
       </WishListHeader>
       <WishContent>
-        <h2>Valor atual: {wish.kitty.toFixed(2).replace(".", ",")}</h2>
+        <h2>Valor atual: {wish.kitty?.toFixed(2).replace(".", ",")}</h2>
         <Porcent>
           <CircularProgressbar
             value={percentage}
@@ -35,7 +44,7 @@ export const CardWishDetails = () => {
             })}
           />
         </Porcent>
-        <h4>Meta: {wish.value.toFixed(2).replace(".", ",")}</h4>
+        <h4>Meta: {wish.value?.toFixed(2).replace(".", ",")}</h4>
         <div>
           <label>Vaquinha</label>
           <input
@@ -43,7 +52,7 @@ export const CardWishDetails = () => {
             placeholder="Adicionar"
             onChange={(e) => setValueKitty(Number(e.target.value))}
           />
-          <button onClick={() => AddtoKitty(wish, valuekitty)}>
+          <button onClick={handleClick}>
             <BiSend />
           </button>
         </div>

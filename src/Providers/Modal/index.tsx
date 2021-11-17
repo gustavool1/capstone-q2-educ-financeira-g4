@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from "react";
+import api from "../../Services/api";
 import { ActivitiesContext } from "../Activities";
 import { ChildrenContext } from "../Children";
 import { useUser } from "../Users";
@@ -26,8 +27,10 @@ interface ModalProviderData {
   wish: Wish;
 
   handleEditingProfile: () => void;
-
+  changingWish: (item:Wish) => void 
   isEditingProfile: boolean;
+
+  AddtoKitty: (wish: Wish, value: number) => void
 }
 
 interface Children {
@@ -46,6 +49,7 @@ export const ModalContext = createContext<ModalProviderData>(
 );
 
 export const ModalProvider = ({ children }: ModalProviderProps) => {
+  const { getUserData,SpendBalance } = useUser()
   const { changingActualChildren } = useContext(ChildrenContext);
   const { changingActualIdActivitie } = useContext(ActivitiesContext);
   const [wish, setWish] = useState<Wish>({} as Wish);
@@ -74,6 +78,47 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
     setWish(item);
   };
 
+  const changingWish = (item:Wish) =>{
+
+  }
+  const AddtoKitty = (wish: Wish, value: number) => {
+    const el = userData.wishlist.map((item) => {
+      if (item.name === wish.name) {
+        return {
+          name: wish.name,
+          value: wish.value,
+          kitty: wish.kitty + value,
+        };
+      }
+      return item;
+    });
+    const send = userData.wishlist.filter(
+      (element) => element.name === wish.name
+    );
+    console.log("send", send);
+    const data = { wishlist: el };
+    const id = localStorage.getItem("userId");
+    SpendBalance(userData, -value);
+    console.log(data);
+    api
+      .patch(`users/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+      .then((response) => {
+        console.log('response', response)
+        const newWish = response.data.wishlist.filter((wishes:any)=> wishes.name === wish.name)
+        console.log('wish',newWish)
+        setWish(newWish[0])
+
+
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <ModalContext.Provider
       value={{
@@ -87,6 +132,8 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
         wish,
         handleEditingProfile,
         isEditingProfile,
+        changingWish, 
+        AddtoKitty
       }}
     >
       {children}

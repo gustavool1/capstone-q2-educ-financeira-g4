@@ -2,7 +2,7 @@ import { createContext, ReactNode, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import api from "../../Services/api";
 import "react-toastify/dist/ReactToastify.css";
-import { useModal } from "../Modal";
+import { ModalContext, useModal } from "../Modal";
 import { showToast } from "../../Components/Toast/style";
 
 interface UserProps {
@@ -78,6 +78,7 @@ export const UserContext = createContext<UserProviderData>(
 );
 
 export const UserProvider = ({ children }: UserProps) => {
+  // const {  } = useContext(ModalContext)
   const [userData, setUserData] = useState<UserDataItens>({} as UserDataItens);
   const history = useHistory();
   const [UserToken, setUserToken] = useState(
@@ -201,6 +202,9 @@ export const UserProvider = ({ children }: UserProps) => {
       })
       .then((reponse) => {
         setUserData(reponse.data);
+
+        console.log('userdata',userData)
+        console.log('response', reponse)
       })
       .catch((e) => {
         console.log(e);
@@ -234,8 +238,11 @@ export const UserProvider = ({ children }: UserProps) => {
         },
       })
       .then((response) => {
+        console.log('response', response)
         getUserData();
-        console.log(response.data);
+        
+
+
       })
       .catch((err) => {
         console.log(err);
