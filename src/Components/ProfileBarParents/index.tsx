@@ -12,7 +12,7 @@ const ProfileBarParents = () => {
     useEffect(() => {
         getAmountToPay()
         getUserData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        console.log(userData)
     }, [])
 
     return (

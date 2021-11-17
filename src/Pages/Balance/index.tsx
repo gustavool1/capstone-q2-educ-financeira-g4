@@ -16,7 +16,6 @@ import {
 import { useState, useEffect } from "react";
 import { CardWish } from "../../Components/CardWish";
 import { useUser } from "../../Providers/Users";
-import Demo from "../../Components/Chart";
 
 interface BalanceProp {
   date?: string;
@@ -63,9 +62,7 @@ export const Balance = () => {
     <Container>
       <LeftSide>
         <h2>Patrimônio Total Acumulado</h2>
-        <Chart>
-          <Demo/>
-        </Chart>
+        <Chart></Chart>
         <Button onClick={() => setIsOpenBalance(!isOpenBalance)}>
           Movimentações
         </Button>
@@ -135,7 +132,7 @@ export const Balance = () => {
             </WishListContent>
           ) : (
             <WishListContent>
-              {userData.wishlist?.map((item: Wish, index: number) => (
+              {userData.wishlist.map((item: Wish, index: number) => (
                 <CardWish key={index} item={item} />
               ))}
             </WishListContent>

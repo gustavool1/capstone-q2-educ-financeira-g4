@@ -14,11 +14,12 @@ import { UserContext } from "../../Providers/Users";
 export const DashboardParents = () => {
   const { getYourChildrens, childrenArr } = useContext(ActivitiesContext)
   const { isEditing, isAdding } = useContext(ModalContext) 
-  const { userData, getUserData} = useContext(UserContext)
+  const { userData } = useContext(UserContext)
   const history = useHistory();
 
   useEffect(()=>{
     if(localStorage.getItem('token')){
+
       getYourChildrens()
     }
   },[])
