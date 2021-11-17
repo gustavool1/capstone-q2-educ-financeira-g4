@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
+
+export const Container = styled.div`
+  scroll-behavior: smooth;
+`;
 export const VideoContainer = styled.div`
   height: fit-content;
   background-color: #9b5de5;
@@ -78,6 +82,12 @@ export const KnowMore = styled.div`
       border-radius: 50px;
       font-size: 28px;
       width: 240px;
+      :hover {
+        transition: 0.3s;
+        color: #000;
+        scale: 1.5;
+        background-color: #fff;
+      }
     }
   }
   @media (min-width: 768px) {
