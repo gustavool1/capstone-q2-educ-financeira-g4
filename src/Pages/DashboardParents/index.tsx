@@ -10,10 +10,11 @@ import FormEditingActivity from "../../Components/FormEditingActivity";
 import ProfileBarParents from "../../Components/ProfileBarParents";
 import { useHistory } from "react-router";
 import { UserContext } from "../../Providers/Users";
+import FormEditingProfile from "../../Components/FormEditingProfile";
 
 export const DashboardParents = () => {
   const { getYourChildrens, childrenArr } = useContext(ActivitiesContext)
-  const { isEditing, isAdding } = useContext(ModalContext) 
+  const { isEditing, isAdding, isEditingProfile } = useContext(ModalContext) 
   const { userData } = useContext(UserContext)
   const history = useHistory();
 
@@ -40,7 +41,12 @@ export const DashboardParents = () => {
               <FormEditingActivity/>
             </EditingContainer>
           }
-
+          {
+            isEditingProfile && 
+            <EditingContainer>
+              <FormEditingProfile/>
+            </EditingContainer>
+          }
       <ProfileBarParents/>
       {childrenArr.length !==0&&
         <ListChildren children={childrenArr}/>
