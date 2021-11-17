@@ -35,7 +35,18 @@ export const ProfileContainer = styled.div`
             border-radius: 20%;
         }
     }
-
+    button{
+        border: none;
+        background-color: transparent;
+        p{
+            color: white;
+            font-size: 18px;
+            transition: 2s;
+            :hover{
+                color: lightgrey;
+            }
+        }
+    }
     @media screen and (max-width: 768px) {
         display: none;
     }
