@@ -7,19 +7,20 @@ import {
 } from "./style";
 import { GiHamburgerMenu } from "react-icons/gi";
 import MenuList from "./menuList";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../Providers/Users";
 import MenuParentsLogin from "./menuParentsLogin";
 import MenuChildrensLogin from "./menuChildrensLogin";
 import icon from "../../assets/images/iconProfile.jpg";
 import { motion } from "framer-motion";
 import { ActivitiesContext } from "../../Providers/Activities";
+import { ToastContext } from "../../Providers/Toasts";
 
 const NavbarHome = () => {
   const [showMenu, setshowMenu] = useState<boolean>(false);
   const { UserToken, userData } = useContext(UserContext);
   const { amountToPay } = useContext(ActivitiesContext)
-
+  
   return (
     <NavContainer>
       <div className={!!UserToken ? "isLog" : "logOff"}>

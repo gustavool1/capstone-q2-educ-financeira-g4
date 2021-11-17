@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useState } from "react";
 import { toast } from "react-toastify";
 import api from '../../Services/api'
+import { useUser } from "../Users";
 
 interface ActivitiesProviderData{
     getYourChildrens: ()=> void,
@@ -53,9 +54,7 @@ export const ActivitiesProvider = ({ children }:ActivitiesProviderProps) =>{
     const [ childrenArr, setChildrenArr ] = useState<Children[]>([])
     const [ actualActivitieId, setActualActivitieId ]  = useState(0) 
     const [amountToPay, setAmountToPay] = useState<number>(0)
-    const [ userId ] = useState(
-        () => localStorage.getItem("userId") || ""
-    )
+    const { userId } = useUser()
     const getYourChildrens = () =>{
         api
          .get(`users?parentId=${userId}`,{
@@ -63,7 +62,9 @@ export const ActivitiesProvider = ({ children }:ActivitiesProviderProps) =>{
                  Authorization:`Bearer ${localStorage.getItem('token')}`
              }
          })
-          .then((response)=> setChildrenArr([ ...response.data]))
+          .then((response)=> {
+            setChildrenArr([ ...response.data])
+          })
            .catch((err)=>{
                console.log('getyourChildrens', err)
                localStorage.clear();
