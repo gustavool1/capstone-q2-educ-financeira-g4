@@ -25,6 +25,7 @@ interface BalanceProp {
 interface Wish {
   name: string;
   value: number;
+  kitty: number;
 }
 
 export const Balance = () => {
@@ -37,8 +38,8 @@ export const Balance = () => {
   const [spend, setSpend] = useState(0);
   const [wishName, setWishName] = useState("");
   const [wishPrice, setWishPrice] = useState(0);
-  const { isWish, setIsWish } = useModal();
-  
+  const { isWish } = useModal();
+
   const HandleClickBalance = () => {
     spend !== 0 && SpendBalance(userData, spend);
     received !== 0 && ReceivedBalance(userData, received);
@@ -47,7 +48,7 @@ export const Balance = () => {
   };
 
   const HandleClickWish = () => {
-    const wish = { name: wishName, value: wishPrice };
+    const wish = { name: wishName, value: wishPrice, kitty: 0 };
     console.log(wish);
     AddWishList(userData, wish);
   };
@@ -57,8 +58,6 @@ export const Balance = () => {
   }, []);
   return (
     <Container>
-      {isWish &&  <CardWishDetails />}
-
       <LeftSide>
         <h2>Patrimônio Total Acumulado</h2>
         <Chart></Chart>
@@ -133,13 +132,12 @@ export const Balance = () => {
             <WishListContent>
               {userData.wishlist.map((item: Wish, index: number) => (
                 <>
-                <CardWish id="wishlist" key={index} item={item} />
-               
-                
+                  <CardWish id="wishlist" key={index} item={item} />
                 </>
               ))}
             </WishListContent>
           )}
+          {isWish && <CardWishDetails />}
         </WishList>
         <Button onClick={() => setIsOpenWish(!isOpenWish)}>
           {isOpenWish ? "Fechar criar desejo" : "Criar desejo"}

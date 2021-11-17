@@ -1,16 +1,14 @@
 import { HiInformationCircle } from "react-icons/hi";
 import { Li } from "./styles";
 import { useModal } from "../../Providers/Modal";
-import { CardWishDetails } from "../CardWishDetails";
 
 interface WishProps {
-  item: { name: string; value: number };
+  item: { name: string; value: number; kitty: number };
   id?: string;
 }
 
 export const CardWish = ({ item }: WishProps) => {
-  
-  const { isWish, HandleClickDetails } = useModal();
+  const { HandleClickDetails } = useModal();
 
   return (
     <Li>
