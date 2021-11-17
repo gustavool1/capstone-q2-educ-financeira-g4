@@ -11,6 +11,13 @@ export const Container = styled.div<{ background?: string; color?: string }>`
   justify-content: space-around;
   align-items: space-around;
 
+  h3 {
+    margin-bottom: 40px;
+    font-size: 28px;
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto 40px auto;
+  }
   .first {
     margin-top: 50px;
   }
@@ -31,12 +38,6 @@ export const Container = styled.div<{ background?: string; color?: string }>`
 
     .textContent {
       height: 100%;
-
-      h3 {
-        margin-bottom: 40px;
-        font-size: 28px;
-        text-align: center;
-      }
     }
   }
 

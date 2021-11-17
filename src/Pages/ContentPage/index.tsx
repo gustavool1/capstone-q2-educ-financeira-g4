@@ -114,9 +114,53 @@ const ContentPage = () => {
           />
         </div>
       </Container>
-      <Container background="#FEE440"></Container>
-      <Container background="#00F5D4"></Container>
-      <Container background="#302F4D"></Container>
+      <Container background="#FEE440">
+        <div className="content">
+          <LottieMaker
+            lottieImage="https://assets3.lottiefiles.com/packages/lf20_de909vf3.json"
+            width={300}
+            height={300}
+            playerAreVisible={false}
+          />
+          <div className="textContent">
+            <h3>Como Funciona os Juros</h3>
+            <p>
+              Geralmente os juros são dados em %, então, supondo que você
+              emprestou 1000 reais pro banco com 15% de juros. isso quer dizer
+              que você vai receber seus 1000 reais e mais 150 reais depois de um
+              mês .
+            </p>
+            <p>1000 * 1,15 = R$ 1150</p>
+          </div>
+        </div>
+      </Container>
+      <Container background="#00F5D4">
+        <h3>E se eu deixar por um ano? </h3>
+
+        <div className="content">
+          <div className="textContainer">
+            <p>
+              Vamos imaginar que você emprestou os mesmos 1000 reais com 15% de
+              juros para o banco mas dessa vez por um ano
+            </p>
+
+            <p>Depois de 12 meses o banco te pagará 5350,20 reais, !</p>
+
+            <p>
+              Isso acontece por que no segundo mês além dos R$ 1000 você terá
+              emprestado os 150 reais também.
+            </p>
+
+            <p>É isso que acontece no Juros Composto !!</p>
+          </div>
+          <LottieMaker
+            lottieImage="https://assets4.lottiefiles.com/private_files/lf30_aXRkcv.json"
+            width={300}
+            height={300}
+            playerAreVisible={false}
+          />
+        </div>
+      </Container>
     </>
   );
 };
