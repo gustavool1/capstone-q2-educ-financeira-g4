@@ -101,6 +101,7 @@ export const RegisterParents = () => {
             <span>{errors.confirmPassword?.message}</span>
             <Button type="submit">Cadastrar</Button>
           </Form>
+
         </FormContainer>
       </Container>
     </>

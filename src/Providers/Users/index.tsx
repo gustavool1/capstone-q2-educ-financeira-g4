@@ -35,9 +35,9 @@ interface Wish {
   value: number;
 }
 
-interface Balance {
-  date?: string;
-  move?: number;
+export interface Balance {
+  date: string;
+  move: number;
 }
 
 interface Children {
@@ -103,14 +103,16 @@ export const UserProvider = ({ children }: UserProps) => {
     localStorage.clear();
     toast.success("Você esta deslogado!");
     setUserToken("");
+    history.push('/')
   };
 
   const Register = (ParentUserData: UserDataItens) => {
+    const { type } = ParentUserData
     api
       .post("register", ParentUserData)
-      .then(() => {
-        history.push("/login");
-        toast.success("Parabéns, você criou uma conta!");
+      .then(() => {       
+        toast.success("Parabéns, você criou uma conta!"); 
+        !(type === 'children') && history.push("/login");
       })
       .catch((err) => {
         console.log(err);
@@ -178,10 +180,11 @@ export const UserProvider = ({ children }: UserProps) => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
-      .then((reponse) => {
-        setUserData(reponse.data);
+      .then((response) => {
+        setUserData(response.data);
       })
       .catch((e) => {
+
         console.log(e);
         localStorage.clear();
       });
@@ -196,6 +199,7 @@ export const UserProvider = ({ children }: UserProps) => {
       })
       .then((response) => {
         setActivities(response.data);
+
       });
   };
 

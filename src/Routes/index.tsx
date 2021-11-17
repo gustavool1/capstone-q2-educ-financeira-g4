@@ -21,7 +21,7 @@ export const Routes = () => {
       <Route path="/dashboardkids" component={DashboardKids} isPrivate />
       <Route path="/contenthome" component={ContentHome} />
       <Route path="/dashboardparents" component={DashboardParents} isPrivate />
-      <Route component={Home} />
+      {/* <Route component={Home} /> */}
     </Switch>
   );
 };
