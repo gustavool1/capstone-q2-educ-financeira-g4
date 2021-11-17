@@ -9,11 +9,20 @@ import { useUser } from "../../Providers/Users";
 export const CardWishDetails = () => {
   const { isWish, setIsWish, wish } = useModal();
 
-  const { AddtoKitty } = useUser();
+  const { AddtoKitty, userData } = useUser();
 
   const percentage = (wish.kitty / wish.value) * 100;
 
   const [valuekitty, setValueKitty] = useState(0);
+
+  const send = userData.wishlist.filter(
+    (element) => element.name === wish.name
+  );
+
+  // useEffect(() => {
+
+  //   }
+  // }, [userData])
 
   return (
     <ModalWish>
