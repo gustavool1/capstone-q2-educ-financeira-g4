@@ -14,19 +14,12 @@ import MenuChildrensLogin from "./menuChildrensLogin";
 import icon from "../../assets/images/iconProfile.jpg";
 import { motion } from "framer-motion";
 import { ActivitiesContext } from "../../Providers/Activities";
+import { ToastContext } from "../../Providers/Toasts";
 
 const NavbarHome = () => {
   const [showMenu, setshowMenu] = useState<boolean>(false);
   const { UserToken, userData, getUserData } = useContext(UserContext);
   const { amountToPay } = useContext(ActivitiesContext)
-
-  // useEffect(() => {
-  //   getUserData()
-
-  //   if (!UserToken || userData) {
-  //     history.push('')
-  //   }
-  // }, [])
 
   return (
     <NavContainer>

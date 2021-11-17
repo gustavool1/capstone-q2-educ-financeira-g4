@@ -18,17 +18,12 @@ export const DashboardParents = () => {
   const history = useHistory();
 
   useEffect(()=>{
-    getYourChildrens()
-    getUserData()
-    console.log(userData)
+    if(localStorage.getItem('token')){
+      getYourChildrens()
+    }
   },[])
 
-  useEffect(() => {
-    if (userData.type !== 'parent') {
-        history.push('/')
-    }
-  })
-
+ 
   return(
     
     <Container>
@@ -46,7 +41,7 @@ export const DashboardParents = () => {
           }
 
       <ProfileBarParents/>
-      {childrenArr.length &&
+      {childrenArr.length !==0&&
         <ListChildren children={childrenArr}/>
       }
 
