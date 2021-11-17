@@ -11,7 +11,6 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { FaTrash, FaAngellist } from "react-icons/fa";
 import { RiEmotionSadLine } from "react-icons/ri";
 import api from "../../Services/api";
-import ProfileBarChildren from "../../Components/ProfileBarChildren";
 
 const DashboardKids = () => {
   const { activities, GetActivities } = useUser();
@@ -69,17 +68,9 @@ const DashboardKids = () => {
     }
   };
 
-  const { getUserData, userData } = useContext(UserContext)
-
-  useEffect(() => {
-    getUserData()
-    console.log(userData)
-  }, [])
-
   return (
     <>
       <ContainerDesktop>
-        <ProfileBarChildren/>
         <h2>Atividades</h2>
 
         <CardList>
