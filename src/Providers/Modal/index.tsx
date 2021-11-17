@@ -24,6 +24,10 @@ interface ModalProviderData {
   isWish: boolean;
   setIsWish: (isWish: boolean) => void;
   wish: Wish;
+
+  handleEditingProfile: () => void;
+
+  isEditingProfile: boolean;
 }
 
 interface Children {
@@ -48,9 +52,15 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
   const [isWish, setIsWish] = useState(false);
+  const [isEditingProfile, setIsEditingProfile] = useState(false);
   const handleEditing = (activitieId: number) => {
     changingActualIdActivitie(activitieId);
     setIsEditing(!isEditing);
+  };
+  const { userData } = useUser();
+
+  const handleEditingProfile = () => {
+    setIsEditingProfile(!isEditingProfile);
   };
 
   const handleAdding = (childrenId: number) => {
@@ -60,6 +70,7 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
 
   const HandleClickDetails = (item: Wish) => {
     setIsWish(!isWish);
+
     setWish(item);
   };
 
@@ -74,6 +85,8 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
         setIsWish,
         isWish,
         wish,
+        handleEditingProfile,
+        isEditingProfile,
       }}
     >
       {children}

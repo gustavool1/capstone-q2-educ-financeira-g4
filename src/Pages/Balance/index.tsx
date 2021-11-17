@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { BsFillPencilFill } from "react-icons/bs";
 import {
   Container,
   ModalBalance,
@@ -14,9 +15,11 @@ import {
 } from "./styles";
 import { useState, useEffect } from "react";
 import { CardWish } from "../../Components/CardWish";
-import { useUser } from "../../Providers/Users";
 import { CardWishDetails } from "../../Components/CardWishDetails";
 import { useModal } from "../../Providers/Modal";
+import { UserContext, useUser } from "../../Providers/Users";
+import Demo from "../../Components/Chart";
+import { isToastIdValid } from "react-toastify/dist/utils";
 interface BalanceProp {
   date?: string;
   move?: number;
@@ -31,9 +34,20 @@ interface Wish {
 export const Balance = () => {
   const [isOpenBalance, setIsOpenBalance] = useState(false);
   const [isOpenWish, setIsOpenWish] = useState(false);
-  const { userData, getUserData, ReceivedBalance, SpendBalance, AddWishList } =
-    useUser();
+  const { isValidToken } = useContext(UserContext);
 
+  const {
+    userData,
+    getUserData,
+    ReceivedBalance,
+    SpendBalance,
+    AddWishList,
+    isTokenValid,
+  } = useUser();
+
+  const [isParent] = useState<boolean>(
+    userData.type === "parent" ? true : false
+  );
   const [received, setReceived] = useState(0);
   const [spend, setSpend] = useState(0);
   const [wishName, setWishName] = useState("");
@@ -56,11 +70,19 @@ export const Balance = () => {
   useEffect(() => {
     getUserData();
   }, []);
+
+  useEffect(() => {
+    isTokenValid();
+  }, []);
+
+  console.log(userData);
   return (
     <Container>
       <LeftSide>
         <h2>Patrimônio Total Acumulado</h2>
-        <Chart></Chart>
+        <Chart>
+          <Demo />
+        </Chart>
         <Button onClick={() => setIsOpenBalance(!isOpenBalance)}>
           Movimentações
         </Button>
@@ -85,20 +107,26 @@ export const Balance = () => {
             <h2>{`Saldo:   ${userData.wallet
               .toFixed(2)
               .replace(".", ",")}`}</h2>
-            <label>Recebido</label>
-            <Input
-              placeholder="Recebido"
-              onChange={(e) => {
-                setReceived(Number(e.target.value));
-                console.log(e.target.value);
-              }}
-            />
-            <label className="secondLabel">Pago</label>
-            <Input
-              placeholder="Pago"
-              onChange={(e) => setSpend(Number(e.target.value) * -1)}
-            />
-            <Button onClick={() => HandleClickBalance()}>Enviar</Button>
+            {!isParent && <label>Recebido</label>}
+            {!isParent && (
+              <Input
+                placeholder="Recebido"
+                onChange={(e) => {
+                  setReceived(Number(e.target.value));
+                  console.log(e.target.value);
+                }}
+              />
+            )}
+            {!isParent && <label className="secondLabel">Pago</label>}
+            {!isParent && (
+              <Input
+                placeholder="Pago"
+                onChange={(e) => setSpend(Number(e.target.value) * -1)}
+              />
+            )}
+            {!isParent && (
+              <Button onClick={() => HandleClickBalance()}>Enviar</Button>
+            )}
             <Button onClick={() => setIsOpenBalance(!isOpenBalance)}>
               Sair
             </Button>
@@ -130,18 +158,18 @@ export const Balance = () => {
             </WishListContent>
           ) : (
             <WishListContent>
-              {userData.wishlist.map((item: Wish, index: number) => (
-                <>
-                  <CardWish id="wishlist" key={index} item={item} />
-                </>
+              {userData.wishlist?.map((item: Wish, index: number) => (
+                <CardWish id="wishlist" key={index} item={item} />
               ))}
             </WishListContent>
           )}
           {isWish && <CardWishDetails />}
         </WishList>
-        <Button onClick={() => setIsOpenWish(!isOpenWish)}>
-          {isOpenWish ? "Fechar criar desejo" : "Criar desejo"}
-        </Button>
+        {!isParent && (
+          <Button onClick={() => setIsOpenWish(!isOpenWish)}>
+            {isOpenWish ? "Fechar criar desejo" : "Criar desejo"}
+          </Button>
+        )}
       </RightSide>
     </Container>
   );

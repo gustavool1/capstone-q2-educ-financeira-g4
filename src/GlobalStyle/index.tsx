@@ -1,6 +1,5 @@
 import { createGlobalStyle } from "styled-components"
-
-
+import 'react-toastify/dist/ReactToastify.minimal.css';
 export const GlobalStyle = createGlobalStyle`
 
 :root {

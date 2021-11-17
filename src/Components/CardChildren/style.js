@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+import { motion } from 'framer-motion'
 export const Container = styled.div`
    
    
@@ -48,6 +48,10 @@ export const Front = styled.div`
     p{
         font-size: 25px;
     }
+    @media screen and (max-width:768px){
+        display: none;
+    }
+
 `
 export const Back = styled.div`
     width: 350px;
@@ -66,6 +70,9 @@ export const Back = styled.div`
     flex-direction: column;
     padding: 10px;
     border: 1px solid white;
+    @media screen and (max-width:768px){
+        display: none;
+    }
 `
 export const Achivied = styled.div`
     height: 170px;
@@ -150,4 +157,121 @@ export const ButtonsContainer = styled.div`
         background-color: #fff;
         }
     }
+`
+
+
+
+export const MobileCard = styled.div`
+    width: 100%;
+    margin: 10px 0px;
+    display: none;
+    transition: 3s;
+    @media screen and (max-width:768px){
+        display: block;
+        .isOpen{
+        @keyframes slidein{
+            from{
+                height: 0px;
+            }
+            to{
+                height: 400px;
+            }
+
+        }
+        animation:slidein 3s  ;
+
+    }
+    .isClosed{
+        height: 0px;
+       
+        @keyframes slideout{
+            from{
+                height: 400px;
+                display: block;
+            }
+            to{
+                height: 0px;
+                display: none;
+            }
+
+        }
+       
+        animation:slideout 3s  ;
+
+    }
+
+    
+    }
+`
+     
+
+
+export const ChildrenData = styled(motion.div)`
+    
+    height: 100px;
+    width: 100%;
+    box-sizing:border-box;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color:  #302F4D;
+    margin: 0 ;
+    display: flex;
+    justify-content: space-between;
+    img{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+
+    button{
+        height: fit-content;
+        background-color: transparent;
+        border: 0;
+        svg{
+            font-size: 20px;
+
+            color: white;
+        }
+    }
+    div{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        margin-left: 10px;
+    }
+    color: white;
+`
+
+export const ChildrenActivities = styled(motion.div)`
+    height: 400px;
+    width: 100%;
+    background-color:  #302F4D;
+    margin: 0 ;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: white;
+    padding: 20px;
+    
+    p{
+        max-width: 15ch;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .closed{
+        @keyframes closed{
+            from{
+                opacity: 1;
+            }
+
+            to{
+                opacity: 0;
+                
+            }
+        }
+        animation:closed 2s  ;
+        display: none;
+    }
+    
+    transition: 3s;
 `

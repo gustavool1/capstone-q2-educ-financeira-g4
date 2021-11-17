@@ -15,7 +15,7 @@ export const Provider = ({ children }: UserProps) => {
       <ActivitiesProvider>
         <ChildrenProvider>
           <ModalProvider>
-            {children}
+              {children}
           </ModalProvider>
         </ChildrenProvider>
       </ActivitiesProvider>

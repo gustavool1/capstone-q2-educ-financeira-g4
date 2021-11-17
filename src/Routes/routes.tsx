@@ -4,24 +4,40 @@ import { Redirect, Route as ReactDOMRoute } from 'react-router-dom'
 
 interface RoutesProps {
     isPrivate?: boolean,
-    exact?: true,
+    isParent?: boolean,
+    isChildren?: boolean,
+    exact?: boolean,
     path?: string,
     component: () => JSX.Element;
 }
 
-const Route = ({ isPrivate = false, component: Component, ...rest }: RoutesProps) => {
-    const { UserToken, userData } = useContext(UserContext)
+const Route = ({ isPrivate = false, isParent = false, isChildren = false,  component: Component, ...rest }: RoutesProps) => {
+    const { UserToken, typeUser } = useContext(UserContext)
 
     return (
         
         <ReactDOMRoute 
             {...rest}
             render={() => {
-                return isPrivate === !!UserToken?  <Component/>  :  <Redirect to={isPrivate? ('/'
-                    ):(
-                        userData.type==='parent'? '/dashboardparents' : '/dashboardkids'
-                    )}/>
-            
+ 
+                if (!UserToken) {
+                    if (isPrivate || isParent || isChildren) {                        
+                        return <Redirect to='/' />
+                    }                  
+                        
+                   return  <Component/>
+                }                
+                if (isParent) {
+                    return typeUser === 'parent'? <Component/> : (<Redirect to='/dashboardkids'/> )
+                }
+                if (isChildren) {
+                    return typeUser === 'children'? <Component/> : (<Redirect to='/dashboardparents'/> )
+                }
+                if (isPrivate) {
+                    return <Component/>
+                }
+
+                return <Redirect to={typeUser === 'parent'? '/dashboardparents': '/dashboardkids'} />
             }}
         />
     )

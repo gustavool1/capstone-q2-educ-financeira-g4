@@ -8,7 +8,7 @@ import { useHistory } from 'react-router';
 
 
 const ProfileBarChildren = () => {
-    const { userData, getUserData } = useContext(UserContext)
+    const { userData, getUserData, typeUser } = useContext(UserContext)
     const history = useHistory();
 
     useEffect(() => {
@@ -16,7 +16,7 @@ const ProfileBarChildren = () => {
     }, [])
 
     useEffect(() => {
-        if (userData.type !== 'children') {
+        if (typeUser !== 'children') {
             history.push('/')
         }
     })
