@@ -1,17 +1,10 @@
-import React, { useContext, useState } from 'react';
-import ReactDOM from 'react-dom';
+import { useContext, useEffect, useState } from 'react';
 import { Chart, LineAdvance} from 'bizcharts';
-import { data } from './mocky';
 import { Balance, UserContext } from '../../Providers/Users';
+import { ButtonChart } from './style'
 
 interface SortBalanceTypes {
 	date: string ;
-	wallet: string;
-	total: number;
-}
-
-interface BalanceTypeDate {
-	date: Date;
 	wallet: string;
 	total: number;
 }
@@ -21,7 +14,6 @@ interface BalanceDate {
 	move: number;
 }
 
-
 function Demo() {
 	const { userData } = useContext(UserContext);
 	const [sortBalance, setSortBalance] = useState<SortBalanceTypes[]>([])
@@ -30,7 +22,7 @@ function Demo() {
 
 	function sortBalanceByDate (balance: Balance[]) {
 		
-		let balanceTypedDate = balance.map((el: Balance) => {
+		let balanceTypedDate = balance?.map((el: Balance) => {
 			let year = Number(el.date.slice(6, 10));
 			let month = Number(el.date.slice(3, 5)) - 1;
 			let day = Number(el.date.slice(0, 2));
@@ -41,11 +33,11 @@ function Demo() {
 			}
 		})
 
-		balanceTypedDate = balanceTypedDate.sort((a: any, b: any) => {
+		balanceTypedDate = balanceTypedDate?.sort((a: any, b: any) => {
 			return a.date - b.date
 		})
 
-		let balanceTypedString = balanceTypedDate.map((el: BalanceDate) => {
+		let balanceTypedString = balanceTypedDate?.map((el: BalanceDate) => {
 			return	 {
 				date: el.date.toLocaleDateString('pt-br').slice(0, 10),
 				move: el.move
@@ -75,7 +67,7 @@ function Demo() {
 		return chartData;
 	}
 
-	const getAnnualBalance = () => {
+	const getMonthlyBalance = () => {
         let chartData: { date: string; wallet: string; total: number; }[] = []
 		let filterType: string[] = [];		
 
@@ -111,15 +103,18 @@ function Demo() {
         setSortBalance(chartData)
 	}
 
+	useEffect(() => {
+		(balance?.length >=2) && getMonthlyBalance()
+	}, [])
+
 	return (
 		<>
-			{balance.length < 2? (
+			{balance?.length < 2? (
 				<h2>Você ainda não tem movimentações o suficiente &#128552;</h2>
 			):(
 				<>
-					<button onClick={() => sortBalanceByDate(balance)} ></button>
-					<button onClick={getAnnualBalance}>Anual</button>
-					<button onClick={getWeeklyBalance}>Mensal</button>
+					<ButtonChart onClick={getMonthlyBalance}>Anual</ButtonChart>
+					<ButtonChart onClick={getWeeklyBalance}>Mensal</ButtonChart>
 					<Chart padding={[10, 20, 50, 40]} autoFit height={300} data={sortBalance} >
 					<LineAdvance
 						shape="smooth"

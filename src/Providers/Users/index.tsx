@@ -91,11 +91,12 @@ export const UserProvider = ({ children }: UserProps) => {
   };
 
   const Register = (ParentUserData: UserDataItens) => {
+    const { type } = ParentUserData
     api
       .post("register", ParentUserData)
-      .then(() => {
-        history.push("/login");
-        toast.success("Parabéns, você criou uma conta!");
+      .then(() => {       
+        toast.success("Parabéns, você criou uma conta!"); 
+        !(type === 'children') && history.push("/login");
       })
       .catch((err) => {
         console.log(err);
