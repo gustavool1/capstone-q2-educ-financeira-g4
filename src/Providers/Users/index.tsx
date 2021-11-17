@@ -87,6 +87,7 @@ export const UserProvider = ({ children }: UserProps) => {
     localStorage.clear();
     toast.success("Você esta deslogado!");
     setUserToken("");
+    history.push('/')
   };
 
   const Register = (ParentUserData: UserDataItens) => {

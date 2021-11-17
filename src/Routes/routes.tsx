@@ -16,18 +16,19 @@ const Route = ({ isPrivate = false, component: Component, ...rest }: RoutesProps
 
     return (
         <>
-        {/* <ReactDOMRoute 
+        <ReactDOMRoute 
             {...rest}
             render={() => {
-                return isPrivate === !!UserToken?  <Component/>  :  <Redirect to={isPrivate? 
-                    '/'
-                    : userData.type==='parent'? ('/dashboardparents') : (userData.type === 'children'? '/dashboardkids': '/') 
-                    }/>
+                return <Component/>
+                // isPrivate === !!UserToken?  <Component/>  :  <Redirect to={isPrivate? 
+                //     '/'
+                //     : userData.type==='parent'? ('/dashboardparents') : (userData.type === 'children'? '/dashboardkids': '/') 
+                //     }/>
             }}
-        /> */}
+        />
 
         
-        <ReactDOMRoute 
+        {/* <ReactDOMRoute 
             {...rest}
             render={() => {
                if (isPrivate === !!UserToken) {
@@ -39,7 +40,7 @@ const Route = ({ isPrivate = false, component: Component, ...rest }: RoutesProps
                 
                 
             }}
-        />
+        /> */}
         
         </>
     )
