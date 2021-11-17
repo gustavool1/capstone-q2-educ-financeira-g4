@@ -4,8 +4,6 @@ import api from "../../Services/api";
 import "react-toastify/dist/ReactToastify.css";
 import { showToast } from "../../Components/Toast/style";
 
-
-
 interface UserProps {
   children: ReactNode;
 }
@@ -25,11 +23,13 @@ interface UserDataItens {
   children: Children[];
   parentId: number;
   id?: number;
+  type: string;
 }
 
 interface Wish {
   name: string;
   value: number;
+  kitty: number;
 }
 
 export interface Balance {
@@ -49,9 +49,9 @@ interface activity {
   id: number;
 }
 
-interface EditProfileData{
-  name?:string,
-  password?:string,
+interface EditProfileData {
+  name?: string;
+  password?: string;
 }
 interface UserProviderData {
   Login: (userData: UserData) => void;
@@ -64,60 +64,61 @@ interface UserProviderData {
   AddWishList: (data: UserDataItens, wish: Wish) => void;
   SpendBalance: (data: UserDataItens, number: number) => void;
   ReceivedBalance: (data: UserDataItens, number: number) => void;
-  getUserData: () => void; 
+  AddtoKitty: (item: Wish, value: number) => void;
+  getUserData: () => void;
   isValidToken: boolean;
   isTokenValid: () => void;
   typeUser: string;
-  userId:string
-  EditProfile : (data:EditProfileData) => void
-
+  userId: string;
+  EditProfile: (data: EditProfileData) => void;
 }
-export const UserContext = createContext<UserProviderData>({} as UserProviderData);
-
+export const UserContext = createContext<UserProviderData>(
+  {} as UserProviderData
+);
 
 export const UserProvider = ({ children }: UserProps) => {
+  // const {  } = useContext(ModalContext)
   const [userData, setUserData] = useState<UserDataItens>({} as UserDataItens);
   const history = useHistory();
   const [UserToken, setUserToken] = useState(
     () => localStorage.getItem("token") || ""
   );
-  const [ userId, setUserId ] = useState(
+  const [userId, setUserId] = useState(
     () => localStorage.getItem("userId") || ""
-)
+  );
   const [activities, setActivities] = useState([] as activity[]);
-    const [isValidToken, setIsValidToken] = useState<boolean>(false)
-    const [typeUser, setTypeUser] = useState(
-      () => localStorage.getItem("typeUser") || ""
-  )
+  const [isValidToken, setIsValidToken] = useState<boolean>(false);
+  const [typeUser, setTypeUser] = useState(
+    () => localStorage.getItem("typeUser") || ""
+  );
 
   const Login = (userData: UserData) => {
     api
       .post("login", userData)
       .then((response) => {
         localStorage.setItem("userId", response.data.user.id);
-        setUserId(response.data.user.id)
-        localStorage.setItem('typeUser', response.data.user.type)
-        setTypeUser(response.data.user.type)
+        setUserId(response.data.user.id);
+        localStorage.setItem("typeUser", response.data.user.type);
+        setTypeUser(response.data.user.type);
         localStorage.setItem("token", response.data.accessToken);
-        showToast({type:"success", message:"Sucesso ao logar"})
+        showToast({ type: "success", message: "Sucesso ao logar" });
         setUserToken(response.data.accessToken);
         setUserData(response.data.user);
         response.data.user.type === "parent"
           ? history.push("/dashboardparents")
-          : history.push("/dashboardkids");        
+          : history.push("/dashboardkids");
       })
       .catch((err) => {
         console.log(err);
-        showToast({type:"error", message:"Erro, ao tentar logar!"})
-       
+        showToast({ type: "error", message: "Erro, ao tentar logar!" });
       });
   };
 
   const Logout = () => {
     localStorage.clear();
-    showToast({type:"success", message:"Você esta deslogado!"})
+    showToast({ type: "success", message: "Você esta deslogado!" });
     setUserToken("");
-    history.push('/')
+    history.push("/");
   };
 
   const Register = (ParentUserData: UserDataItens) => {
@@ -125,11 +126,14 @@ export const UserProvider = ({ children }: UserProps) => {
       .post("register", ParentUserData)
       .then(() => {
         history.push("/login");
-        showToast({type:"success", message:"Parabéns, você criou uma conta!"})
+        showToast({
+          type: "success",
+          message: "Parabéns, você criou uma conta!",
+        });
       })
       .catch((err) => {
         console.log(err);
-        showToast({type:"error", message:"Erro, ao criar logar!"})
+        showToast({ type: "error", message: "Erro, ao criar logar!" });
       });
   };
 
@@ -139,7 +143,7 @@ export const UserProvider = ({ children }: UserProps) => {
     api
       .patch(`users/${data.id}`, data, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${UserToken}`,
         },
       })
       .then((response) => {
@@ -157,10 +161,11 @@ export const UserProvider = ({ children }: UserProps) => {
     api
       .patch(`users/${data.id}`, data, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${UserToken}`,
         },
       })
       .then((response) => {
+        getUserData();
         console.log(response.data);
       })
       .catch((err) => {
@@ -175,10 +180,11 @@ export const UserProvider = ({ children }: UserProps) => {
     api
       .patch(`users/${data.id}`, data, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${UserToken}`,
         },
       })
       .then((response) => {
+        getUserData();
         console.log(response.data);
       })
       .catch((err) => {
@@ -190,14 +196,52 @@ export const UserProvider = ({ children }: UserProps) => {
     api
       .get(`users/${localStorage.getItem("userId")}`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${UserToken}`,
         },
       })
       .then((reponse) => {
         setUserData(reponse.data);
+
+        console.log("userdata", userData);
+        console.log("response", reponse);
       })
       .catch((e) => {
         console.log(e);
+        localStorage.clear();
+      });
+  };
+
+  const AddtoKitty = (wish: Wish, value: number) => {
+    const el = userData.wishlist.map((item) => {
+      if (item.name === wish.name) {
+        return {
+          name: wish.name,
+          value: wish.value,
+          kitty: wish.kitty + value,
+        };
+      }
+      return item;
+    });
+    const send = userData.wishlist.filter(
+      (element) => element.name === wish.name
+    );
+    console.log("send", send);
+    const data = { wishlist: el };
+    const id = localStorage.getItem("userId");
+    SpendBalance(userData, -value);
+    console.log(data);
+    api
+      .patch(`users/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${UserToken}`,
+        },
+      })
+      .then((response) => {
+        console.log("response", response);
+        getUserData();
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
@@ -213,7 +257,6 @@ export const UserProvider = ({ children }: UserProps) => {
       });
   };
 
-
   const isTokenValid = () => {
     api
       .get(`users/${localStorage.getItem("userId")}`, {
@@ -221,27 +264,26 @@ export const UserProvider = ({ children }: UserProps) => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
-      .then(resp => {
-        console.log('chamou a função')
+      .then((resp) => {
+        console.log("chamou a função");
       })
       .catch((e) => {
-        console.log('token expirado');
-        Logout()
+        console.log("token expirado");
+        Logout();
       });
-  }
-  const EditProfile = (data:EditProfileData) =>{
-        api
-         .patch(`/users/${userData.id}`, data, {
-           headers:{
-             Authorization: `Bearer ${localStorage.getItem("token")}`
-           }
-         })
-          .then((response)=> {
-            setUserData(response.data)
-            showToast({type:"success", message:"Perfil editado"})
-          })
-
-  }
+  };
+  const EditProfile = (data: EditProfileData) => {
+    api
+      .patch(`/users/${userData.id}`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((response) => {
+        setUserData(response.data);
+        showToast({ type: "success", message: "Perfil editado" });
+      });
+  };
 
   return (
     <UserContext.Provider
@@ -255,20 +297,19 @@ export const UserProvider = ({ children }: UserProps) => {
         SpendBalance,
         ReceivedBalance,
         getUserData,
+        AddtoKitty,
         activities,
         GetActivities,
         userId,
         isValidToken,
-        isTokenValid, 
+        isTokenValid,
         typeUser,
-        EditProfile
-
+        EditProfile,
       }}
     >
       {children}
     </UserContext.Provider>
   );
 };
-
 
 export const useUser = () => useContext(UserContext);

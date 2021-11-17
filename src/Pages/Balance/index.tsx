@@ -15,10 +15,11 @@ import {
 } from "./styles";
 import { useState, useEffect } from "react";
 import { CardWish } from "../../Components/CardWish";
+import { CardWishDetails } from "../../Components/CardWishDetails";
+import { useModal } from "../../Providers/Modal";
 import { UserContext, useUser } from "../../Providers/Users";
 import Demo from "../../Components/Chart";
 import { isToastIdValid } from "react-toastify/dist/utils";
-
 interface BalanceProp {
   date?: string;
   move?: number;
@@ -27,31 +28,41 @@ interface BalanceProp {
 interface Wish {
   name: string;
   value: number;
+  kitty: number;
 }
 
 export const Balance = () => {
   const [isOpenBalance, setIsOpenBalance] = useState(false);
   const [isOpenWish, setIsOpenWish] = useState(false);
-  const { isValidToken } = useContext(UserContext)
+  const { isValidToken } = useContext(UserContext);
 
-  const { userData, getUserData, ReceivedBalance, SpendBalance, AddWishList, isTokenValid } =
-    useUser();
+  const {
+    userData,
+    getUserData,
+    ReceivedBalance,
+    SpendBalance,
+    AddWishList,
+    isTokenValid,
+  } = useUser();
 
+  const [isParent] = useState<boolean>(
+    userData.type === "parent" ? true : false
+  );
   const [received, setReceived] = useState(0);
   const [spend, setSpend] = useState(0);
   const [wishName, setWishName] = useState("");
   const [wishPrice, setWishPrice] = useState(0);
+  const { isWish } = useModal();
 
   const HandleClickBalance = () => {
     spend !== 0 && SpendBalance(userData, spend);
     received !== 0 && ReceivedBalance(userData, received);
     setSpend(0);
     setReceived(0);
-    getUserData();
   };
 
   const HandleClickWish = () => {
-    const wish = { name: wishName, value: wishPrice };
+    const wish = { name: wishName, value: wishPrice, kitty: 0 };
     console.log(wish);
     AddWishList(userData, wish);
   };
@@ -61,8 +72,8 @@ export const Balance = () => {
   }, []);
 
   useEffect(() => {
-    isTokenValid()
-   }, [])
+    isTokenValid();
+  }, []);
 
   console.log(userData);
   return (
@@ -70,7 +81,7 @@ export const Balance = () => {
       <LeftSide>
         <h2>Patrimônio Total Acumulado</h2>
         <Chart>
-          <Demo/>
+          <Demo />
         </Chart>
         <Button onClick={() => setIsOpenBalance(!isOpenBalance)}>
           Movimentações
@@ -82,7 +93,7 @@ export const Balance = () => {
               {userData.balance ? (
                 userData.balance.map((item: BalanceProp, index: number) => (
                   <li key={index}>
-                    <span>{item.date && item.date}</span>
+                    <span>{item.date}</span>
                     <strong>
                       {" R$ "}
                       {item.move && item.move.toFixed(2).replace(".", ",")}
@@ -93,23 +104,29 @@ export const Balance = () => {
                 <p>"Sem movimentações!"</p>
               )}
             </BankStatement>
-            <h2>{`Total:   ${userData.wallet
+            <h2>{`Saldo:   ${userData.wallet
               .toFixed(2)
               .replace(".", ",")}`}</h2>
-            <label>Recebido</label>
-            <Input
-              placeholder="Recebido"
-              onChange={(e) => {
-                setReceived(Number(e.target.value));
-                console.log(e.target.value);
-              }}
-            />
-            <label className="secondLabel">Pago</label>
-            <Input
-              placeholder="Pago"
-              onChange={(e) => setSpend(Number(e.target.value) * -1)}
-            />
-            <Button onClick={() => HandleClickBalance()}>Enviar</Button>
+            {!isParent && <label>Recebido</label>}
+            {!isParent && (
+              <Input
+                placeholder="Recebido"
+                onChange={(e) => {
+                  setReceived(Number(e.target.value));
+                  console.log(e.target.value);
+                }}
+              />
+            )}
+            {!isParent && <label className="secondLabel">Pago</label>}
+            {!isParent && (
+              <Input
+                placeholder="Pago"
+                onChange={(e) => setSpend(Number(e.target.value) * -1)}
+              />
+            )}
+            {!isParent && (
+              <Button onClick={() => HandleClickBalance()}>Enviar</Button>
+            )}
             <Button onClick={() => setIsOpenBalance(!isOpenBalance)}>
               Sair
             </Button>
@@ -122,7 +139,7 @@ export const Balance = () => {
             {isOpenWish ? (
               <h3>Criar novo desejo</h3>
             ) : (
-              <h3>Lista de desejos</h3>
+              <h3>Lista de desejsssos</h3>
             )}
           </WishListHeader>
           {isOpenWish ? (
@@ -142,16 +159,18 @@ export const Balance = () => {
           ) : (
             <WishListContent>
               {userData.wishlist?.map((item: Wish, index: number) => (
-                <CardWish key={index} item={item} />
+                <CardWish id="wishlist" key={index} item={item} />
               ))}
             </WishListContent>
           )}
+          {isWish && <CardWishDetails />}
         </WishList>
-        <Button onClick={() => setIsOpenWish(!isOpenWish)}>
-          {isOpenWish ? "Fechar criar desejo" : "Criar desejo"}
-        </Button>
+        {!isParent && (
+          <Button onClick={() => setIsOpenWish(!isOpenWish)}>
+            {isOpenWish ? "Fechar criar desejo" : "Criar desejo"}
+          </Button>
+        )}
       </RightSide>
     </Container>
   );
 };
-//abobrinha
