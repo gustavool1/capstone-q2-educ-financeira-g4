@@ -6,4 +6,12 @@ export const Li = styled.li`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  button {
+    border: none;
+    background-color: transparent;
+  }
+  svg {
+    width: 150%;
+    height: 150%;
+  }
 `;
