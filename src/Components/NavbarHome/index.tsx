@@ -7,20 +7,19 @@ import {
 } from "./style";
 import { GiHamburgerMenu } from "react-icons/gi";
 import MenuList from "./menuList";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../Providers/Users";
 import MenuParentsLogin from "./menuParentsLogin";
 import MenuChildrensLogin from "./menuChildrensLogin";
 import icon from "../../assets/images/iconProfile.jpg";
 import { motion } from "framer-motion";
 import { ActivitiesContext } from "../../Providers/Activities";
-import { ToastContext } from "../../Providers/Toasts";
 
 const NavbarHome = () => {
   const [showMenu, setshowMenu] = useState<boolean>(false);
-  const { UserToken, userData } = useContext(UserContext);
+  const { UserToken, userData, typeUser } = useContext(UserContext);
   const { amountToPay } = useContext(ActivitiesContext)
-  
+
   return (
     <NavContainer>
       <div className={!!UserToken ? "isLog" : "logOff"}>
@@ -29,10 +28,10 @@ const NavbarHome = () => {
 
           <MenuDesktop>
             {!!UserToken ? (
-              userData.type === "parent" ? (
+              typeUser === "parent" ? (
                 <MenuParentsLogin />
               ) : (
-                <MenuChildrensLogin />
+                typeUser === "children"? <MenuChildrensLogin /> : <MenuList/>
               )
             ) : (
               <MenuList />
@@ -40,7 +39,7 @@ const NavbarHome = () => {
           </MenuDesktop>
 
           {!!UserToken && <MobileMenu>
-            {userData.type === "children" ? (
+            {typeUser === "children" ? (
               <div className="userLog">
                 <img src={icon} alt="profile face" />
 
@@ -70,10 +69,10 @@ const NavbarHome = () => {
               transition={{ duration: 1 }}
               animate={{ opacity: 1, x: 0 }}>
                 {!UserToken && <MenuList />}
-                {UserToken && userData.type === "parent" && (
+                {UserToken && typeUser === "parent" && (
                   <MenuParentsLogin />
                 )}
-                {UserToken && userData.type === "children" && (
+                {UserToken && typeUser === "children" && (
                   <MenuChildrensLogin />
                 )}
               </motion.div>

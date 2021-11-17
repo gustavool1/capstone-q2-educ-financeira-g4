@@ -14,9 +14,13 @@ import FormEditingProfile from "../../Components/FormEditingProfile";
 
 export const DashboardParents = () => {
   const { getYourChildrens, childrenArr } = useContext(ActivitiesContext)
+
+  const { isTokenValid} = useContext(UserContext)
+
   const { isEditing, isAdding, isEditingProfile } = useContext(ModalContext) 
   const { userData } = useContext(UserContext)
   const history = useHistory();
+
 
   useEffect(()=>{
     if(localStorage.getItem('token')){
@@ -25,6 +29,9 @@ export const DashboardParents = () => {
     }
   },[])
 
+  useEffect(() => {
+    isTokenValid()
+   }, [])
  
   return(
     

@@ -23,13 +23,11 @@ interface RegisterUserData {
 
 export const RegisterKids = () => {
   const history = useHistory();
-  const { userData } = useContext(UserContext)
+  const { userData, isTokenValid } = useContext(UserContext)
 
   useEffect(() => {
-    if (userData.type !== 'parent') {
-        history.push('/')
-    }
-  })
+    isTokenValid()
+  }, [])
 
   const schema = yup.object().shape({
     name: yup.string().required("Campo obrigatório!"),
@@ -61,7 +59,7 @@ export const RegisterKids = () => {
       children: [],
       parentId: Number(userData.id),
     };
-    Register(ParentUserData);
+     Register(ParentUserData);
   };
 
   return (
