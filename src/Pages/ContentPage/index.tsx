@@ -26,8 +26,8 @@ const ContentPage = () => {
           </div>
           <LottieMaker
             lottieImage="https://assets10.lottiefiles.com/packages/lf20_s5aOgS.json"
-            width={300}
-            height={300}
+            width={400}
+            height={400}
             playerAreVisible={false}
           />
         </div>
@@ -53,8 +53,8 @@ const ContentPage = () => {
           </div>
           <LottieMaker
             lottieImage="https://assets9.lottiefiles.com/packages/lf20_ys2X9P.json"
-            width={300}
-            height={300}
+            width={400}
+            height={400}
             playerAreVisible={false}
           />
         </div>
@@ -64,8 +64,8 @@ const ContentPage = () => {
         <div className="content">
           <LottieMaker
             lottieImage="https://assets4.lottiefiles.com/packages/lf20_SyUX5x.json"
-            width={300}
-            height={300}
+            width={400}
+            height={400}
             playerAreVisible={false}
           />
           <div className="textContent">
@@ -108,22 +108,23 @@ const ContentPage = () => {
           </div>
           <LottieMaker
             lottieImage="https://assets8.lottiefiles.com/packages/lf20_R5I6iR.json"
-            width={300}
-            height={300}
+            width={400}
+            height={400}
             playerAreVisible={false}
           />
         </div>
       </Container>
       <Container background="#FEE440">
+        <h2>Como Funcionam os Juros</h2>
+
         <div className="content">
           <LottieMaker
             lottieImage="https://assets3.lottiefiles.com/packages/lf20_de909vf3.json"
-            width={300}
-            height={300}
+            width={400}
+            height={400}
             playerAreVisible={false}
           />
           <div className="textContent">
-            <h3>Como Funciona os Juros</h3>
             <p>
               Geralmente os juros são dados em %, então, supondo que você
               emprestou 1000 reais pro banco com 15% de juros. isso quer dizer
@@ -155,8 +156,8 @@ const ContentPage = () => {
           </div>
           <LottieMaker
             lottieImage="https://assets4.lottiefiles.com/private_files/lf30_aXRkcv.json"
-            width={300}
-            height={300}
+            width={400}
+            height={400}
             playerAreVisible={false}
           />
         </div>

@@ -32,6 +32,7 @@ export const Container = styled.div<{ background?: string; color?: string }>`
   }
   .content {
     display: flex;
+    flex-wrap: wrap;
     height: 100%;
     align-items: center;
     justify-content: space-around;
