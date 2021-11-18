@@ -90,6 +90,7 @@ export const UserProvider = ({ children }: UserProps) => {
   );
   const [activities, setActivities] = useState([] as activity[]);
   const [isValidToken, setIsValidToken] = useState<boolean>(false);
+
   const [typeUser, setTypeUser] = useState(
     () => localStorage.getItem("typeUser") || ""
   );
@@ -99,6 +100,7 @@ export const UserProvider = ({ children }: UserProps) => {
       .post("login", userData)
       .then((response) => {
         localStorage.setItem("userId", response.data.user.id);
+        localStorage.setItem("amountToPay", "0")
         setUserId(response.data.user.id);
         localStorage.setItem("typeUser", response.data.user.type);
         setTypeUser(response.data.user.type);
