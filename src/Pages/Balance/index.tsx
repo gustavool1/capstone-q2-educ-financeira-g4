@@ -65,9 +65,7 @@ export const Balance = () => {
     AddWishList(userData, wish);
   };
 
-  // useEffect(() => {
-  //   getUserData();
-  // }, []);
+
 
   useEffect(() => {
     isTokenValid();

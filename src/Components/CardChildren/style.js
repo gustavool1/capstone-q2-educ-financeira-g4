@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
 export const Container = styled.div`
-   
+  
    
     
 `
@@ -27,6 +27,7 @@ export const Front = styled.div`
         width: 250px;
         height: 250px;
         border-radius: 50%;
+        cursor: pointer;
     }
     
     .create-activity {

@@ -11,6 +11,7 @@ import ProfileBarParents from "../../Components/ProfileBarParents";
 import { UserContext } from "../../Providers/Users";
 import FormEditingProfile from "../../Components/FormEditingProfile";
 import { BiHappyBeaming } from "react-icons/bi";
+import { useHistory } from "react-router-dom";
 
 export const DashboardParents = () => {
   const { getYourChildrens, childrenArr } = useContext(ActivitiesContext);
@@ -32,36 +33,6 @@ export const DashboardParents = () => {
     isTokenValid()
    }, [])
  
-  return(
-    
-    <Container>
-          {
-          isAdding &&
-            <EditingContainer>
-              <FormCreatingActivity/>
-            </EditingContainer>
-          }
-          {
-          isEditing &&
-            <EditingContainer>
-              <FormEditingActivity/>
-            </EditingContainer>
-          }
-          {
-            isEditingProfile && 
-            <EditingContainer>
-              <FormEditingProfile/>
-            </EditingContainer>
-          }
-      <ProfileBarParents/>
-      {childrenArr.length < 1? 
-      (<div className='warnning'>
-        <h1>Você ainda não tem dependentes cadastrados, </h1>
-        <p>cadastre-os e acompanhe o desenvlvimento deles.</p>
-        </div>) 
-        : 
-      (<ListChildren children={childrenArr}/>)
-      }
 
 
   return (

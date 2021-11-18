@@ -113,8 +113,8 @@ function Demo() {
 				<h2>Você ainda não tem movimentações o suficiente &#128552;</h2>
 			):(
 				<>
-					<ButtonChart onClick={getMonthlyBalance}>Anual</ButtonChart>
-					<ButtonChart onClick={getWeeklyBalance}>Mensal</ButtonChart>
+					<ButtonChart onClick={getMonthlyBalance}>Mensal</ButtonChart>
+					<ButtonChart onClick={getWeeklyBalance}>Semanal</ButtonChart>
 					<Chart padding={[10, 20, 50, 40]} autoFit height={300} data={sortBalance} >
 					<LineAdvance
 						shape="smooth"

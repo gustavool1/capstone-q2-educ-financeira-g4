@@ -80,12 +80,15 @@ const CardChildren = ({ children }: CardChildrenProps) => {
     getYourActivities(children.id);
   }, [createActivie]);
 
-      
+  const updateCard = () => {
+    getYourChildrens()
+    setIsFlipped(!isFlipped)
+  }
     return(
             <>
             <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
-                <Front>
-                    <img src='https://d3ugyf2ht6aenh.cloudfront.net/stores/001/829/347/themes/amazonas/img-1347263166-1629736427-e77800fdb2094c2bcc4fb6f44d82ce1d1629736428.jpg?1211721950' alt='img'/>
+                <Front >
+                    <img src='https://d3ugyf2ht6aenh.cloudfront.net/stores/001/829/347/themes/amazonas/img-1347263166-1629736427-e77800fdb2094c2bcc4fb6f44d82ce1d1629736428.jpg?1211721950' alt='img'onClick={() => SelectedChild(children.id)} />
                     <p>{children.name}</p>
                     <p>Saldo: R${children.wallet}</p>
                     <button className='create-activity' onClick={()=>setIsFlipped(!isFlipped)}>Ver mais</button>
@@ -165,13 +168,11 @@ const CardChildren = ({ children }: CardChildrenProps) => {
                                 <p title={notAchivied.name}>{notAchivied.name}</p>
                                 <p>R${notAchivied.reward}</p>
                                 <button onClick={()=>handleEditing(notAchivied.id)}><IoIosCreate/></button>
-                    <IoIosCreate />
-                  </button>
-                  <input
-                    type="checkbox"
-                    onClick={(e) => FinishingTask(e, notAchivied)}
-                  />
-                </div>
+                    <input
+                      type="checkbox"
+                      onClick={(e) => FinishingTask(e, notAchivied)}
+                    />
+                  </div>
               ))}
           </NotAchivied>
         </ChildrenActivities>
