@@ -128,7 +128,7 @@ const CardChildren = ({ children }: CardChildrenProps) => {
               .map((notAchivied, key) => (
                 <div key={key}>
                   <p title={notAchivied.name}>{notAchivied.name}</p>
-                  <p>R${notAchivied.reward}</p>
+                  <p>R$ {notAchivied.reward}</p>
                   <button onClick={() => handleEditing(notAchivied.id)}>
                     <IoIosCreate />
                   </button>
