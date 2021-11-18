@@ -154,12 +154,8 @@ export const WishListContent = styled.div`
 export const Chart = styled.div`
   width: 80%;
   height: 50%;
-<<<<<<< HEAD
-  background: blue;
+  
   @media screen and (min-width: 768px) {
-=======
-  @media screen and (min-width: 700px) {
->>>>>>> 189bedda1fc1a85675785b422c938c3a299e4e54
     width: 70%;
     height: 40%;
   }
@@ -212,6 +208,15 @@ export const BankStatement = styled.ul`
     justify-content: space-evenly;
     margin: 3px 0;
   }
+
+  .red {
+    color: darkred;
+  }
+
+  .green {
+    color: darkgreen;
+  }
+
   @media screen and (min-width: 768px) {
     height: 45%;
     padding-top: 10px;
