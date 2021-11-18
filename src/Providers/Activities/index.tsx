@@ -13,7 +13,9 @@ interface ActivitiesProviderData{
     actualActivitieId:number
     changingActualIdActivitie: (activitieId:number ) => void,
     getAmountToPay: () => void
-    amountToPay: number
+    amountToPay: number,
+
+    deleteActivitie: (activitie:Activities) => void
 } 
 interface ActivitiesProviderProps{
     children:ReactNode
@@ -30,12 +32,13 @@ interface Children{
         type: string
 }
 interface Activities {
-    achivied: boolean
-    frequency: string
-    name: string
-    reward: number
-    userId: number,
-    id?:number
+    childAchivied: boolean,
+    parentAchivied: boolean,
+    frequency: string;
+    name: string;
+    reward: number;
+    userId: number;
+    id: number;
 }
 interface ChildrenObj {
     achivied: boolean,
@@ -111,12 +114,25 @@ export const ActivitiesProvider = ({ children }:ActivitiesProviderProps) =>{
         
     }
 
+    const deleteActivitie = (activitie:Activities) =>{
+        api
+         .delete(`activities/${activitie.id}`,{
+            headers:{
+                Authorization:`Bearer ${localStorage.getItem('token')}`
+            }
+         })
+          .then((response) => {
+            console.log(response)
+            showToast({type:"success", message:"Pagamento concluído"})
+          })
+    }
+
     const changingActualIdActivitie = (activitieId:number) =>{
         setActualActivitieId(activitieId)
     }
     
     return(
-        <ActivitiesContext.Provider value={{getYourChildrens, userId, childrenArr,updateActivitie, createActivie, changingActualIdActivitie, actualActivitieId, getAmountToPay, amountToPay}}>
+        <ActivitiesContext.Provider value={{getYourChildrens, userId, childrenArr,updateActivitie, createActivie, changingActualIdActivitie, actualActivitieId, getAmountToPay, amountToPay, deleteActivitie}}>
             { children }
         </ActivitiesContext.Provider>
     )

@@ -9,12 +9,13 @@ import { ModalContext } from "../../Providers/Modal";
 import { ChildrenContext } from '../../Providers/Children';
 
 interface FormProps {
-    achivied: boolean
-    frequency: string
-    name: string
-    reward: number
-    userId: number,
-    id?:number
+    childAchivied: boolean,
+    parentAchivied: boolean,
+    frequency: string;
+    name: string;
+    reward: number;
+    userId: number;
+    id: number;
 }
 
 const FormCreatingActivity = () =>{
@@ -32,7 +33,8 @@ const FormCreatingActivity = () =>{
     const onSubmitFunction = (data:FormProps) =>{
         console.log(data)
         data.userId=actualChildren
-        data.achivied=false 
+        data.childAchivied= false 
+        data.parentAchivied= false
         createActivie(data)
         getYourChildrens()
         

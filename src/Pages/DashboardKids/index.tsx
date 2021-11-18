@@ -28,7 +28,7 @@ const DashboardKids = () => {
 
   const AchiviedFunction = (id: number) => {
     const body = {
-      achivied: true,
+      childAchivied: true,
     };
     api
       .patch(`activities/${id}`, body, {
@@ -87,12 +87,12 @@ const DashboardKids = () => {
             <ActivitiesList>
               <h3>Tarefas a concluir:</h3>
               {activities.filter(
-                (item) => item.frequency === "Diaria" && item.achivied === false
+                (item) => item.frequency === "Diaria" && item.childAchivied === false
               ).length > 0 ? (
                 activities
                   .filter(
                     (item) =>
-                      item.frequency === "Diaria" && item.achivied === false
+                      item.frequency === "Diaria" && item.childAchivied === false
                   )
                   .map((item, index) => (
                     <li key={index}>
@@ -112,12 +112,12 @@ const DashboardKids = () => {
 
               <h3>Tarefas Concluídas: </h3>
               {activities.filter(
-                (item) => item.frequency === "Diaria" && item.achivied === true
+                (item) => item.frequency === "Diaria" && item.childAchivied === true
               ).length > 0 ? (
                 activities
                   .filter(
                     (item) =>
-                      item.frequency === "Diaria" && item.achivied === true
+                      item.frequency === "Diaria" && item.childAchivied === true
                   )
                   .map((item, index) => (
                     <li key={index}>
@@ -144,12 +144,12 @@ const DashboardKids = () => {
 
               {activities.filter(
                 (item) =>
-                  item.frequency === "Semanal" && item.achivied === false
+                  item.frequency === "Semanal" && item.childAchivied === false
               ).length > 0 ? (
                 activities
                   .filter(
                     (item) =>
-                      item.frequency === "Semanal" && item.achivied === false
+                      item.frequency === "Semanal" && item.childAchivied === false
                   )
                   .map((item, index) => (
                     <li key={index}>
@@ -168,12 +168,12 @@ const DashboardKids = () => {
               )}
               <h3>Tarefas concluídas</h3>
               {activities.filter(
-                (item) => item.frequency === "Semanal" && item.achivied === true
+                (item) => item.frequency === "Semanal" && item.childAchivied === true
               ).length > 0 ? (
                 activities
                   .filter(
                     (item) =>
-                      item.frequency === "Semanal" && item.achivied === false
+                      item.frequency === "Semanal" && item.childAchivied === false
                   )
                   .map((item, index) => (
                     <li key={index}>
@@ -199,12 +199,12 @@ const DashboardKids = () => {
               <h3>Tarefas a concluir</h3>
 
               {activities.filter(
-                (item) => item.frequency === "Mensal" && item.achivied === false
+                (item) => item.frequency === "Mensal" && item.childAchivied === false
               ).length > 0 ? (
                 activities
                   .filter(
                     (item) =>
-                      item.frequency === "Mensal" && item.achivied === false
+                      item.frequency === "Mensal" && item.childAchivied === false
                   )
                   .map((item, index) => (
                     <li key={index}>
@@ -224,12 +224,12 @@ const DashboardKids = () => {
 
               <h3>Tarefas concluídas</h3>
               {activities.filter(
-                (item) => item.frequency === "Mensal" && item.achivied === true
+                (item) => item.frequency === "Mensal" && item.childAchivied === true
               ).length > 0 ? (
                 activities
                   .filter(
                     (item) =>
-                      item.frequency === "Mensal" && item.achivied === true
+                      item.frequency === "Mensal" && item.childAchivied === true
                   )
                   .map((item, index) => (
                     <li key={index}>
@@ -272,12 +272,12 @@ const DashboardKids = () => {
                   <h3>Tarefas a concluir:</h3>
                   {activities.filter(
                     (item) =>
-                      item.frequency === "Diaria" && item.achivied === false
+                      item.frequency === "Diaria" && item.childAchivied === false
                   ).length > 0 ? (
                     activities
                       .filter(
                         (item) =>
-                          item.frequency === "Diaria" && item.achivied === false
+                          item.frequency === "Diaria" && item.childAchivied === false
                       )
                       .map((item, index) => (
                         <li key={index}>
@@ -298,12 +298,12 @@ const DashboardKids = () => {
                   <h3>Tarefas Concluídas: </h3>
                   {activities.filter(
                     (item) =>
-                      item.frequency === "Diaria" && item.achivied === true
+                      item.frequency === "Diaria" && item.childAchivied === true
                   ).length > 0 ? (
                     activities
                       .filter(
                         (item) =>
-                          item.frequency === "Diaria" && item.achivied === true
+                          item.frequency === "Diaria" && item.childAchivied === true
                       )
                       .map((item, index) => (
                         <li key={index}>
@@ -330,13 +330,13 @@ const DashboardKids = () => {
                   <h3>Tarefas a concluir:</h3>
                   {activities.filter(
                     (item) =>
-                      item.frequency === "Semanal" && item.achivied === false
+                      item.frequency === "Semanal" && item.childAchivied === false
                   ).length > 0 ? (
                     activities
                       .filter(
                         (item) =>
                           item.frequency === "Semanal" &&
-                          item.achivied === false
+                          item.childAchivied === false
                       )
                       .map((item, index) => (
                         <li key={index}>
@@ -357,12 +357,12 @@ const DashboardKids = () => {
                   <h3>Tarefas Concluídas: </h3>
                   {activities.filter(
                     (item) =>
-                      item.frequency === "Semanal" && item.achivied === true
+                      item.frequency === "Semanal" && item.childAchivied === true
                   ).length > 0 ? (
                     activities
                       .filter(
                         (item) =>
-                          item.frequency === "Semanal" && item.achivied === true
+                          item.frequency === "Semanal" && item.childAchivied === true
                       )
                       .map((item, index) => (
                         <li key={index}>
@@ -389,12 +389,12 @@ const DashboardKids = () => {
                   <h3>Tarefas a concluir:</h3>
                   {activities.filter(
                     (item) =>
-                      item.frequency === "Mensal" && item.achivied === false
+                      item.frequency === "Mensal" && item.childAchivied === false
                   ).length > 0 ? (
                     activities
                       .filter(
                         (item) =>
-                          item.frequency === "Mensal" && item.achivied === false
+                          item.frequency === "Mensal" && item.childAchivied === false
                       )
                       .map((item, index) => (
                         <li key={index}>
@@ -415,12 +415,12 @@ const DashboardKids = () => {
                   <h3>Tarefas Concluídas: </h3>
                   {activities.filter(
                     (item) =>
-                      item.frequency === "Mensal" && item.achivied === true
+                      item.frequency === "Mensal" && item.childAchivied === true
                   ).length > 0 ? (
                     activities
                       .filter(
                         (item) =>
-                          item.frequency === "Mensal" && item.achivied === true
+                          item.frequency === "Mensal" && item.childAchivied === true
                       )
                       .map((item, index) => (
                         <li key={index}>
