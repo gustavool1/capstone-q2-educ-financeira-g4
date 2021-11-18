@@ -6,12 +6,9 @@ import FormCreatingActivity from "../../Components/FormCreatingActivity";
 import { Container, EditingContainer } from "./style";
 import { ModalContext } from "../../Providers/Modal";
 import FormEditingActivity from "../../Components/FormEditingActivity";
-
 import ProfileBarParents from "../../Components/ProfileBarParents";
 import { UserContext } from "../../Providers/Users";
 import FormEditingProfile from "../../Components/FormEditingProfile";
-import { BiHappyBeaming } from "react-icons/bi";
-import { useHistory } from "react-router-dom";
 
 export const DashboardParents = () => {
   const { getYourChildrens, childrenArr } = useContext(ActivitiesContext);
@@ -19,8 +16,6 @@ export const DashboardParents = () => {
   const { isTokenValid, userData } = useContext(UserContext);
 
   const { isEditing, isAdding, isEditingProfile } = useContext(ModalContext);
-
-  const history = useHistory();
 
   useEffect(() => {
     if (localStorage.getItem("token")) {

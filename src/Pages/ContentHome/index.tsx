@@ -6,7 +6,7 @@ import {
   CharityContainer,
   WaistContainer,
   EntrepreneurContainer,
-} from "./style.js";
+} from "./style";
 import LottieMaker from "../../Components/LottieMaker/";
 import { useEffect } from "react";
 import { gsap } from "gsap";

@@ -9,7 +9,7 @@ import {
   MobileCard,
   ChildrenData,
   ChildrenActivities,
-} from "./style.js";
+} from "./style";
 import api from "../../Services/api";
 import ReactCardFlip from "react-card-flip";
 import { IoIosCreate, IoIosArrowForward, IoIosArrowDown } from "react-icons/io";
