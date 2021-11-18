@@ -55,7 +55,6 @@ const CardChildren = ({children}:CardChildrenProps) =>{
         task.parentAchivied=true
         if(task.parentAchivied && task.childAchivied){
             deleteActivitie(task)
-            updateActivitie(task)
             updateWallet(children,task.reward)
             getYourChildrens()
             getYourActivities(children.id)

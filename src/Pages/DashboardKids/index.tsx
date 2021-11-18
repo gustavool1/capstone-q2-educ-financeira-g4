@@ -36,7 +36,8 @@ const DashboardKids = () => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
-      .then(() => {
+      .then((response) => {
+        console.log('testegug',response)
         GetActivities(Number(userId));
       })
       .catch((err) => {
@@ -46,7 +47,7 @@ const DashboardKids = () => {
 
   const UnachiviedFunction = (id: number) => {
     const body = {
-      achivied: false,
+      childAchivied: false,
     };
     api
       .patch(`activities/${id}`, body, {
@@ -98,7 +99,7 @@ const DashboardKids = () => {
                     <li key={index}>
                       <p>{item.name} </p>
                       <b>R$ {item.reward.toFixed(2)}</b>
-                      <button onClick={getLastCard}>
+                      <button onClick={()=> AchiviedFunction(item.id)}>
                         <AiOutlineCheck />
                       </button>
                     </li>
