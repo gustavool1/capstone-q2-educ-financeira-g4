@@ -94,7 +94,7 @@ export const Balance = () => {
                 userData.balance.map((item: BalanceProp, index: number) => (
                   <li key={index}>
                     <span>{item.date}</span>
-                    <strong>
+                    <strong className={Number(item.move) < 0? 'red' : 'green'}>
                       {" R$ "}
                       {item.move && item.move.toFixed(2).replace(".", ",")}
                     </strong>
