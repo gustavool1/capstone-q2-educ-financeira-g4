@@ -41,10 +41,11 @@ interface Children {
   childrenId: number;
 }
 interface activity {
-  achivied: boolean;
+  childAchivied: boolean,
+  parentAchivied: boolean,
+  frequency: string;
   name: string;
   reward: number;
-  frequency: string;
   userId: number;
   id: number;
 }
@@ -128,12 +129,15 @@ export const UserProvider = ({ children }: UserProps) => {
         history.push("/login");
         showToast({
           type: "success",
-          message: "Parabéns, você criou uma conta!",
+          message:
+            ParentUserData.type === "children"
+              ? "Agora seu dependente pode começar a aprender sobre educação financeira"!
+              : "Parabéns, você criou uma conta!",
         });
       })
       .catch((err) => {
         console.log(err);
-        showToast({ type: "error", message: "Erro, ao criar logar!" });
+        showToast({ type: "error", message: "Erro, ao criar dependente!" });
       });
   };
 

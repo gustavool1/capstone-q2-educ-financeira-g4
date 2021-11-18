@@ -30,6 +30,7 @@ export const ChildrenProvider = ({ children }:ChildrenProviderProps) =>{
     const [actualChildren, setActualChildren] = useState(0)
     const updateWallet = (childrenUser:ChildrenUser, amount:number) =>{
         const { id } = childrenUser
+        console.log("update")
         childrenUser.wallet+=Number(amount)
         api
          .patch(`users/${id}`, childrenUser,{

@@ -7,12 +7,13 @@ import { ActivitiesContext } from '../../Providers/Activities';
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup';
 interface FormProps {
-    achivied: boolean
-    frequency: string
-    name: string
-    reward: number
-    userId: number,
-    id?:number
+    childAchivied: boolean,
+    parentAchivied: boolean,
+    frequency: string;
+    name: string;
+    reward: number;
+    userId: number;
+    id: number;
 }
 const FormEditingActivity = () =>{
     const schema = yup.object().shape({
