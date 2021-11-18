@@ -16,10 +16,9 @@ import { useHistory } from "react-router-dom";
 export const DashboardParents = () => {
   const { getYourChildrens, childrenArr } = useContext(ActivitiesContext);
 
+  const { isTokenValid, userData } = useContext(UserContext);
 
-  const { isTokenValid, userData} = useContext(UserContext)
-
-  const { isEditing, isAdding, isEditingProfile } = useContext(ModalContext) 
+  const { isEditing, isAdding, isEditingProfile } = useContext(ModalContext);
 
   const history = useHistory();
 
@@ -30,10 +29,8 @@ export const DashboardParents = () => {
   }, []);
 
   useEffect(() => {
-    isTokenValid()
-   }, [])
- 
-
+    isTokenValid();
+  }, []);
 
   return (
     <Container>
