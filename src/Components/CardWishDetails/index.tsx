@@ -4,6 +4,7 @@ import { useModal } from "../../Providers/Modal";
 import { useState } from "react";
 import { BiSend } from "react-icons/bi";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import { useUser } from "../../Providers/Users";
 
 interface Wish {
   name: string;
@@ -13,6 +14,12 @@ interface Wish {
 
 export const CardWishDetails = () => {
   const { isWish, setIsWish, wish, AddtoKitty } = useModal();
+
+  const { userData } = useUser();
+
+  const [isParent] = useState<boolean>(
+    userData.type === "parent" ? true : false
+  );
 
   const percentage = (wish.kitty / wish.value) * 100;
 
@@ -42,17 +49,19 @@ export const CardWishDetails = () => {
           />
         </Porcent>
         <h4>Meta: {wish.value?.toFixed(2).replace(".", ",")}</h4>
-        <div>
-          <label>Vaquinha</label>
-          <input
-            type="number"
-            placeholder="Adicionar"
-            onChange={(e) => setValueKitty(Number(e.target.value))}
-          />
-          <button onClick={handleClick}>
-            <BiSend />
-          </button>
-        </div>
+        {!isParent && (
+          <div>
+            <label>Vaquinha</label>
+            <input
+              type="number"
+              placeholder="Adicionar"
+              onChange={(e) => setValueKitty(Number(e.target.value))}
+            />
+            <button onClick={handleClick}>
+              <BiSend />
+            </button>
+          </div>
+        )}
       </WishContent>
     </ModalWish>
   );

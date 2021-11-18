@@ -74,9 +74,6 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
 
   const HandleClickDetails = (item: Wish) => {
     setIsWish(!isWish);
-    const send = userData.wishlist.filter(
-      (element) => element.name === wish.name
-    );
     setWish(item);
   };
 
