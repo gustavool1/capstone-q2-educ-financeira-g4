@@ -27,7 +27,14 @@ const NavbarHome = () => {
     <NavContainer>
       <div className={!!UserToken ? "isLog" : "logOff"}>
         <NavSubContainer>
-          <h1>FinanceKids</h1>
+          <h1>
+            <a href="/">
+              Finance<span className="Kletter">K</span>
+              <span className="Iletter">i</span>
+              <span className="Dletter">d</span>
+              <span className="Sletter">s</span>
+            </a>
+          </h1>
           <MenuDesktop>
             {!!UserToken ? (
               typeUser === "parent" ? (
