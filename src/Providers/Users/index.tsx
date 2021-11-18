@@ -41,10 +41,11 @@ interface Children {
   childrenId: number;
 }
 interface activity {
-  achivied: boolean;
+  childAchivied: boolean,
+  parentAchivied: boolean,
+  frequency: string;
   name: string;
   reward: number;
-  frequency: string;
   userId: number;
   id: number;
 }
