@@ -20,8 +20,6 @@ interface RegisterUserData {
 }
 
 export const Login = () => {
-  const [isChoosed, setIsChoosed] = React.useState<boolean>(false);
-
   const schema = yup.object().shape({
     email: yup.string().required("Campo obrigatório!").email("Email inválido"),
     password: yup.string().required("Campo obrigatório!"),
@@ -56,7 +54,6 @@ export const Login = () => {
           <>
             <FormContainer>
               <h1>Login</h1>
-              <h3 onClick={() => setIsChoosed(!isChoosed)}>voltar</h3>
               <Form onSubmit={handleSubmit(onSubmitFunction)}>
                 <TextField
                   margin="dense"

@@ -16,6 +16,8 @@ import { IoIosCreate, IoIosArrowForward, IoIosArrowDown } from "react-icons/io";
 import { IoAddSharp } from "react-icons/io5";
 import { ChildrenContext } from "../../Providers/Children";
 import { ModalContext } from "../../Providers/Modal";
+import { useUser } from "../../Providers/Users";
+
 interface Children {
   balance: [];
   email: string;
@@ -49,6 +51,7 @@ const CardChildren = ({ children }: CardChildrenProps) => {
     useContext(ActivitiesContext);
   const { handleAdding, handleEditing } = useContext(ModalContext);
   const { updateWallet } = useContext(ChildrenContext);
+  const { SelectedChild } = useUser();
 
   const getYourActivities = (userId: number) => {
     api
@@ -67,7 +70,6 @@ const CardChildren = ({ children }: CardChildrenProps) => {
     if (task.parentAchivied && task.childAchivied) {
       deleteActivitie(task);
       updateWallet(children, task.reward);
-      getYourChildrens();
       getYourActivities(children.id);
       e.target.checked = false;
     }
@@ -76,6 +78,11 @@ const CardChildren = ({ children }: CardChildrenProps) => {
   useEffect(() => {
     getYourActivities(children.id);
   }, [createActivie]);
+
+  const updateCard = () => {
+    getYourChildrens();
+    setIsFlipped(!isFlipped);
+  };
   return (
     <>
       <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
@@ -83,6 +90,7 @@ const CardChildren = ({ children }: CardChildrenProps) => {
           <img
             src="https://d3ugyf2ht6aenh.cloudfront.net/stores/001/829/347/themes/amazonas/img-1347263166-1629736427-e77800fdb2094c2bcc4fb6f44d82ce1d1629736428.jpg?1211721950"
             alt="img"
+            onClick={() => SelectedChild(children.id)}
           />
           <p>{children.name}</p>
           <p>Saldo: R${children.wallet}</p>
@@ -128,7 +136,7 @@ const CardChildren = ({ children }: CardChildrenProps) => {
               .map((notAchivied, key) => (
                 <div key={key}>
                   <p title={notAchivied.name}>{notAchivied.name}</p>
-                  <p>R$ {notAchivied.reward}</p>
+                  <p>R${notAchivied.reward}</p>
                   <button onClick={() => handleEditing(notAchivied.id)}>
                     <IoIosCreate />
                   </button>
@@ -136,10 +144,7 @@ const CardChildren = ({ children }: CardChildrenProps) => {
               ))}
           </NotAchivied>
           <ButtonsContainer>
-            <button
-              className="create-activity"
-              onClick={() => setIsFlipped(!isFlipped)}
-            >
+            <button className="create-activity" onClick={updateCard}>
               Virar
             </button>
             <button
@@ -239,6 +244,10 @@ const CardChildren = ({ children }: CardChildrenProps) => {
                   <button onClick={() => handleEditing(notAchivied.id)}>
                     <IoIosCreate />
                   </button>
+                  <input
+                    type="checkbox"
+                    onClick={(e) => FinishingTask(e, notAchivied)}
+                  />
                 </div>
               ))}
           </NotAchivied>

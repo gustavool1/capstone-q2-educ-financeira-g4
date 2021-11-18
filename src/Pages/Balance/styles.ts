@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   padding-top: 2%;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,26 +11,34 @@ export const Container = styled.div`
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
+    height: 100vh;
   }
 `;
 export const LeftSide = styled.div`
   margin-top: 160px;
   width: 100%;
-  height: 900px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  .moves {
+    margin-top: 6vh;
+    margin-bottom: -2vh;
+  }
   @media screen and (min-width: 768px) {
     margin-top: 0;
     width: 70%;
     height: 100%;
+    .moves {
+      margin-top: -10vh;
+    }
   }
 `;
 
 export const RightSide = styled.div`
   width: 100%;
-  height: 900px;
+  min-height: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,7 +51,7 @@ export const RightSide = styled.div`
 `;
 
 export const ModalBalance = styled.div`
-  padding-top: 28vh;
+  padding-top: 180px;
   position: fixed;
   left: 0;
   top: 0;
@@ -83,13 +91,12 @@ export const ModalBalance = styled.div`
 export const WishList = styled.div`
   min-width: 267px;
   width: 80%;
-  height: 90%;
+  min-height: 40vh;
   background: white;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
   border: 2px solid black;
-  margin: 20px 0;
   ul {
     width: 100%;
     margin: 0;
@@ -108,6 +115,8 @@ export const WishList = styled.div`
   }
   @media screen and (min-width: 768px) {
     height: 60%;
+    margin: 20px 0;
+    min-height: 60%;
   }
 `;
 

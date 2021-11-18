@@ -14,4 +14,7 @@ export const Li = styled.li`
     width: 150%;
     height: 150%;
   }
+  .done {
+    color: green;
+  }
 `;

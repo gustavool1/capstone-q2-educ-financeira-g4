@@ -8,10 +8,10 @@ import { ModalContext } from "../../Providers/Modal";
 import FormEditingActivity from "../../Components/FormEditingActivity";
 
 import ProfileBarParents from "../../Components/ProfileBarParents";
-import { useHistory } from "react-router";
 import { UserContext } from "../../Providers/Users";
 import FormEditingProfile from "../../Components/FormEditingProfile";
 import { BiHappyBeaming } from "react-icons/bi";
+import { useHistory } from "react-router-dom";
 
 export const DashboardParents = () => {
   const { getYourChildrens, childrenArr } = useContext(ActivitiesContext);
@@ -53,7 +53,7 @@ export const DashboardParents = () => {
       {childrenArr.length < 1 ? (
         <div className="warnning">
           <h1>Você ainda não tem dependentes cadastrados, </h1>
-          <p>cadastre-os e acompanhe o desenvolvimento deles.</p>
+          <p>cadastre-os e acompanhe o desenvlvimento deles.</p>
         </div>
       ) : (
         <ListChildren children={childrenArr} />
