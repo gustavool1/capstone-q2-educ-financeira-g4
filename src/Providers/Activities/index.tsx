@@ -83,6 +83,7 @@ export const ActivitiesProvider = ({ children }:ActivitiesProviderProps) =>{
          
     }
     const createActivie = (task:Activities) =>{
+        task.reward = Number(task.reward)
         api
          .post('activities',  task, {
             headers:{
