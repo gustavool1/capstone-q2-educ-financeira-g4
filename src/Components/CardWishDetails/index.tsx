@@ -5,8 +5,14 @@ import { useState } from "react";
 import { BiSend } from "react-icons/bi";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 
+interface Wish {
+  name: string;
+  value: number;
+  kitty: number;
+}
+
 export const CardWishDetails = () => {
-  const { isWish, setIsWish, wish, changingWish, AddtoKitty } = useModal();
+  const { isWish, setIsWish, wish, AddtoKitty } = useModal();
 
   const percentage = (wish.kitty / wish.value) * 100;
 
@@ -26,7 +32,7 @@ export const CardWishDetails = () => {
         <Porcent>
           <CircularProgressbar
             value={percentage}
-            text={`${percentage}%`}
+            text={`${percentage.toFixed(2).replace(".", ",")}%`}
             className="circle-progress"
             styles={buildStyles({
               textColor: "#000000",
