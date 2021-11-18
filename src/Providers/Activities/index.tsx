@@ -12,7 +12,7 @@ interface ActivitiesProviderData{
     createActivie: (task:Activities) => void,
     actualActivitieId:number
     changingActualIdActivitie: (activitieId:number ) => void,
-    getAmountToPay: () => void
+    getAmountToPay: (number:number) => void
     amountToPay: number,
 
     deleteActivitie: (activitie:Activities) => void
@@ -57,7 +57,9 @@ export const ActivitiesProvider = ({ children }:ActivitiesProviderProps) =>{
     toast.configure()
     const [ childrenArr, setChildrenArr ] = useState<Children[]>([])
     const [ actualActivitieId, setActualActivitieId ]  = useState(0) 
-    const [amountToPay, setAmountToPay] = useState<number>(0)
+    const [amountToPay, setAmountToPay] = useState(
+        Number(localStorage.getItem("amountToPay")) || 0 
+    )
     const { userId } = useUser()
     const getYourChildrens = () =>{
         api
@@ -98,21 +100,10 @@ export const ActivitiesProvider = ({ children }:ActivitiesProviderProps) =>{
          })
     }
 
-    const getAmountToPay = () => {
-        api
-        .get(`/activities?userId=${userId}`, {
-            headers:{
-                Authorization:`Bearer ${localStorage.getItem('token')}`
-            }
-        })
-        .then(response => {
-            setAmountToPay(response.data.filter((el: ChildrenObj) => el.achivied === true)
-            .reduce((acc: number, val: ChildrenObj) => acc + val.reward, 0))
-        })
-        .catch(e => {
-            console.log(e)
-        })
-        
+    const getAmountToPay = (number:number) => {
+        const total = Number(localStorage.getItem('amountToPay')) + number
+        setAmountToPay(total)
+        localStorage.setItem('amountToPay', total.toString())
     }
 
     const deleteActivitie = (activitie:Activities) =>{

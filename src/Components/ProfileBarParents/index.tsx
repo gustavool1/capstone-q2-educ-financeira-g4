@@ -7,11 +7,11 @@ import { UserContext } from '../../Providers/Users'
 import { ModalContext } from '../../Providers/Modal'
 
 const ProfileBarParents = () => {
-    const { getAmountToPay, amountToPay } = useContext(ActivitiesContext)
+    const { getAmountToPay, amountToPay, deleteActivitie } = useContext(ActivitiesContext)
     const { getUserData, userData } = useContext(UserContext)
     const { handleEditingProfile } = useContext(ModalContext)
     useEffect(() => {
-        getAmountToPay()
+        getAmountToPay(0)
         getUserData()
         console.log(userData)
     }, [])

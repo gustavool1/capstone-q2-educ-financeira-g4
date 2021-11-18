@@ -47,7 +47,7 @@ const CardChildren = ({ children }: CardChildrenProps) => {
   const [toggle, setToggle] = useState(false);
   const [childrenActivies, setChildrenActivities] = useState<Activities[]>([]);
   const [isFlipped, setIsFlipped] = useState(false);
-  const { updateActivitie, getYourChildrens, createActivie, deleteActivitie } =
+  const { updateActivitie, getYourChildrens, createActivie, deleteActivitie, getAmountToPay } =
     useContext(ActivitiesContext);
   const { handleAdding, handleEditing } = useContext(ModalContext);
   const { updateWallet } = useContext(ChildrenContext);
@@ -70,6 +70,7 @@ const CardChildren = ({ children }: CardChildrenProps) => {
     if (task.parentAchivied && task.childAchivied) {
       deleteActivitie(task);
       updateWallet(children, task.reward);
+      getAmountToPay(task.reward)
       getYourActivities(children.id);
       e.target.checked = false;
     }
