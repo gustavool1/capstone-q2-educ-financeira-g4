@@ -18,64 +18,68 @@ import { ActivitiesContext } from "../../Providers/Activities";
 const NavbarHome = () => {
   const [showMenu, setshowMenu] = useState<boolean>(false);
   const { UserToken, userData, typeUser } = useContext(UserContext);
-  const { amountToPay } = useContext(ActivitiesContext)
+  const { amountToPay } = useContext(ActivitiesContext);
 
-  const handleClick = () =>{
-  }
+  const handleClick = () => {
+    setshowMenu(false);
+  };
   return (
     <NavContainer>
-      
       <div className={!!UserToken ? "isLog" : "logOff"}>
         <NavSubContainer>
           <h1>FinanceKids</h1>
           <MenuDesktop>
             {!!UserToken ? (
               typeUser === "parent" ? (
-                <MenuParentsLogin />
+                <MenuParentsLogin handleClick={handleClick} />
+              ) : typeUser === "children" ? (
+                <MenuChildrensLogin handleClick={handleClick} />
               ) : (
-                typeUser === "children"? <MenuChildrensLogin /> : <MenuList/>
+                <MenuList handleClick={handleClick} />
               )
             ) : (
-              <MenuList />
+              <MenuList handleClick={handleClick} />
             )}
           </MenuDesktop>
 
-          {!!UserToken && <MobileMenu>
-            {typeUser === "children" ? (
-              <div className="userLog">
-                <img src={icon} alt="profile face" />
+          {!!UserToken && (
+            <MobileMenu>
+              {typeUser === "children" ? (
+                <div className="userLog">
+                  <img src={icon} alt="profile face" />
 
-                <span>
-                  <h3>{userData.name}</h3>
-                  <p>Saldo: R$ {Number(userData.wallet).toFixed(2)} </p>
-                </span>
-              </div>
-            ) : (
-              <div className="userLog">
-                <img src={icon} alt="profile face" />
+                  <span>
+                    <h3>{userData.name}</h3>
+                    <p>Saldo: R$ {Number(userData.wallet).toFixed(2)} </p>
+                  </span>
+                </div>
+              ) : (
+                <div className="userLog">
+                  <img src={icon} alt="profile face" />
 
-                <span>
-                  <h3>{userData.name}</h3>
-                  <p>A pagar: R$ {Number(amountToPay).toFixed(2)} </p>
-                </span>
-              </div>
-            )}
-          </MobileMenu>}
+                  <span>
+                    <h3>{userData.name}</h3>
+                    <p>A pagar: R$ {Number(amountToPay).toFixed(2)} </p>
+                  </span>
+                </div>
+              )}
+            </MobileMenu>
+          )}
 
           {showMenu && (
-            <MenuMobile
-              
-            >
-              <motion.div className={!!UserToken ? "menuMobLogin" : "menuMobOff"}
-              initial={{ opacity: 0, x: -300 }}
-              transition={{ duration: 1 }}
-              animate={{ opacity: 1, x: 0 }}>
-                {!UserToken && <MenuList />}
+            <MenuMobile>
+              <motion.div
+                className={!!UserToken ? "menuMobLogin" : "menuMobOff"}
+                initial={{ opacity: 0, x: -300 }}
+                transition={{ duration: 1 }}
+                animate={{ opacity: 1, x: 0 }}
+              >
+                {!UserToken && <MenuList handleClick={handleClick} />}
                 {UserToken && typeUser === "parent" && (
-                  <MenuParentsLogin />
+                  <MenuParentsLogin handleClick={handleClick} />
                 )}
                 {UserToken && typeUser === "children" && (
-                  <MenuChildrensLogin />
+                  <MenuChildrensLogin handleClick={handleClick} />
                 )}
               </motion.div>
             </MenuMobile>

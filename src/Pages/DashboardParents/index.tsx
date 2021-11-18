@@ -6,7 +6,6 @@ import FormCreatingActivity from "../../Components/FormCreatingActivity";
 import { Container, EditingContainer } from "./style";
 import { ModalContext } from "../../Providers/Modal";
 import FormEditingActivity from "../../Components/FormEditingActivity";
-
 import ProfileBarParents from "../../Components/ProfileBarParents";
 import { UserContext } from "../../Providers/Users";
 import FormEditingProfile from "../../Components/FormEditingProfile";

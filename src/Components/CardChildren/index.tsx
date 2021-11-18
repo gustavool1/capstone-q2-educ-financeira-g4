@@ -13,6 +13,7 @@ import {
 import api from "../../Services/api";
 import ReactCardFlip from "react-card-flip";
 import { IoIosCreate, IoIosArrowForward, IoIosArrowDown } from "react-icons/io";
+import { IoAddSharp } from "react-icons/io5";
 import { ChildrenContext } from "../../Providers/Children";
 import { ModalContext } from "../../Providers/Modal";
 import { useUser } from "../../Providers/Users";
@@ -69,7 +70,6 @@ const CardChildren = ({ children }: CardChildrenProps) => {
     if (task.parentAchivied && task.childAchivied) {
       deleteActivitie(task);
       updateWallet(children, task.reward);
-      getYourChildrens();
       getYourActivities(children.id);
       e.target.checked = false;
     }
@@ -79,14 +79,18 @@ const CardChildren = ({ children }: CardChildrenProps) => {
     getYourActivities(children.id);
   }, [createActivie]);
 
+  const updateCard = () => {
+    getYourChildrens();
+    setIsFlipped(!isFlipped);
+  };
   return (
     <>
       <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
         <Front>
           <img
-            onClick={() => SelectedChild(children.id)}
             src="https://d3ugyf2ht6aenh.cloudfront.net/stores/001/829/347/themes/amazonas/img-1347263166-1629736427-e77800fdb2094c2bcc4fb6f44d82ce1d1629736428.jpg?1211721950"
             alt="img"
+            onClick={() => SelectedChild(children.id)}
           />
           <p>{children.name}</p>
           <p>Saldo: R${children.wallet}</p>
@@ -140,10 +144,7 @@ const CardChildren = ({ children }: CardChildrenProps) => {
               ))}
           </NotAchivied>
           <ButtonsContainer>
-            <button
-              className="create-activity"
-              onClick={() => setIsFlipped(!isFlipped)}
-            >
+            <button className="create-activity" onClick={updateCard}>
               Virar
             </button>
             <button
@@ -155,6 +156,7 @@ const CardChildren = ({ children }: CardChildrenProps) => {
           </ButtonsContainer>
         </Back>
       </ReactCardFlip>
+
       <MobileCard>
         <ChildrenData>
           <img
@@ -183,15 +185,26 @@ const CardChildren = ({ children }: CardChildrenProps) => {
             </p>
           </div>
           {toggle ? (
-            <button onClick={() => setToggle(!toggle)}>
-              <IoIosArrowDown />
-            </button>
+            <>
+              <button onClick={() => handleAdding(children.id)}>
+                <IoAddSharp />
+              </button>
+              <button onClick={() => setToggle(!toggle)}>
+                <IoIosArrowDown />
+              </button>
+            </>
           ) : (
-            <button onClick={() => setToggle(!toggle)}>
-              <IoIosArrowForward />
-            </button>
+            <>
+              <button onClick={() => handleAdding(children.id)}>
+                <IoAddSharp />
+              </button>
+              <button onClick={() => setToggle(!toggle)}>
+                <IoIosArrowForward />
+              </button>
+            </>
           )}
         </ChildrenData>
+
         <ChildrenActivities className={toggle ? "isOpen" : "isClosed"}>
           <Achivied className={toggle ? "open" : "closed"}>
             <h2>

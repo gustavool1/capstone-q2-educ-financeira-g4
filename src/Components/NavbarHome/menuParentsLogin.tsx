@@ -1,29 +1,47 @@
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
-import { UserContext } from '../../Providers/Users'
-import { MenuListContainer } from './style'
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { UserContext } from "../../Providers/Users";
+import { MenuListContainer } from "./style";
 
-const MenuParentsLogin = () => {
-    const { Logout, userData, typeUser } = useContext(UserContext)
-    return (
-       <MenuListContainer>
-           <div className={typeUser === 'parent'?  'links parents' : 'links'}>
-                <Link to='/dashboardparents'>Dashboard</Link>
-
-                <Link to='/registerkids'>Cadastrar Dependente</Link>
-
-            </div>
-
-            <div className={typeUser === 'parent'?  'btnContainer parents' : 'btnContainer'}>
-                <button 
-                    className='btnLogin'
-                    onClick={Logout}
-                >
-                    Logout
-                </button>                
-            </div>
-       </MenuListContainer>
-    )
+interface MenuListProps {
+  handleClick: () => void;
 }
 
-export default MenuParentsLogin
+const MenuParentsLogin = ({ handleClick }: MenuListProps) => {
+  const { Logout, userData, typeUser } = useContext(UserContext);
+  return (
+    <MenuListContainer>
+      <div className={typeUser === "parent" ? "links parents" : "links"}>
+        <Link onClick={handleClick} to="/dashboardparents">
+          Dashboard
+        </Link>
+
+        <Link onClick={handleClick} to="/registerkids">
+          Cadastrar Dependente
+        </Link>
+
+        <Link onClick={() => handleClick()} to="/content">
+          Conteúdo
+        </Link>
+      </div>
+
+      <div
+        className={
+          typeUser === "parent" ? "btnContainer parents" : "btnContainer"
+        }
+      >
+        <button
+          className="btnLogin"
+          onClick={() => {
+            Logout();
+            handleClick();
+          }}
+        >
+          Logout
+        </button>
+      </div>
+    </MenuListContainer>
+  );
+};
+
+export default MenuParentsLogin;

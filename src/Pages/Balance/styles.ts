@@ -163,12 +163,8 @@ export const WishListContent = styled.div`
 export const Chart = styled.div`
   width: 80%;
   height: 50%;
-<<<<<<< HEAD
-  @media screen and (min-width: 700px) {
-=======
   
   @media screen and (min-width: 768px) {
->>>>>>> 7308bb894e4b8b022efc50045ed8d60589482212
     width: 70%;
     height: 40%;
   }

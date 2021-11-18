@@ -270,7 +270,6 @@ export const UserProvider = ({ children }: UserProps) => {
         },
       })
       .then((resp) => {
-        console.log("chamou a função");
       })
       .catch((e) => {
         console.log("token expirado");
