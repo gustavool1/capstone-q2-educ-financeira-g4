@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from "react";
+import { showToast } from "../../Components/Toast/style";
 import api from "../../Services/api";
 import { ActivitiesContext } from "../Activities";
 import { ChildrenContext } from "../Children";
@@ -27,10 +28,9 @@ interface ModalProviderData {
   wish: Wish;
 
   handleEditingProfile: () => void;
-  changingWish: (item:Wish) => void 
   isEditingProfile: boolean;
 
-  AddtoKitty: (wish: Wish, value: number) => void
+  AddtoKitty: (wish: Wish, value: number) => void;
 }
 
 interface Children {
@@ -49,7 +49,7 @@ export const ModalContext = createContext<ModalProviderData>(
 );
 
 export const ModalProvider = ({ children }: ModalProviderProps) => {
-  const { getUserData,SpendBalance } = useUser()
+  const { SpendBalance } = useUser();
   const { changingActualChildren } = useContext(ChildrenContext);
   const { changingActualIdActivitie } = useContext(ActivitiesContext);
   const [wish, setWish] = useState<Wish>({} as Wish);
@@ -80,10 +80,14 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
     setWish(item);
   };
 
-  const changingWish = (item:Wish) =>{
-
-  }
   const AddtoKitty = (wish: Wish, value: number) => {
+    if (value + wish.kitty > wish.value) {
+      showToast({ type: "warning", message: "Passou de 100%" });
+      return;
+    }
+    if (value + wish.kitty === wish.value) {
+      showToast({ type: "sucess", message: "Parabéns, chegou a 100%" });
+    }
     const el = userData.wishlist.map((item) => {
       if (item.name === wish.name) {
         return {
@@ -94,27 +98,23 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
       }
       return item;
     });
-    const send = userData.wishlist.filter(
-      (element) => element.name === wish.name
-    );
-    console.log("send", send);
     const data = { wishlist: el };
     const id = localStorage.getItem("userId");
     SpendBalance(userData, -value);
     console.log(data);
+
     api
       .patch(`users/${id}`, data, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
       .then((response) => {
-        console.log('response', response)
-        const newWish = response.data.wishlist.filter((wishes:any)=> wishes.name === wish.name)
-        console.log('wish',newWish)
-        setWish(newWish[0])
-
-
+        console.log("response", response);
+        const newWish = response.data.wishlist.filter(
+          (wishes: any) => wishes.name === wish.name
+        );
+        setWish(newWish[0]);
       })
       .catch((err) => {
         console.log(err);
@@ -134,8 +134,7 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
         wish,
         handleEditingProfile,
         isEditingProfile,
-        changingWish, 
-        AddtoKitty
+        AddtoKitty,
       }}
     >
       {children}

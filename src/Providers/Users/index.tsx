@@ -72,6 +72,7 @@ interface UserProviderData {
   typeUser: string;
   userId: string;
   EditProfile: (data: EditProfileData) => void;
+  SelectedChild: (id: number) => void;
 }
 export const UserContext = createContext<UserProviderData>(
   {} as UserProviderData
@@ -288,6 +289,32 @@ export const UserProvider = ({ children }: UserProps) => {
       });
   };
 
+  const SelectedChild = (id: number) => {
+    api
+      .get(`/users/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((response) => {
+        const data = {
+          name: response.data.name,
+          email: response.data.email,
+          password: response.data.password,
+          children: response.data.children,
+          parentId: response.data.parentId,
+          id: response.data.id,
+          balance: [...response.data.balance],
+          wishlist: [...response.data.wishlist],
+          wallet: response.data.wallet,
+          type: "parent",
+        };
+        console.log(data);
+        setUserData(data);
+        history.push("/balance");
+      });
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -308,6 +335,7 @@ export const UserProvider = ({ children }: UserProps) => {
         isTokenValid,
         typeUser,
         EditProfile,
+        SelectedChild,
       }}
     >
       {children}

@@ -1,11 +1,22 @@
-import { useContext, useEffect, useState } from "react"
-import { ActivitiesContext } from "../../Providers/Activities"
-import {  Achivied, NotAchivied , Front, Back, ButtonsContainer, MobileCard, ChildrenData, ChildrenActivities}from "./style.js"
-import api from '../../Services/api'
-import ReactCardFlip from 'react-card-flip';
-import { IoIosCreate, IoIosArrowForward,  IoIosArrowDown} from "react-icons/io";
-import { ChildrenContext } from "../../Providers/Children"
+import { useContext, useEffect, useState } from "react";
+import { ActivitiesContext } from "../../Providers/Activities";
+import {
+  Achivied,
+  NotAchivied,
+  Front,
+  Back,
+  ButtonsContainer,
+  MobileCard,
+  ChildrenData,
+  ChildrenActivities,
+} from "./style.js";
+import api from "../../Services/api";
+import ReactCardFlip from "react-card-flip";
+import { IoIosCreate, IoIosArrowForward, IoIosArrowDown } from "react-icons/io";
+import { ChildrenContext } from "../../Providers/Children";
 import { ModalContext } from "../../Providers/Modal";
+import { useUser } from "../../Providers/Users";
+
 interface Children {
   balance: [];
   email: string;
@@ -22,8 +33,8 @@ interface CardChildrenProps {
 }
 
 interface Activities {
-  childAchivied: boolean,
-  parentAchivied: boolean,
+  childAchivied: boolean;
+  parentAchivied: boolean;
   frequency: string;
   name: string;
   reward: number;
@@ -31,45 +42,43 @@ interface Activities {
   id: number;
 }
 
-const CardChildren = ({children}:CardChildrenProps) =>{
-    const [ toggle, setToggle ] = useState(false)
-    const [childrenActivies, setChildrenActivities] = useState<Activities[]>([])
-    const [ isFlipped, setIsFlipped ] = useState(false)
-    const { updateActivitie, getYourChildrens, createActivie, deleteActivitie } = useContext(ActivitiesContext)
-    const { handleAdding, handleEditing} = useContext(ModalContext)
-    const { updateWallet } = useContext(ChildrenContext)
-    
-    const getYourActivities = (userId: number) => {
-        api
-          .get(`activities/?userId=${userId}`, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-        })
-        .then((response) => {
-            setChildrenActivities(response.data);
-        })
-          .catch((err) => console.log("getyourActivies", err));
-    };
 
-    const FinishingTask = (e:any,task:Activities) =>{
-        task.parentAchivied=true
-        if(task.parentAchivied && task.childAchivied){
-            deleteActivitie(task)
-            updateWallet(children,task.reward)
-            getYourActivities(children.id)
-            e.target.checked=false 
-        }
-    }
-    
-    useEffect(()=>{
-        getYourActivities(children.id)       
-    },[createActivie])
+const CardChildren = ({ children }: CardChildrenProps) => {
+  const [toggle, setToggle] = useState(false);
+  const [childrenActivies, setChildrenActivities] = useState<Activities[]>([]);
+  const [isFlipped, setIsFlipped] = useState(false);
+  const { updateActivitie, getYourChildrens, createActivie, deleteActivitie } =
+    useContext(ActivitiesContext);
+  const { handleAdding, handleEditing } = useContext(ModalContext);
+  const { updateWallet } = useContext(ChildrenContext);
+  const { SelectedChild } = useUser();
 
-    const updateCard = () => {
-        getYourChildrens()
-        setIsFlipped(!isFlipped)
+  const getYourActivities = (userId: number) => {
+    api
+      .get(`activities/?userId=${userId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((response) => {
+        setChildrenActivities(response.data);
+      })
+      .catch((err) => console.log("getyourActivies", err));
+  };
+  const FinishingTask = (e: any, task: Activities) => {
+    task.parentAchivied = true;
+    if (task.parentAchivied && task.childAchivied) {
+      deleteActivitie(task);
+      updateWallet(children, task.reward);
+      getYourChildrens();
+      getYourActivities(children.id);
+      e.target.checked = false;
     }
+  };
+
+  useEffect(() => {
+    getYourActivities(children.id);
+  }, [createActivie]);
 
       
     return(
@@ -156,13 +165,18 @@ const CardChildren = ({children}:CardChildrenProps) =>{
                                 <p title={notAchivied.name}>{notAchivied.name}</p>
                                 <p>R${notAchivied.reward}</p>
                                 <button onClick={()=>handleEditing(notAchivied.id)}><IoIosCreate/></button>
-
-                        </div>
-                        ))}
-                    </NotAchivied>
-                </ChildrenActivities> 
-            </MobileCard>
-            </ >
-    )
-}
-export default CardChildren
+                    <IoIosCreate />
+                  </button>
+                  <input
+                    type="checkbox"
+                    onClick={(e) => FinishingTask(e, notAchivied)}
+                  />
+                </div>
+              ))}
+          </NotAchivied>
+        </ChildrenActivities>
+      </MobileCard>
+    </>
+  );
+};
+export default CardChildren;

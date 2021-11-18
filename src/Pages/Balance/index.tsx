@@ -17,9 +17,8 @@ import { useState, useEffect } from "react";
 import { CardWish } from "../../Components/CardWish";
 import { CardWishDetails } from "../../Components/CardWishDetails";
 import { useModal } from "../../Providers/Modal";
-import { UserContext, useUser } from "../../Providers/Users";
+import { useUser } from "../../Providers/Users";
 import Demo from "../../Components/Chart";
-import { isToastIdValid } from "react-toastify/dist/utils";
 interface BalanceProp {
   date?: string;
   move?: number;
@@ -34,7 +33,6 @@ interface Wish {
 export const Balance = () => {
   const [isOpenBalance, setIsOpenBalance] = useState(false);
   const [isOpenWish, setIsOpenWish] = useState(false);
-  const { isValidToken } = useContext(UserContext);
 
   const {
     userData,
@@ -67,9 +65,9 @@ export const Balance = () => {
     AddWishList(userData, wish);
   };
 
-  useEffect(() => {
-    getUserData();
-  }, []);
+  // useEffect(() => {
+  //   getUserData();
+  // }, []);
 
   useEffect(() => {
     isTokenValid();
@@ -83,7 +81,10 @@ export const Balance = () => {
         <Chart>
           <Demo />
         </Chart>
-        <Button onClick={() => setIsOpenBalance(!isOpenBalance)}>
+        <Button
+          className="moves"
+          onClick={() => setIsOpenBalance(!isOpenBalance)}
+        >
           Movimentações
         </Button>
         {isOpenBalance && (
@@ -139,7 +140,7 @@ export const Balance = () => {
             {isOpenWish ? (
               <h3>Criar novo desejo</h3>
             ) : (
-              <h3>Lista de desejsssos</h3>
+              <h3>Lista de desejos</h3>
             )}
           </WishListHeader>
           {isOpenWish ? (

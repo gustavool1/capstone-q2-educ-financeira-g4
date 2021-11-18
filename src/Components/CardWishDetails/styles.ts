@@ -18,7 +18,7 @@ export const ModalWish = styled.div`
   border: 2px solid black;
   font-size: 18px;
   @media screen and (min-width: 768px) {
-    height: 60%;
+    height: 73%;
   }
 `;
 
@@ -107,7 +107,7 @@ export const WishContent = styled.div`
   }
   @media screen and (min-width: 768px) {
     h2 {
-      top: -43vh;
+      top: -50vh;
     }
   }
 `;
@@ -126,7 +126,7 @@ export const Porcent = styled.div`
   }
   @media screen and (min-width: 768px) {
     height: 16vw;
-    margin-top: -34vh;
+    margin-top: -40vh;
     margin-left: -20px;
   }
 `;
