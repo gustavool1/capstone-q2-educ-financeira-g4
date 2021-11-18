@@ -19,12 +19,6 @@ export const Front = styled.div`
   flex-direction: column;
   padding: 10px;
   border: 1px solid white;
-  img {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    cursor: pointer;
-  }
 
   .create-activity {
     padding: 10px;
@@ -49,6 +43,14 @@ export const Front = styled.div`
     display: none;
   }
 `;
+
+export const Img = styled.img`
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  cursor: pointer;
+`;
+
 export const Back = styled.div`
   width: 350px;
   height: 570px;

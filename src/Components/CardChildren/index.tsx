@@ -9,6 +9,7 @@ import {
   MobileCard,
   ChildrenData,
   ChildrenActivities,
+  Img,
 } from "./style";
 import api from "../../Services/api";
 import ReactCardFlip from "react-card-flip";
@@ -87,10 +88,10 @@ const CardChildren = ({ children }: CardChildrenProps) => {
     <>
       <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
         <Front>
-          <img
+          <Img
+            onClick={() => SelectedChild(children.id)}
             src="https://d3ugyf2ht6aenh.cloudfront.net/stores/001/829/347/themes/amazonas/img-1347263166-1629736427-e77800fdb2094c2bcc4fb6f44d82ce1d1629736428.jpg?1211721950"
             alt="img"
-            onClick={() => SelectedChild(children.id)}
           />
           <p>{children.name}</p>
           <p>Saldo: R${children.wallet}</p>
