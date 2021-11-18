@@ -3,11 +3,11 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100vw;
   min-height: Calc(100vh - 80px);
-  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   align-content: center;
+  justify-content: space-around;
   margin-top: 80px;
 `;
 
@@ -49,6 +49,8 @@ export const FormContainer = styled.div`
   border-radius: 10px;
   border: none;
   h1 {
+    color: white;
+    text-shadow: 1px 1px 1px black;
     position: absolute;
     top: 1rem;
     left: 1rem;
