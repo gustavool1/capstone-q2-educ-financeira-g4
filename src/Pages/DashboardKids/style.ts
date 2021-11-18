@@ -1,5 +1,6 @@
 import styled from "styled-components";
 export const ContainerDesktop = styled.div`
+
   display: none;
   h2 {
     font-size: 40px;
@@ -87,6 +88,7 @@ export const ActivitiesList = styled.ul`
       color: red;
     }
   }
+  
 `;
 
 export const ContainerMobile = styled.div`
@@ -142,4 +144,116 @@ export const ContainerPage = styled.div`
     display: none;
   } 
 
+`
+
+export const NotAchivied = styled.div`
+  height: 200px;
+  overflow: auto;
+  
+  li{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    width: 90%;
+    p{
+      width: 40%;
+      max-width: 10ch;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+   
+  }
+  ::-webkit-scrollbar {
+        width: 10px;
+        margin:10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+    
+        border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        height: 30px;
+        border-radius: 10px;
+        background-color: #fff;
+    }
+    div{
+      text-align: center;
+    }
+`
+
+export const Achivied = styled.div`
+  margin-top: 30px;
+  height: 100px;
+  overflow: auto;
+  
+  li{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    width: 90%;
+    p{
+      width: 40%;
+      max-width: 10ch;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  ::-webkit-scrollbar {
+        width: 10px;
+        margin:10px;
+        padding: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+    
+        border-radius: 10px;
+        padding: 10px;
+
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        height: 30px;
+        border-radius: 10px;
+        background-color: #fff;
+        padding: 10px;
+
+    }
+
+    div{
+      text-align: center;
+    }
+`
+
+export const AchiviedMobile = styled.div`
+  height: 100px;
+  border: 1px solid red;
+  overflow: auto;
+  div{
+    text-align: center;
+  }
+`
+export const NotAchiviedMobile = styled.div`
+  border: 1px solid green;
+  height: 100px;
+  overflow: auto;
+  li{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    width: 90%;
+    p{
+      width: 40%;
+      max-width: 10ch;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  div{
+    text-align: center;
+  }
 `
