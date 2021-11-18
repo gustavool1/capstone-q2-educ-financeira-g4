@@ -58,7 +58,7 @@ const FormCreatingActivity = () =>{
                 <input type="text"   placeholder='Insira o Nome' {...register('name')}/>
             </section>
             <section className='input-container'>
-                <p>{errors.name?.message}</p>
+                <p>{errors.reward?.message}</p>
                 <input type="number"  placeholder='Insira o valor'{...register('reward')}/>
             </section>
             <select {...register("frequency")} >
