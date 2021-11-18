@@ -45,27 +45,33 @@ const CardChildren = ({children}:CardChildrenProps) =>{
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
-          })
-          .then((response) => {
+        })
+        .then((response) => {
             setChildrenActivities(response.data);
-          })
+        })
           .catch((err) => console.log("getyourActivies", err));
-      };
+    };
+
     const FinishingTask = (e:any,task:Activities) =>{
         task.parentAchivied=true
         if(task.parentAchivied && task.childAchivied){
             deleteActivitie(task)
             updateWallet(children,task.reward)
-            getYourChildrens()
             getYourActivities(children.id)
             e.target.checked=false 
         }
-
     }
     
     useEffect(()=>{
-        getYourActivities(children.id)
+        getYourActivities(children.id)       
     },[createActivie])
+
+    const updateCard = () => {
+        getYourChildrens()
+        setIsFlipped(!isFlipped)
+    }
+
+      
     return(
             <>
             <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
@@ -99,7 +105,7 @@ const CardChildren = ({children}:CardChildrenProps) =>{
                         ))}
                     </NotAchivied>
                     <ButtonsContainer>
-                        <button className='create-activity' onClick={()=>setIsFlipped(!isFlipped)}>Virar</button>
+                        <button className='create-activity' onClick={updateCard}>Virar</button>
                         <button className='create-activity' onClick={()=>handleAdding(children.id)}>Criar Atividade</button>
                     </ButtonsContainer>
                 </Back>
