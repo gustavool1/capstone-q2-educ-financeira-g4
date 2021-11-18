@@ -97,7 +97,7 @@ const DashboardKids = () => {
                   .map((item, index) => (
                     <li key={index}>
                       <p>{item.name} </p>
-                      <b>R$ {item.reward.toFixed(2)}</b>
+                      <b>R$ {(item.reward)?.toFixed(2)}</b>
                       <button onClick={getLastCard}>
                         <AiOutlineCheck />
                       </button>

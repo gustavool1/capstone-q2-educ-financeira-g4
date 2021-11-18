@@ -1,5 +1,5 @@
 import CardChildren from "../CardChildren"
-import { Container }from './style.js'
+import { Container } from "./style"
 interface Children{
     balance:[],
     email:string,

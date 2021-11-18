@@ -3,7 +3,6 @@ import { useContext, useEffect } from "react";
 import ListChildren from "../../Components/ListChildren";
 import { ActivitiesContext } from "../../Providers/Activities";
 import FormCreatingActivity from "../../Components/FormCreatingActivity";
-import {Container, EditingContainer } from './style'
 import { ModalContext } from "../../Providers/Modal";
 import FormEditingActivity from "../../Components/FormEditingActivity";
 
@@ -11,6 +10,8 @@ import ProfileBarParents from "../../Components/ProfileBarParents";
 import { useHistory } from "react-router";
 import { UserContext } from "../../Providers/Users";
 import FormEditingProfile from "../../Components/FormEditingProfile";
+import { Container, EditingContainer } from "./style";
+// import { Container, EditingContainer } from "./style";
 
 export const DashboardParents = () => {
   const { getYourChildrens, childrenArr } = useContext(ActivitiesContext)
@@ -34,7 +35,6 @@ export const DashboardParents = () => {
    }, [])
  
   return(
-    
     <Container>
           {
           isAdding &&
