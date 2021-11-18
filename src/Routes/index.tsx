@@ -15,14 +15,14 @@ export const Routes = () => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route exact path="/content" component={ContentPage} />
+      <Route exact path="/content" component={ContentPage} isPrivate />
       <Route path="/login" component={Login} />
-      <Route path="/balance" component={Balance} isPrivate/>
-      <Route path="/registerkids" component={RegisterKids} isParent/>
+      <Route path="/balance" component={Balance} isPrivate />
+      <Route path="/registerkids" component={RegisterKids} isParent />
       <Route path="/registerparents" component={RegisterParents} />
-      <Route path="/dashboardkids" component={DashboardKids}  isChildren />
+      <Route path="/dashboardkids" component={DashboardKids} isChildren />
       <Route path="/contenthome" component={ContentHome} />
-      <Route path="/dashboardparents" component={DashboardParents} isParent/>
+      <Route path="/dashboardparents" component={DashboardParents} isParent />
       <Route component={Home} />
     </Switch>
   );

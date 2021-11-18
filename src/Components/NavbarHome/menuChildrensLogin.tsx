@@ -2,18 +2,24 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../Providers/Users";
 import { MenuListContainer } from "./style";
-
-const MenuChildrensLogin = ({ setshowMenu }: any) => {
+interface MenuListProps {
+  handleClick: () => void;
+}
+const MenuChildrensLogin = ({ handleClick }: MenuListProps) => {
   const { Logout, userData, typeUser } = useContext(UserContext);
   return (
     <MenuListContainer>
       <div className={typeUser === "children" ? "links children" : "links"}>
-        <Link onClick={() => setshowMenu(false)} to="/dashboardkids">
+        <Link onClick={() => handleClick()} to="/dashboardkids">
           Dashboard
         </Link>
 
-        <Link onClick={() => setshowMenu(false)} to="/balance">
+        <Link onClick={() => handleClick()} to="/balance">
           Balanço Financeiro
+        </Link>
+
+        <Link onClick={() => handleClick()} to="/content">
+          Conteúdo
         </Link>
       </div>
 
@@ -25,7 +31,8 @@ const MenuChildrensLogin = ({ setshowMenu }: any) => {
         <button
           className="btnLogin"
           onClick={() => {
-            setshowMenu(false);
+            handleClick();
+            Logout();
           }}
         >
           Logout

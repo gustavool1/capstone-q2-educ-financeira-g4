@@ -31,7 +31,7 @@ const NavbarHome = () => {
           <MenuDesktop>
             {!!UserToken ? (
               typeUser === "parent" ? (
-                <MenuParentsLogin />
+                <MenuParentsLogin handleClick={handleClick} />
               ) : typeUser === "children" ? (
                 <MenuChildrensLogin handleClick={handleClick} />
               ) : (
@@ -75,8 +75,12 @@ const NavbarHome = () => {
                 animate={{ opacity: 1, x: 0 }}
               >
                 {!UserToken && <MenuList handleClick={handleClick} />}
-                {UserToken && typeUser === "parent" && <MenuParentsLogin />}
-                {UserToken && typeUser === "children" && <MenuChildrensLogin />}
+                {UserToken && typeUser === "parent" && (
+                  <MenuParentsLogin handleClick={handleClick} />
+                )}
+                {UserToken && typeUser === "children" && (
+                  <MenuChildrensLogin handleClick={handleClick} />
+                )}
               </motion.div>
             </MenuMobile>
           )}
