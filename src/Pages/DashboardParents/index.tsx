@@ -1,9 +1,9 @@
-import React from "react"
+import React from "react";
 import { useContext, useEffect } from "react";
 import ListChildren from "../../Components/ListChildren";
 import { ActivitiesContext } from "../../Providers/Activities";
 import FormCreatingActivity from "../../Components/FormCreatingActivity";
-import {Container, EditingContainer } from './style'
+import { Container, EditingContainer } from "./style";
 import { ModalContext } from "../../Providers/Modal";
 import FormEditingActivity from "../../Components/FormEditingActivity";
 
@@ -14,58 +14,50 @@ import FormEditingProfile from "../../Components/FormEditingProfile";
 import { BiHappyBeaming } from "react-icons/bi";
 
 export const DashboardParents = () => {
-  const { getYourChildrens, childrenArr } = useContext(ActivitiesContext)
+  const { getYourChildrens, childrenArr } = useContext(ActivitiesContext);
 
-  const { isTokenValid, userData} = useContext(UserContext)
+  const { isTokenValid, userData } = useContext(UserContext);
 
-  const { isEditing, isAdding, isEditingProfile } = useContext(ModalContext) 
+  const { isEditing, isAdding, isEditingProfile } = useContext(ModalContext);
 
   const history = useHistory();
 
-
-  useEffect(()=>{
-    if(localStorage.getItem('token')){
-
-      getYourChildrens()
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      getYourChildrens();
     }
-  },[])
+  }, []);
 
   useEffect(() => {
-    isTokenValid()
-   }, [])
- 
-  return(
-    
+    isTokenValid();
+  }, []);
+
+  return (
     <Container>
-          {
-          isAdding &&
-            <EditingContainer>
-              <FormCreatingActivity/>
-            </EditingContainer>
-          }
-          {
-          isEditing &&
-            <EditingContainer>
-              <FormEditingActivity/>
-            </EditingContainer>
-          }
-          {
-            isEditingProfile && 
-            <EditingContainer>
-              <FormEditingProfile/>
-            </EditingContainer>
-          }
-      <ProfileBarParents/>
-      {childrenArr.length < 1? 
-      (<div className='warnning'>
-        <h1>Você ainda não tem dependentes cadastrados, </h1>
-        <p>cadastre-os e acompanhe o desenvlvimento deles.</p>
-        </div>) 
-        : 
-      (<ListChildren children={childrenArr}/>)
-      }
-
+      {isAdding && (
+        <EditingContainer>
+          <FormCreatingActivity />
+        </EditingContainer>
+      )}
+      {isEditing && (
+        <EditingContainer>
+          <FormEditingActivity />
+        </EditingContainer>
+      )}
+      {isEditingProfile && (
+        <EditingContainer>
+          <FormEditingProfile />
+        </EditingContainer>
+      )}
+      <ProfileBarParents />
+      {childrenArr.length < 1 ? (
+        <div className="warnning">
+          <h1>Você ainda não tem dependentes cadastrados, </h1>
+          <p>cadastre-os e acompanhe o desenvolvimento deles.</p>
+        </div>
+      ) : (
+        <ListChildren children={childrenArr} />
+      )}
     </Container>
-  )
-
+  );
 };
