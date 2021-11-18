@@ -10,13 +10,17 @@ import FormEditingActivity from "../../Components/FormEditingActivity";
 import ProfileBarParents from "../../Components/ProfileBarParents";
 import { UserContext } from "../../Providers/Users";
 import FormEditingProfile from "../../Components/FormEditingProfile";
+import { BiHappyBeaming } from "react-icons/bi";
 
 export const DashboardParents = () => {
   const { getYourChildrens, childrenArr } = useContext(ActivitiesContext);
 
-  const { isTokenValid, userData } = useContext(UserContext);
 
-  const { isEditing, isAdding, isEditingProfile } = useContext(ModalContext);
+  const { isTokenValid, userData} = useContext(UserContext)
+
+  const { isEditing, isAdding, isEditingProfile } = useContext(ModalContext) 
+
+  const history = useHistory();
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -25,8 +29,40 @@ export const DashboardParents = () => {
   }, []);
 
   useEffect(() => {
-    isTokenValid();
-  }, []);
+    isTokenValid()
+   }, [])
+ 
+  return(
+    
+    <Container>
+          {
+          isAdding &&
+            <EditingContainer>
+              <FormCreatingActivity/>
+            </EditingContainer>
+          }
+          {
+          isEditing &&
+            <EditingContainer>
+              <FormEditingActivity/>
+            </EditingContainer>
+          }
+          {
+            isEditingProfile && 
+            <EditingContainer>
+              <FormEditingProfile/>
+            </EditingContainer>
+          }
+      <ProfileBarParents/>
+      {childrenArr.length < 1? 
+      (<div className='warnning'>
+        <h1>Você ainda não tem dependentes cadastrados, </h1>
+        <p>cadastre-os e acompanhe o desenvlvimento deles.</p>
+        </div>) 
+        : 
+      (<ListChildren children={childrenArr}/>)
+      }
+
 
   return (
     <Container>

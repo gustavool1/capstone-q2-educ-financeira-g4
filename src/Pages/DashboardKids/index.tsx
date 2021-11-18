@@ -7,6 +7,10 @@ import {
   ContainerMobile,
   MobileContent,
   ContainerPage,
+  NotAchivied,
+  Achivied,
+  AchiviedMobile,
+  NotAchiviedMobile
 } from "./style";
 import { AiOutlineCheck } from "react-icons/ai";
 import { FaTrash, FaAngellist } from "react-icons/fa";
@@ -87,6 +91,7 @@ const DashboardKids = () => {
             <h2>Diárias</h2>
             <ActivitiesList>
               <h3>Tarefas a concluir:</h3>
+              <NotAchivied>
               {activities.filter(
                 (item) => item.frequency === "Diaria" && item.childAchivied === false
               ).length > 0 ? (
@@ -110,8 +115,9 @@ const DashboardKids = () => {
                   <p>Tudo concluído !!</p>
                 </div>
               )}
-
+              </NotAchivied>
               <h3>Tarefas Concluídas: </h3>
+              <Achivied>
               {activities.filter(
                 (item) => item.frequency === "Diaria" && item.childAchivied === true
               ).length > 0 ? (
@@ -135,6 +141,7 @@ const DashboardKids = () => {
                   <p className="nothingDone">Nada concluído</p>
                 </div>
               )}
+              </Achivied>
             </ActivitiesList>
           </li>
 
@@ -142,7 +149,7 @@ const DashboardKids = () => {
             <h2>Semanais</h2>
             <ActivitiesList>
               <h3>Tarefas a concluir:</h3>
-
+                <NotAchivied>
               {activities.filter(
                 (item) =>
                   item.frequency === "Semanal" && item.childAchivied === false
@@ -167,6 +174,8 @@ const DashboardKids = () => {
                   <p>Tudo concluído !!</p>
                 </div>
               )}
+              </NotAchivied>
+              <Achivied>
               <h3>Tarefas concluídas</h3>
               {activities.filter(
                 (item) => item.frequency === "Semanal" && item.childAchivied === true
@@ -191,6 +200,7 @@ const DashboardKids = () => {
                   <p className="nothingDone">Nada concluído</p>
                 </div>
               )}
+              </Achivied>
             </ActivitiesList>
           </li>
 
@@ -198,6 +208,7 @@ const DashboardKids = () => {
             <h2>Mensais</h2>
             <ActivitiesList>
               <h3>Tarefas a concluir</h3>
+              <NotAchivied>
 
               {activities.filter(
                 (item) => item.frequency === "Mensal" && item.childAchivied === false
@@ -222,8 +233,9 @@ const DashboardKids = () => {
                   <p>Tudo concluído !!</p>
                 </div>
               )}
-
+                </NotAchivied>
               <h3>Tarefas concluídas</h3>
+                <Achivied>
               {activities.filter(
                 (item) => item.frequency === "Mensal" && item.childAchivied === true
               ).length > 0 ? (
@@ -247,6 +259,7 @@ const DashboardKids = () => {
                   <p className="nothingDone">Nada concluído</p>
                 </div>
               )}
+              </Achivied>
             </ActivitiesList>
           </li>
         </CardList>
@@ -271,6 +284,7 @@ const DashboardKids = () => {
                   <h2>Diária</h2>
 
                   <h3>Tarefas a concluir:</h3>
+                  <AchiviedMobile>
                   {activities.filter(
                     (item) =>
                       item.frequency === "Diaria" && item.childAchivied === false
@@ -295,8 +309,9 @@ const DashboardKids = () => {
                       <p>Tudo concluído !!</p>
                     </div>
                   )}
-
+                  </AchiviedMobile>
                   <h3>Tarefas Concluídas: </h3>
+                  <NotAchiviedMobile>
                   {activities.filter(
                     (item) =>
                       item.frequency === "Diaria" && item.childAchivied === true
@@ -321,6 +336,7 @@ const DashboardKids = () => {
                       <p className="nothingDone">Nada concluído</p>
                     </div>
                   )}
+                  </NotAchiviedMobile>
                 </ActivitiesList>
               )}
 
@@ -329,6 +345,7 @@ const DashboardKids = () => {
                   <h2>Semanal</h2>
 
                   <h3>Tarefas a concluir:</h3>
+                  <AchiviedMobile>
                   {activities.filter(
                     (item) =>
                       item.frequency === "Semanal" && item.childAchivied === false
@@ -354,8 +371,9 @@ const DashboardKids = () => {
                       <p>Tudo concluído !!</p>
                     </div>
                   )}
-
+                  </AchiviedMobile>
                   <h3>Tarefas Concluídas: </h3>
+                  <NotAchiviedMobile>
                   {activities.filter(
                     (item) =>
                       item.frequency === "Semanal" && item.childAchivied === true
@@ -380,6 +398,7 @@ const DashboardKids = () => {
                       <p className="nothingDone">Nada concluído</p>
                     </div>
                   )}
+                  </NotAchiviedMobile>
                 </ActivitiesList>
               )}
 
@@ -388,6 +407,7 @@ const DashboardKids = () => {
                   <h2>Mensal</h2>
 
                   <h3>Tarefas a concluir:</h3>
+                  <AchiviedMobile>
                   {activities.filter(
                     (item) =>
                       item.frequency === "Mensal" && item.childAchivied === false
@@ -412,8 +432,9 @@ const DashboardKids = () => {
                       <p>Tudo concluído !!</p>
                     </div>
                   )}
-
+                  </AchiviedMobile>
                   <h3>Tarefas Concluídas: </h3>
+                  <NotAchiviedMobile>
                   {activities.filter(
                     (item) =>
                       item.frequency === "Mensal" && item.childAchivied === true
@@ -438,6 +459,7 @@ const DashboardKids = () => {
                       <p className="nothingDone">Nada concluído</p>
                     </div>
                   )}
+                  </NotAchiviedMobile>
                 </ActivitiesList>
               )}
             </li>
