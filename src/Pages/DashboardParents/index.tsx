@@ -14,7 +14,7 @@ import FormEditingProfile from "../../Components/FormEditingProfile";
 export const DashboardParents = () => {
   const { getYourChildrens, childrenArr } = useContext(ActivitiesContext);
 
-  const { isTokenValid } = useContext(UserContext);
+  const { isTokenValid, userData } = useContext(UserContext);
 
   const { isEditing, isAdding, isEditingProfile } = useContext(ModalContext);
 
@@ -46,7 +46,14 @@ export const DashboardParents = () => {
         </EditingContainer>
       )}
       <ProfileBarParents />
-      {childrenArr.length !== 0 && <ListChildren children={childrenArr} />}
+      {childrenArr.length < 1 ? (
+        <div className="warnning">
+          <h1>Você ainda não tem dependentes cadastrados, </h1>
+          <p>cadastre-os e acompanhe o desenvlvimento deles.</p>
+        </div>
+      ) : (
+        <ListChildren children={childrenArr} />
+      )}
     </Container>
   );
 };

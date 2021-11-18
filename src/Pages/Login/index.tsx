@@ -62,8 +62,9 @@ export const Login = () => {
                   label="Email"
                   variant="outlined"
                   {...register("email")}
+                  helperText={errors.email?.message}
                 />
-                <span>{errors.email?.message}</span>
+                
                 <TextField
                   margin="dense"
                   type="password"
@@ -71,8 +72,8 @@ export const Login = () => {
                   label="Senha"
                   variant="outlined"
                   {...register("password")}
+                  helperText={errors.password?.message}
                 />
-                <p>{errors.password?.message}</p>
                 <Button type="submit">Logar</Button>
               </Form>
             </FormContainer>
