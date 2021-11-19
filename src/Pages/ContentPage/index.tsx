@@ -197,7 +197,9 @@ const ContentPage = () => {
         <a
           href="#inflacao"
           className="Inflacao"
-          onClick={() => setNavegationIsOpen(false)}
+          onClick={() => {
+            setNavegationIsOpen(false);
+          }}
         >
           <img src={openBook} alt="barChartRepresentation" />
           <p>Inflação</p>

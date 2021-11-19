@@ -79,11 +79,11 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
 
   const AddtoKitty = (wish: Wish, value: number) => {
     if (value + wish.kitty > wish.value) {
-      showToast({ type: "warning", message: "Passou de 100%" });
+      showToast({ type: "warn", message: "Passou de 100%!" });
       return;
     }
     if (value + wish.kitty === wish.value) {
-      showToast({ type: "sucess", message: "Parabéns, chegou a 100%" });
+      showToast({ type: "success", message: "Parabéns, chegou a 100%!" });
     }
     const el = userData.wishlist.map((item) => {
       if (item.name === wish.name) {
@@ -112,6 +112,12 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
           (wishes: any) => wishes.name === wish.name
         );
         setWish(newWish[0]);
+        showToast({
+          type: "info",
+          message: `O valor ${value
+            .toFixed(2)
+            .replace(".", ",")} foi adicionado!`,
+        });
       })
       .catch((err) => {
         console.log(err);

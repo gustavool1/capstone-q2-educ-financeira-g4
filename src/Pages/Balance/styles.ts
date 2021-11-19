@@ -130,7 +130,7 @@ export const WishListHeader = styled.div`
   text-align: center;
   justify-content: center;
   padding: 5px 0;
-  color: #FFFFFF;
+  color: #ffffff;
   h3 {
     margin: auto;
     font-size: 24px;
@@ -164,7 +164,8 @@ export const WishListContent = styled.div`
 export const Chart = styled.div`
   width: 80%;
   height: 50%;
-  
+  margin-top: -10px;
+  margin-bottom: 10px;
   @media screen and (min-width: 768px) {
     width: 70%;
     height: 40%;

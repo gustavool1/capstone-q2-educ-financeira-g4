@@ -19,6 +19,7 @@ import { CardWishDetails } from "../../Components/CardWishDetails";
 import { useModal } from "../../Providers/Modal";
 import { useUser } from "../../Providers/Users";
 import Demo from "../../Components/Chart";
+import { showToast } from "../../Components/Toast/style";
 interface BalanceProp {
   date?: string;
   move?: number;
@@ -63,9 +64,8 @@ export const Balance = () => {
     const wish = { name: wishName, value: wishPrice, kitty: 0 };
     console.log(wish);
     AddWishList(userData, wish);
+    showToast({ type: "success", message: `O desejo foi criado!` });
   };
-
-
 
   useEffect(() => {
     isTokenValid();
@@ -75,7 +75,7 @@ export const Balance = () => {
   return (
     <Container>
       <LeftSide>
-        <h2>Patrimônio Total Acumulado</h2>
+        <h2>Histórico de Movimentações</h2>
         <Chart>
           <Demo />
         </Chart>
@@ -93,7 +93,7 @@ export const Balance = () => {
                 userData.balance.map((item: BalanceProp, index: number) => (
                   <li key={index}>
                     <span>{item.date}</span>
-                    <strong className={Number(item.move) < 0? 'red' : 'green'}>
+                    <strong className={Number(item.move) < 0 ? "red" : "green"}>
                       {" R$ "}
                       {item.move && item.move.toFixed(2).replace(".", ",")}
                     </strong>

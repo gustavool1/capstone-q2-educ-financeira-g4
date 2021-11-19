@@ -22,6 +22,7 @@ import { useHistory } from "react-router-dom";
 
 export const Home = () => {
   const history = useHistory();
+
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     gsap.from(".left", {
@@ -155,7 +156,12 @@ export const Home = () => {
       <KnowMore>
         <div className="Content left">
           <p>Saiba agora porque vocês precisam da gente!</p>
-          <button onClick={() => history.push("/contenthome")}>
+          <button
+            onClick={() => {
+              window.scrollTo(0, 0);
+              history.push("/contenthome");
+            }}
+          >
             Saiba Mais
           </button>
         </div>
