@@ -1,16 +1,9 @@
 import { ModalWish, WishListHeader, WishContent, Porcent } from "./styles";
-// import { BsFillPencilFill } from "react-icons/bs";
 import { useModal } from "../../Providers/Modal";
 import { useState } from "react";
 import { BiSend } from "react-icons/bi";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { useUser } from "../../Providers/Users";
-
-interface Wish {
-  name: string;
-  value: number;
-  kitty: number;
-}
 
 export const CardWishDetails = () => {
   const { isWish, setIsWish, wish, AddtoKitty } = useModal();
@@ -39,7 +32,7 @@ export const CardWishDetails = () => {
         <Porcent>
           <CircularProgressbar
             value={percentage}
-            // text={`${percentage.toFixed(2).replace(".", ",")}%`}
+            text={`${percentage.toFixed(2).replace(".", ",")}%`}
             className="circle-progress"
             styles={buildStyles({
               textColor: "#000000",

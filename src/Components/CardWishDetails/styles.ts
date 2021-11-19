@@ -37,6 +37,11 @@ export const WishListHeader = styled.div`
     margin: auto;
     font-size: 24px;
   }
+  p {
+    margin: 0 30px;
+    color: white;
+    font-weight: bold;
+  }
   button {
     border: none;
     background: transparent;
