@@ -102,6 +102,7 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
           (wishes: any) => wishes.name === wish.name
         );
         setWish(newWish[0]);
+        showToast({ type: "success", message: `Foi adicionado RS ${value} reais à sua vaquinha!` });
       })
       .catch((err) => {
         console.log(err);
