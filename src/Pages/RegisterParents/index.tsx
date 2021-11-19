@@ -57,10 +57,19 @@ export const RegisterParents = () => {
   return (
     <>
       <Container>
-        <ImageContainer>
+        <ImageContainer
+          initial={{x:-250, opacity:0 }}
+          animate={{ x:0, opacity:1 }}
+          transition={{duration:2}}
+         
+        >
           <img src={Image} alt="imagem de registro" />
         </ImageContainer>
-        <FormContainer>
+        <FormContainer
+           initial={{x:250, opacity:0 }}
+           animate={{ x:0, opacity:1 }}
+           transition={{duration:2}}
+        >
           <Form onSubmit={handleSubmit(onSubmitFunction)}>
             <h1>Cadastrar </h1>
             <TextField
