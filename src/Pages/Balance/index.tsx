@@ -86,8 +86,16 @@ export const Balance = () => {
         >
           Movimentações
         </Button>
-          <ModalBalance className={isOpenBalance ? 'openBalance': 'closeBalance'}>
-            <h2>Balanço Financeiras</h2>
+        {
+        // isOpenBalance && 
+        (
+          <ModalBalance
+          isOpen={isOpenBalance}
+          initial={{ opacity: 0, x: -300 }}
+          transition={{ duration: 1 }}
+          animate={{ opacity: 1, x: 0 }}
+          >
+            <h2>Balanço Financeiro</h2>
             <BankStatement>
               {userData.balance ? (
                 userData.balance.map((item: BalanceProp, index: number) => (
