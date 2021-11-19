@@ -230,14 +230,12 @@ export const Achivied = styled.div`
 
 export const AchiviedMobile = styled.div`
   height: 100px;
-  border: 1px solid red;
   overflow: auto;
   div{
     text-align: center;
   }
 `
 export const NotAchiviedMobile = styled.div`
-  border: 1px solid green;
   height: 100px;
   overflow: auto;
   li{
