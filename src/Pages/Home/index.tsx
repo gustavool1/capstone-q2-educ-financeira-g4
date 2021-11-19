@@ -155,7 +155,12 @@ export const Home = () => {
       <KnowMore>
         <div className="Content left">
           <p>Saiba agora porque vocês precisam da gente!</p>
-          <button onClick={() => history.push("/contenthome")}>
+          <button
+            onClick={() => {
+              window.scrollTo(0, 0);
+              history.push("/contenthome");
+            }}
+          >
             Saiba Mais
           </button>
         </div>

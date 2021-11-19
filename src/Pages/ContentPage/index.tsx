@@ -5,12 +5,13 @@ import { useState } from "react";
 import barChart from "../../assets/images/bar-chart.png";
 import profits from "../../assets/images/profits.png";
 import openBook from "../../assets/images/open-book.png";
+import { HashLink } from "react-router-hash-link";
 
 const ContentPage = () => {
   const [navegationIsOpen, setNavegationIsOpen] = useState(false);
   return (
     <>
-      <Container background="#9B5DE5" color="#fff" id="ofertaEprocura">
+      <Container background="#9B5DE5" color="#fff" id="suplyAndDemand">
         <h2 className="first">A lei da oferta e da procura !</h2>
         <div className="content">
           <div className="textContent">
@@ -185,32 +186,35 @@ const ContentPage = () => {
           />
         </button>
 
-        <a
-          href="#ofertaEprocura"
+        <HashLink
+          to="/content#suplyAndDemand"
           className="Oferta"
           onClick={() => setNavegationIsOpen(false)}
+          scroll={(el) => el.scrollIntoView({ behavior: "smooth", block: "end" })}
         >
           <img src={barChart} alt="barChartRepresentation" />
-          <p>Oferta e procura</p>
-        </a>
+          <p>Oferta e procura</p>          
+        </HashLink>
 
-        <a
-          href="#inflacao"
+        <HashLink
+          to="/content#inflacao"
           className="Inflacao"
           onClick={() => setNavegationIsOpen(false)}
+          scroll={(el) => el.scrollIntoView({ behavior: "smooth", block: "end" })}
         >
           <img src={openBook} alt="barChartRepresentation" />
-          <p>Inflação</p>
-        </a>
+          <p>Inflação</p>         
+        </HashLink>
 
-        <a
-          href="#juros"
+        <HashLink
+          to="/content#juros"
           className={"Juros"}
           onClick={() => setNavegationIsOpen(false)}
+          scroll={(el) => el.scrollIntoView({ behavior: "smooth", block: "end" })}
         >
-          <img src={profits} alt="barChartRepresentation" />
-          <p>Juros</p>
-        </a>
+           <img src={profits} alt="barChartRepresentation" />
+          <p>Juros</p>       
+        </HashLink>
       </Nav>
     </>
   );
