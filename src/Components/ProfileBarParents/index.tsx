@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import  { useContext, useEffect } from 'react'
 import { ActivitiesContext } from '../../Providers/Activities'
 import { ProfileContainer } from './style'
 import profile from '../../assets/images/iconProfile.jpg'
@@ -7,13 +6,14 @@ import { UserContext } from '../../Providers/Users'
 import { ModalContext } from '../../Providers/Modal'
 
 const ProfileBarParents = () => {
-    const { getAmountToPay, amountToPay, deleteActivitie } = useContext(ActivitiesContext)
+    const { getAmountToPay, amountToPay } = useContext(ActivitiesContext)
     const { getUserData, userData } = useContext(UserContext)
     const { handleEditingProfile } = useContext(ModalContext)
     useEffect(() => {
         getAmountToPay(0)
         getUserData()
         console.log(userData)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

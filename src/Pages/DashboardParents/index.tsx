@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useContext, useEffect } from "react";
 import ListChildren from "../../Components/ListChildren";
 import { ActivitiesContext } from "../../Providers/Activities";
@@ -13,7 +13,7 @@ import FormEditingProfile from "../../Components/FormEditingProfile";
 export const DashboardParents = () => {
   const { getYourChildrens, childrenArr } = useContext(ActivitiesContext);
 
-  const { isTokenValid, userData } = useContext(UserContext);
+  const { isTokenValid } = useContext(UserContext);
 
   const { isEditing, isAdding, isEditingProfile } = useContext(ModalContext);
 
@@ -21,10 +21,12 @@ export const DashboardParents = () => {
     if (localStorage.getItem("token")) {
       getYourChildrens();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     isTokenValid();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

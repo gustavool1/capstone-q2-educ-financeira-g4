@@ -16,7 +16,7 @@ const FormEditingProfile = () => {
   const { handleEditingProfile } = useContext(ModalContext);
   const { EditProfile } = useUser();
 
-  const id = localStorage.getItem("userId");
+ 
   const schema = yup.object().shape({
     name: yup
       .string()

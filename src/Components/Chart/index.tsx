@@ -105,6 +105,7 @@ function Demo() {
 
 	useEffect(() => {
 		(balance?.length >=2) && getMonthlyBalance()
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	return (
