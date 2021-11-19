@@ -47,8 +47,13 @@ const CardChildren = ({ children }: CardChildrenProps) => {
   const [toggle, setToggle] = useState(false);
   const [childrenActivies, setChildrenActivities] = useState<Activities[]>([]);
   const [isFlipped, setIsFlipped] = useState(false);
-  const { updateActivitie, getYourChildrens, createActivie, deleteActivitie, getAmountToPay } =
-    useContext(ActivitiesContext);
+  const {
+    updateActivitie,
+    getYourChildrens,
+    createActivie,
+    deleteActivitie,
+    getAmountToPay,
+  } = useContext(ActivitiesContext);
   const { handleAdding, handleEditing } = useContext(ModalContext);
   const { updateWallet } = useContext(ChildrenContext);
   const { SelectedChild } = useUser();
@@ -70,7 +75,7 @@ const CardChildren = ({ children }: CardChildrenProps) => {
     if (task.parentAchivied && task.childAchivied) {
       deleteActivitie(task);
       updateWallet(children, task.reward);
-      getAmountToPay(task.reward)
+      getAmountToPay(task.reward);
       getYourActivities(children.id);
       e.target.checked = false;
     }
@@ -220,7 +225,7 @@ const CardChildren = ({ children }: CardChildrenProps) => {
               .map((achivied, key) => (
                 <div key={key}>
                   <p title={achivied.name}>{achivied.name}</p>
-                  <p>R${achivied.reward}</p>
+                  <p>R$ {achivied.reward}</p>
                   <input
                     type="checkbox"
                     onClick={(e) => FinishingTask(e, achivied)}
@@ -241,7 +246,7 @@ const CardChildren = ({ children }: CardChildrenProps) => {
               .map((notAchivied, key) => (
                 <div key={key}>
                   <p title={notAchivied.name}>{notAchivied.name}</p>
-                  <p>R${notAchivied.reward}</p>
+                  <p>R$ {notAchivied.reward}</p>
                   <button onClick={() => handleEditing(notAchivied.id)}>
                     <IoIosCreate />
                   </button>
