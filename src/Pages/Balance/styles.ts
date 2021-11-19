@@ -86,6 +86,25 @@ export const ModalBalance = styled.div`
       margin-left: -240px;
     }
   }
+
+  .openBalance{
+
+    @keyframes enter1{
+      from{
+        width:0px;
+      }
+
+      to{
+        width: 400px;
+      }
+    }
+    animation: enter1, 5;
+    display: none;
+  }
+
+  .closeBalance{
+    display: none;
+  }
 `;
 
 export const WishList = styled.div`
@@ -158,6 +177,11 @@ export const WishListContent = styled.div`
     margin-left: -100px;
     margin-bottom: -8px;
   }
+  section{
+    h3{
+      margin: 10px 0px;
+    }
+  }
 `;
 
 export const Chart = styled.div`
@@ -171,17 +195,19 @@ export const Chart = styled.div`
 `;
 
 export const Input = styled.input`
-  width: 80%;
-  margin: 0.5rem;
-  border-radius: 10px;
-  border: none;
-  padding: 0.5rem;
-  ::placeholder {
-    padding-left: 5px;
-  }
-  @media screen and (min-width: 768px) {
-    padding: 1rem;
-  }
+  input, select{
+        padding: 0px 10px;
+        background-color: white;
+        width: 90px;
+        margin: 10px;
+        height: 48px;
+        border-radius: 7px;
+        font-size: 18px;
+        :focus{
+            outline-style: none;
+            box-shadow: none;
+        }
+    }
 `;
 
 export const BankStatement = styled.ul`

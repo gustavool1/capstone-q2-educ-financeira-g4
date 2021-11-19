@@ -19,6 +19,7 @@ import { CardWishDetails } from "../../Components/CardWishDetails";
 import { useModal } from "../../Providers/Modal";
 import { useUser } from "../../Providers/Users";
 import Demo from "../../Components/Chart";
+import { TextField } from "@material-ui/core";
 interface BalanceProp {
   date?: string;
   move?: number;
@@ -86,7 +87,7 @@ export const Balance = () => {
           Movimentações
         </Button>
         {isOpenBalance && (
-          <ModalBalance>
+          <ModalBalance className='openBalance'>
             <h2>Balanço Financeiras</h2>
             <BankStatement>
               {userData.balance ? (
@@ -143,16 +144,20 @@ export const Balance = () => {
           </WishListHeader>
           {isOpenWish ? (
             <WishListContent>
-              <label>Nome do item</label>
-              <Input
-                placeholder="nome"
-                onChange={(e) => setWishName(e.target.value)}
-              />
-              <label>Valor do item</label>
-              <Input
-                placeholder="valor"
-                onChange={(e) => setWishPrice(Number(e.target.value))}
-              />
+              <section>
+                <h3>Nome</h3>
+                <Input
+                  placeholder="nome"
+                  onChange={(e) => setWishName(e.target.value)}
+                />
+              </section>
+              <section>
+                <h3>Valor</h3>
+                <Input
+                  placeholder="valor"
+                  onChange={(e) => setWishPrice(Number(e.target.value))}
+                />
+              </section>
               <Button onClick={() => HandleClickWish()}>Enviar</Button>
             </WishListContent>
           ) : (

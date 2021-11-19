@@ -79,7 +79,7 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
 
   const AddtoKitty = (wish: Wish, value: number) => {
     if (value + wish.kitty > wish.value) {
-      showToast({ type: "warning", message: "Passou de 100%" });
+      showToast({ type: "warn", message: "Passou de 100%" });
       return;
     }
     if (value + wish.kitty === wish.value) {
