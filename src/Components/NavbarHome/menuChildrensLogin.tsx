@@ -6,7 +6,7 @@ interface MenuListProps {
   handleClick: () => void;
 }
 const MenuChildrensLogin = ({ handleClick }: MenuListProps) => {
-  const { Logout, userData, typeUser } = useContext(UserContext);
+  const { Logout, typeUser } = useContext(UserContext);
   return (
     <MenuListContainer>
       <div className={typeUser === "children" ? "links children" : "links"}>

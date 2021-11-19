@@ -67,7 +67,6 @@ interface UserProviderData {
   ReceivedBalance: (data: UserDataItens, number: number) => void;
   AddtoKitty: (item: Wish, value: number) => void;
   getUserData: () => void;
-  isValidToken: boolean;
   isTokenValid: () => void;
   typeUser: string;
   userId: string;
@@ -79,7 +78,7 @@ export const UserContext = createContext<UserProviderData>(
 );
 
 export const UserProvider = ({ children }: UserProps) => {
-  // const {  } = useContext(ModalContext)
+ 
   const [userData, setUserData] = useState<UserDataItens>({} as UserDataItens);
   const history = useHistory();
   const [UserToken, setUserToken] = useState(
@@ -89,7 +88,6 @@ export const UserProvider = ({ children }: UserProps) => {
     () => localStorage.getItem("userId") || ""
   );
   const [activities, setActivities] = useState([] as activity[]);
-  const [isValidToken, setIsValidToken] = useState<boolean>(false);
 
   const [typeUser, setTypeUser] = useState(
     () => localStorage.getItem("typeUser") || ""
@@ -333,7 +331,6 @@ export const UserProvider = ({ children }: UserProps) => {
         activities,
         GetActivities,
         userId,
-        isValidToken,
         isTokenValid,
         typeUser,
         EditProfile,

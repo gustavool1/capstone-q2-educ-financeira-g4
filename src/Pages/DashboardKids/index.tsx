@@ -24,10 +24,12 @@ const DashboardKids = () => {
   const [carrouselNumber, setCarrouselNumber] = useState(0);
   useEffect(() => {
     GetActivities(Number(userId));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     isTokenValid()
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [])
 
   const AchiviedFunction = (id: number) => {
@@ -271,7 +273,7 @@ const DashboardKids = () => {
         <h2>Atividades</h2>
         <MobileContent>
           <button
-            onClick={() => setCarrouselNumber(1)}
+            onClick={getLastCard}
             className="passLeft navegateButton"
           >
             &lt;

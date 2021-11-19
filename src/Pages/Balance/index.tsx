@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { BsFillPencilFill } from "react-icons/bs";
+
 import {
   Container,
   ModalBalance,
@@ -19,7 +18,6 @@ import { CardWishDetails } from "../../Components/CardWishDetails";
 import { useModal } from "../../Providers/Modal";
 import { useUser } from "../../Providers/Users";
 import Demo from "../../Components/Chart";
-import { TextField } from "@material-ui/core";
 import { showToast } from "../../Components/Toast/style";
 interface BalanceProp {
   date?: string;
@@ -38,7 +36,6 @@ export const Balance = () => {
 
   const {
     userData,
-    getUserData,
     ReceivedBalance,
     SpendBalance,
     AddWishList,
@@ -72,6 +69,7 @@ export const Balance = () => {
 
   useEffect(() => {
     isTokenValid();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log(userData);

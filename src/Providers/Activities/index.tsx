@@ -40,15 +40,6 @@ interface Activities {
     userId: number;
     id: number;
 }
-interface ChildrenObj {
-    achivied: boolean,
-    childrenId: number,
-    frequency: string,
-    id: number,
-    name: string,
-    reward: 1000,
-    userId: 2
-}
 
 
 export const ActivitiesContext = createContext<ActivitiesProviderData>({} as ActivitiesProviderData)
