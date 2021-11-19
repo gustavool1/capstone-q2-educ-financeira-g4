@@ -185,7 +185,7 @@ const DashboardKids = () => {
                 activities
                   .filter(
                     (item) =>
-                      item.frequency === "Semanal" && item.childAchivied === false
+                      item.frequency === "Semanal" && item.childAchivied === true
                   )
                   .map((item, index) => (
                     <li key={index}>
