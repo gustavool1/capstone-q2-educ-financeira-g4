@@ -65,7 +65,11 @@ export const RegisterKids = () => {
   return (
     <>
       <Container>
-        <FormContainer>
+        <FormContainer
+           initial={{x:-250, opacity:0 }}
+           animate={{ x:0, opacity:1 }}
+           transition={{duration:2}}
+        >
           <Form onSubmit={handleSubmit(onSubmitFunction)}>
             <h1>Cadastrar dependente</h1>
             <TextField
@@ -75,8 +79,10 @@ export const RegisterKids = () => {
               label="Nome"
               variant="outlined"
               {...register("name")}
+              error={!!errors.name}
+              helperText={errors.name?.message}
             />
-            <span> {errors.name?.message}</span>
+            
             <TextField
               margin="dense"
               type="text"
@@ -84,8 +90,10 @@ export const RegisterKids = () => {
               label="Email"
               variant="outlined"
               {...register("email")}
+              error={!!errors.email}
+              helperText={errors.email?.message}
             />
-            <span>{errors.email?.message}</span>
+
             <TextField
               margin="dense"
               type="password"
@@ -93,8 +101,10 @@ export const RegisterKids = () => {
               label="Senha"
               variant="outlined"
               {...register("password")}
+              error={!!errors.password}
+              helperText={errors.password?.message}
             />
-            <p>{errors.password?.message}</p>
+
             <TextField
               margin="dense"
               type="password"
@@ -102,12 +112,18 @@ export const RegisterKids = () => {
               label="Confirmação de senha"
               variant="outlined"
               {...register("confirmPassword")}
+              error={!!errors.confirmPassword}
+              helperText={errors.confirmPassword?.message}
             />
-            <span>{errors.confirmPassword?.message}</span>
+
             <Button type="submit">Cadastrar</Button>
           </Form>
         </FormContainer>
-        <ImageContainer>
+        <ImageContainer
+          initial={{x:250, opacity:0 }}
+          animate={{ x:0, opacity:1 }}
+          transition={{duration:2}}
+        >
           <LottieMaker
             lottieImage={
               "https://assets6.lottiefiles.com/packages/lf20_0qrzy1vy.json"

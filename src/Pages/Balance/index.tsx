@@ -89,7 +89,9 @@ export const Balance = () => {
           Movimentações
         </Button>
           <ModalBalance className={isOpenBalance ? 'openBalance': 'closeBalance'}>
-            <h2>Balanço Financeiras</h2>
+         
+          
+            <h2>Balanço Financeiro</h2>
             <BankStatement>
               {userData.balance ? (
                 userData.balance.map((item: BalanceProp, index: number) => (

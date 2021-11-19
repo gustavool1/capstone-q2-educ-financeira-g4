@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -16,26 +17,33 @@ export const Container = styled.div`
   }
 
   .openBalance{
-    animation: enter1 2s;
-    
+    animation: Entering 2s;
+    left: 0px;
   }
   .closeBalance{
-    animation: out 2s;
-    left: -450px;
+     animation: ReverseEntering 2s; 
+     left: -400px;
+    
   }
-  @keyframes enter1 {
-    from{
-      left: -450px;
+  @keyframes Entering {
+    0.0% {
+      opacity:0;
+      left:  -400px;
     }
-
-  }
-  @keyframes out {
-    from{
+    100% {
+      opacity: 1;
       left: 0px;
     }
-    to{
-      left:-450px;
-    
+  }
+
+  @keyframes ReverseEntering {
+    0.0% {
+      left:0px;
+      
+    }
+    100% {
+      left:-400px;
+     
     }
   }
 
@@ -77,7 +85,7 @@ export const RightSide = styled.div`
   }
 `;
 
-export const ModalBalance = styled.div`
+export const ModalBalance = styled(motion.div)`
   padding-top: 180px;
   position: fixed;
   left: 0;
@@ -114,6 +122,8 @@ export const ModalBalance = styled.div`
     }
   }
 
+ 
+  
 `;
 
 export const WishList = styled.div`

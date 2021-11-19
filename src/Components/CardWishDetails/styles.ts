@@ -1,6 +1,6 @@
 import styled from "styled-components";
-
-export const ModalWish = styled.div`
+import { motion } from 'framer-motion'
+export const ModalWish = styled(motion.div)`
   min-width: 267px;
   width: 80%;
   height: 80%;
