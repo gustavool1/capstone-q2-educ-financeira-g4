@@ -162,7 +162,7 @@ export const UserProvider = ({ children }: UserProps) => {
   };
 
   const ReceivedBalance = (data: UserDataItens, value: number) => {
-    const send = { date: new Date().toLocaleString(), move: value };
+    const send = { date: new Date().toLocaleDateString('pt-br').slice(0,20), move: value };
     data.balance.push(send);
     data.wallet += value;
     api
@@ -181,7 +181,7 @@ export const UserProvider = ({ children }: UserProps) => {
   };
 
   const SpendBalance = (data: UserDataItens, value: number) => {
-    const send = { date: new Date().toLocaleString(), move: value };
+    const send = { date: new Date().toLocaleDateString('pt-br').slice(0,20), move: value };
     data.balance.push(send);
     data.wallet += value;
     api
