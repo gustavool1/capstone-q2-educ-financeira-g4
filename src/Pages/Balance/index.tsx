@@ -86,8 +86,7 @@ export const Balance = () => {
         >
           Movimentações
         </Button>
-        {isOpenBalance && (
-          <ModalBalance className='openBalance'>
+          <ModalBalance className={isOpenBalance ? 'openBalance': 'closeBalance'}>
             <h2>Balanço Financeiras</h2>
             <BankStatement>
               {userData.balance ? (
@@ -109,6 +108,7 @@ export const Balance = () => {
               .replace(".", ",")}`}</h2>
             {!isParent && <label>Recebido</label>}
             {!isParent && (
+              
               <Input
                 placeholder="Recebido"
                 onChange={(e) => {
@@ -131,7 +131,6 @@ export const Balance = () => {
               Sair
             </Button>
           </ModalBalance>
-        )}
       </LeftSide>
       <RightSide>
         <WishList>
@@ -152,7 +151,7 @@ export const Balance = () => {
                 />
               </section>
               <section>
-                <h3>Valor</h3>
+                <h2>Valor</h2>
                 <Input
                   placeholder="valor"
                   onChange={(e) => setWishPrice(Number(e.target.value))}

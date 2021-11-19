@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+ 
   padding-top: 2%;
   width: 100vw;
   min-height: 100vh;
@@ -13,6 +14,35 @@ export const Container = styled.div`
     flex-direction: row;
     height: 100vh;
   }
+
+  .openBalance{
+    animation: enter1 2s;
+    
+  }
+  .closeBalance{
+    animation: out 2s;
+    left: -450px;
+  }
+  @keyframes enter1 {
+    from{
+      left: -450px;
+    }
+/* 
+    to{
+      left: 0px;
+    } */
+  }
+  @keyframes out {
+    from{
+      left: 0px;
+    }
+    to{
+      left:-450px;
+    
+    }
+  }
+
+
 `;
 export const LeftSide = styled.div`
   margin-top: 160px;
@@ -87,24 +117,6 @@ export const ModalBalance = styled.div`
     }
   }
 
-  .openBalance{
-
-    @keyframes enter1{
-      from{
-        width:0px;
-      }
-
-      to{
-        width: 400px;
-      }
-    }
-    animation: enter1, 5;
-    display: none;
-  }
-
-  .closeBalance{
-    display: none;
-  }
 `;
 
 export const WishList = styled.div`
@@ -178,6 +190,7 @@ export const WishListContent = styled.div`
     margin-bottom: -8px;
   }
   section{
+    width: 90%;
     h3{
       margin: 10px 0px;
     }
@@ -195,10 +208,9 @@ export const Chart = styled.div`
 `;
 
 export const Input = styled.input`
-  input, select{
         padding: 0px 10px;
         background-color: white;
-        width: 90px;
+        width: 90%;
         margin: 10px;
         height: 48px;
         border-radius: 7px;
@@ -207,7 +219,6 @@ export const Input = styled.input`
             outline-style: none;
             box-shadow: none;
         }
-    }
 `;
 
 export const BankStatement = styled.ul`
