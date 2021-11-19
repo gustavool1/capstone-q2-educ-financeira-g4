@@ -139,6 +139,7 @@ export const Balance = () => {
               Sair
             </Button>
           </ModalBalance>
+        )}
       </LeftSide>
       <RightSide>
         <WishList>
