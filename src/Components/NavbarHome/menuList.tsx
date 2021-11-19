@@ -19,14 +19,14 @@ const MenuList = ({ handleClick }: MenuListProps) => {
         <HashLink
           onClick={handleClick}
           to="/#myServices"
-          scroll={(el) => el.scrollIntoView({ behavior: "auto", block: "end" })}
+          scroll={(el) => el.scrollIntoView({ behavior: "smooth", block: "end" })}
         >
           Serviços
         </HashLink>
         <HashLink
           onClick={handleClick}
           to="/#whoWeAre"
-          scroll={(el) => el.scrollIntoView({ behavior: "auto", block: "end" })}
+          scroll={(el) => el.scrollIntoView({ behavior: "smooth", block: "end" })}
         >
           Quem somos
         </HashLink>
