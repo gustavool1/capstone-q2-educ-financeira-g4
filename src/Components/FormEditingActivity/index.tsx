@@ -18,7 +18,7 @@ interface FormProps {
 const FormEditingActivity = () =>{
     const schema = yup.object().shape({
         name:yup.string().required("Nome obrigatório"),
-        reward:yup.string().required("Recompensa obrigatória")
+        reward:yup.number().required("Recompensa obrigatória")
     })
     const { register, handleSubmit, formState:{ errors } } = useForm({
         resolver:yupResolver(schema)
@@ -30,7 +30,7 @@ const FormEditingActivity = () =>{
 
     const onSubmitFunction = (data:FormProps) =>{
         data.id = actualActivitieId
-        
+        console.log(data)
         updateActivitie(data)
     }
     return(
