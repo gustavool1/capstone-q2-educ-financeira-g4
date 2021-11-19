@@ -86,15 +86,9 @@ export const Balance = () => {
         >
           Movimentações
         </Button>
-        {
-        // isOpenBalance && 
-        (
-          <ModalBalance
-          isOpen={isOpenBalance}
-          initial={{ opacity: 0, x: -300 }}
-          transition={{ duration: 1 }}
-          animate={{ opacity: 1, x: 0 }}
-          >
+          <ModalBalance className={isOpenBalance ? 'openBalance': 'closeBalance'}>
+         
+          
             <h2>Balanço Financeiro</h2>
             <BankStatement>
               {userData.balance ? (
@@ -139,7 +133,6 @@ export const Balance = () => {
               Sair
             </Button>
           </ModalBalance>
-        )}
       </LeftSide>
       <RightSide>
         <WishList>

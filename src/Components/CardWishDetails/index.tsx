@@ -29,7 +29,15 @@ export const CardWishDetails = () => {
     AddtoKitty(wish, valuekitty);
   };
   return (
-    <ModalWish>
+    <ModalWish
+      initial={{ scale: 0, opacity:0 }}
+        animate={{ scale: 1,opacity:1 }}
+        transition={{
+        type: "spring",
+        stiffness: 80,
+        duration:2
+        }}
+    >
       <WishListHeader>
         <h3>{wish.name}</h3>
         <button onClick={() => setIsWish(!isWish)}>x</button>
@@ -39,7 +47,6 @@ export const CardWishDetails = () => {
         <Porcent>
           <CircularProgressbar
             value={percentage}
-            // text={`${percentage.toFixed(2).replace(".", ",")}%`}
             className="circle-progress"
             styles={buildStyles({
               textColor: "#000000",
