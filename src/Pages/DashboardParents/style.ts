@@ -26,10 +26,11 @@ export const Container = styled.div`
 export const EditingContainer = styled.div`
     background-color: rgb(242, 242, 242, 0.85);
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    top:0;
     position: fixed;
     z-index: 3;
 
