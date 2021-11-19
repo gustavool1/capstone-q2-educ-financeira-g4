@@ -75,6 +75,18 @@ export const Achivied = styled.div`
   width: 90%;
   overflow: auto;
   overflow-x: hidden;
+  ::-webkit-scrollbar {
+    width: 10px;
+    margin: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    height: 30px;
+    border-radius: 10px;
+    background-color: #fff;
+  }
   div {
     display: flex;
     justify-content: space-between;
@@ -92,12 +104,25 @@ export const Achivied = styled.div`
 export const NotAchivied = styled.div`
   height: 170px;
   overflow: auto;
-  width: 90%;
+  width: 100%;
+  ::-webkit-scrollbar {
+    width: 10px;
+    margin: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    height: 30px;
+    border-radius: 10px;
+    background-color: #fff;
+  }
   div {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 5px;
+    width: 90%;
     input {
       width: 20px;
       height: 20px;
@@ -165,7 +190,7 @@ export const MobileCard = styled.div`
           height: 400px;
         }
       }
-      animation: slidein 3s;
+      animation: slidein 1s;
     }
     .isClosed {
       height: 0px;
@@ -173,15 +198,14 @@ export const MobileCard = styled.div`
       @keyframes slideout {
         from {
           height: 400px;
-          display: block;
         }
         to {
+          opacity: 1;
           height: 0px;
-          display: none;
         }
       }
 
-      animation: slideout 3s;
+      animation: slideout 1s;
     }
   }
 `;
@@ -247,8 +271,22 @@ export const ChildrenActivities = styled(motion.div)`
         opacity: 0;
       }
     }
-    animation: closed 2s;
-    display: none;
+    animation: closed 0.2s forwards;
+  }
+  .open {
+    @keyframes opened {
+      0% {
+        opacity: 0;
+      }
+
+      50% {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    animation: opened 1s forwards;
   }
 
   transition: 3s;
