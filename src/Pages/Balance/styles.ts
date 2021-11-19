@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 
 export const Container = styled.div`
+ 
   padding-top: 2%;
   width: 100vw;
   min-height: 100vh;
@@ -14,6 +15,32 @@ export const Container = styled.div`
     flex-direction: row;
     height: 100vh;
   }
+
+  .openBalance{
+    animation: enter1 2s;
+    
+  }
+  .closeBalance{
+    animation: out 2s;
+    left: -450px;
+  }
+  @keyframes enter1 {
+    from{
+      left: -450px;
+    }
+
+  }
+  @keyframes out {
+    from{
+      left: 0px;
+    }
+    to{
+      left:-450px;
+    
+    }
+  }
+
+
 `;
 export const LeftSide = styled.div`
   margin-top: 160px;
@@ -184,6 +211,12 @@ export const WishListContent = styled.div`
     margin-left: -100px;
     margin-bottom: -8px;
   }
+  section{
+    width: 90%;
+    h3{
+      margin: 10px 0px;
+    }
+  }
 `;
 
 export const Chart = styled.div`
@@ -197,17 +230,17 @@ export const Chart = styled.div`
 `;
 
 export const Input = styled.input`
-  width: 80%;
-  margin: 0.5rem;
-  border-radius: 10px;
-  border: none;
-  padding: 0.5rem;
-  ::placeholder {
-    padding-left: 5px;
-  }
-  @media screen and (min-width: 768px) {
-    padding: 1rem;
-  }
+        padding: 0px 10px;
+        background-color: white;
+        width: 90%;
+        margin: 10px;
+        height: 48px;
+        border-radius: 7px;
+        font-size: 18px;
+        :focus{
+            outline-style: none;
+            box-shadow: none;
+        }
 `;
 
 export const BankStatement = styled.ul`

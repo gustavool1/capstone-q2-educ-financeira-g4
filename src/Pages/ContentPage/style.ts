@@ -107,6 +107,9 @@ export const Nav = styled.nav<{ isOpen: Boolean }>`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  @media (max-width: 768px) {
+    height: calc(100vh - 170px);
+  }
 
   .exit {
     position: fixed;
