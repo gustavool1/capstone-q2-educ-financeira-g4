@@ -104,7 +104,7 @@ export const Achivied = styled.div`
 export const NotAchivied = styled.div`
   height: 170px;
   overflow: auto;
-  width: 90%;
+  width: 100%;
   ::-webkit-scrollbar {
     width: 10px;
     margin: 10px;
@@ -122,6 +122,7 @@ export const NotAchivied = styled.div`
     justify-content: space-between;
     align-items: center;
     margin: 5px;
+    width: 90%;
     input {
       width: 20px;
       height: 20px;
