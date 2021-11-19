@@ -19,6 +19,7 @@ import { CardWishDetails } from "../../Components/CardWishDetails";
 import { useModal } from "../../Providers/Modal";
 import { useUser } from "../../Providers/Users";
 import Demo from "../../Components/Chart";
+import { TextField } from "@material-ui/core";
 interface BalanceProp {
   date?: string;
   move?: number;
@@ -85,8 +86,7 @@ export const Balance = () => {
         >
           Movimentações
         </Button>
-        {isOpenBalance && (
-          <ModalBalance>
+          <ModalBalance className={isOpenBalance ? 'openBalance': 'closeBalance'}>
             <h2>Balanço Financeiras</h2>
             <BankStatement>
               {userData.balance ? (
@@ -108,6 +108,7 @@ export const Balance = () => {
               .replace(".", ",")}`}</h2>
             {!isParent && <label>Recebido</label>}
             {!isParent && (
+              
               <Input
                 placeholder="Recebido"
                 onChange={(e) => {
@@ -130,7 +131,6 @@ export const Balance = () => {
               Sair
             </Button>
           </ModalBalance>
-        )}
       </LeftSide>
       <RightSide>
         <WishList>
@@ -143,16 +143,20 @@ export const Balance = () => {
           </WishListHeader>
           {isOpenWish ? (
             <WishListContent>
-              <label>Nome do item</label>
-              <Input
-                placeholder="nome"
-                onChange={(e) => setWishName(e.target.value)}
-              />
-              <label>Valor do item</label>
-              <Input
-                placeholder="valor"
-                onChange={(e) => setWishPrice(Number(e.target.value))}
-              />
+              <section>
+                <h3>Nome</h3>
+                <Input
+                  placeholder="nome"
+                  onChange={(e) => setWishName(e.target.value)}
+                />
+              </section>
+              <section>
+                <h2>Valor</h2>
+                <Input
+                  placeholder="valor"
+                  onChange={(e) => setWishPrice(Number(e.target.value))}
+                />
+              </section>
               <Button onClick={() => HandleClickWish()}>Enviar</Button>
             </WishListContent>
           ) : (
