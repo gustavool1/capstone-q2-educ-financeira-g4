@@ -27,10 +27,7 @@ export const Container = styled.div`
     from{
       left: -450px;
     }
-/* 
-    to{
-      left: 0px;
-    } */
+
   }
   @keyframes out {
     from{
