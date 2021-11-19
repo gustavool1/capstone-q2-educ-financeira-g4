@@ -39,7 +39,7 @@ export const CardWishDetails = () => {
         <Porcent>
           <CircularProgressbar
             value={percentage}
-            text={`${percentage.toFixed(2).replace(".", ",")}%`}
+            // text={`${percentage.toFixed(2).replace(".", ",")}%`}
             className="circle-progress"
             styles={buildStyles({
               textColor: "#000000",
