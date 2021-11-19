@@ -1,16 +1,9 @@
 import { ModalWish, WishListHeader, WishContent, Porcent } from "./styles";
-// import { BsFillPencilFill } from "react-icons/bs";
 import { useModal } from "../../Providers/Modal";
 import { useState } from "react";
 import { BiSend } from "react-icons/bi";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { useUser } from "../../Providers/Users";
-
-interface Wish {
-  name: string;
-  value: number;
-  kitty: number;
-}
 
 export const CardWishDetails = () => {
   const { isWish, setIsWish, wish, AddtoKitty } = useModal();
@@ -30,13 +23,13 @@ export const CardWishDetails = () => {
   };
   return (
     <ModalWish
-      initial={{ scale: 0, opacity:0 }}
-        animate={{ scale: 1,opacity:1 }}
-        transition={{
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{
         type: "spring",
         stiffness: 80,
-        duration:2
-        }}
+        duration: 2,
+      }}
     >
       <WishListHeader>
         <h3>{wish.name}</h3>
