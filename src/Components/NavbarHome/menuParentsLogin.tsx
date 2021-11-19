@@ -8,7 +8,7 @@ interface MenuListProps {
 }
 
 const MenuParentsLogin = ({ handleClick }: MenuListProps) => {
-  const { Logout, userData, typeUser } = useContext(UserContext);
+  const { Logout, typeUser } = useContext(UserContext);
   return (
     <MenuListContainer>
       <div className={typeUser === "parent" ? "links parents" : "links"}>

@@ -89,7 +89,6 @@ export const UserProvider = ({ children }: UserProps) => {
     () => localStorage.getItem("userId") || ""
   );
   const [activities, setActivities] = useState([] as activity[]);
-  const [isValidToken, setIsValidToken] = useState<boolean>(false);
 
   const [typeUser, setTypeUser] = useState(
     () => localStorage.getItem("typeUser") || ""

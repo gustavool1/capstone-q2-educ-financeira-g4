@@ -6,11 +6,6 @@ import { BiSend } from "react-icons/bi";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { useUser } from "../../Providers/Users";
 
-interface Wish {
-  name: string;
-  value: number;
-  kitty: number;
-}
 
 export const CardWishDetails = () => {
   const { isWish, setIsWish, wish, AddtoKitty } = useModal();

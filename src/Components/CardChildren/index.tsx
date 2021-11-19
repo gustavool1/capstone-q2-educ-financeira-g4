@@ -48,7 +48,6 @@ const CardChildren = ({ children }: CardChildrenProps) => {
   const [childrenActivies, setChildrenActivities] = useState<Activities[]>([]);
   const [isFlipped, setIsFlipped] = useState(false);
   const {
-    updateActivitie,
     getYourChildrens,
     createActivie,
     deleteActivitie,
@@ -83,6 +82,7 @@ const CardChildren = ({ children }: CardChildrenProps) => {
 
   useEffect(() => {
     getYourActivities(children.id);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [createActivie]);
 
   const updateCard = () => {

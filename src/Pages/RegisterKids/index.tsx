@@ -12,7 +12,6 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField } from "@material-ui/core";
 import { UserContext, useUser } from "../../Providers/Users";
-import { useHistory } from "react-router";
 
 interface RegisterUserData {
   name: string;
@@ -22,11 +21,11 @@ interface RegisterUserData {
 }
 
 export const RegisterKids = () => {
-  const history = useHistory();
   const { userData, isTokenValid } = useContext(UserContext)
 
   useEffect(() => {
     isTokenValid()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const schema = yup.object().shape({

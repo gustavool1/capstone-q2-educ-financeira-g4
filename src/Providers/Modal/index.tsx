@@ -33,16 +33,6 @@ interface ModalProviderData {
   AddtoKitty: (wish: Wish, value: number) => void;
 }
 
-interface Children {
-  email: string;
-  name: string;
-  wallet: number;
-  type: string;
-  wishlist?: [];
-  balance?: [];
-  id: number;
-  parentId: number;
-}
 
 export const ModalContext = createContext<ModalProviderData>(
   {} as ModalProviderData

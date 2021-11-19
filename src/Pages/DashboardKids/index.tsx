@@ -24,10 +24,12 @@ const DashboardKids = () => {
   const [carrouselNumber, setCarrouselNumber] = useState(0);
   useEffect(() => {
     GetActivities(Number(userId));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     isTokenValid()
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [])
 
   const AchiviedFunction = (id: number) => {
@@ -71,13 +73,13 @@ const DashboardKids = () => {
     }
   };
 
-  const getLastCard = () => {
-    if (carrouselNumber !== 0) {
-      setCarrouselNumber(carrouselNumber - 1);
-    } else {
-      setCarrouselNumber(2);
-    }
-  };
+  // const getLastCard = () => {
+  //   if (carrouselNumber !== 0) {
+  //     setCarrouselNumber(carrouselNumber - 1);
+  //   } else {
+  //     setCarrouselNumber(2);
+  //   }
+  // };
 
   return (
     <>       
