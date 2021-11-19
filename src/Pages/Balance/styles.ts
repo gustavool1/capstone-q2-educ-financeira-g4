@@ -130,6 +130,7 @@ export const WishListHeader = styled.div`
   text-align: center;
   justify-content: center;
   padding: 5px 0;
+  color: #FFFFFF;
   h3 {
     margin: auto;
     font-size: 24px;

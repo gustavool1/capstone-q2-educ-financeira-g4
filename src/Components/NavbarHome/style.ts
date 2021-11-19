@@ -228,15 +228,23 @@ export const MenuListContainer = styled(motion.div)`
     justify-content: flex-end;
   }
 
-  @media screen and (max-width: 930px) {
+  @media screen and (max-width: 1050px) {
     .links a {
       font-size: 16px;
       margin: 0 5px;
     }
 
+    .links.parents, .links.children {
+      width: 450px;
+    }
+
     .btnContainer {
       width: 280px;
       margin: 0 5px;
+    }
+
+    .btnContainer.parents {
+      width: 150px;
     }
   }
 
