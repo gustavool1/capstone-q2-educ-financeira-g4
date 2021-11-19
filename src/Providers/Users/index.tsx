@@ -67,7 +67,6 @@ interface UserProviderData {
   ReceivedBalance: (data: UserDataItens, number: number) => void;
   AddtoKitty: (item: Wish, value: number) => void;
   getUserData: () => void;
-  isValidToken: boolean;
   isTokenValid: () => void;
   typeUser: string;
   userId: string;
@@ -332,7 +331,6 @@ export const UserProvider = ({ children }: UserProps) => {
         activities,
         GetActivities,
         userId,
-        isValidToken,
         isTokenValid,
         typeUser,
         EditProfile,
