@@ -17,6 +17,7 @@ import { CardWishDetails } from "../../Components/CardWishDetails";
 import { useModal } from "../../Providers/Modal";
 import { useUser } from "../../Providers/Users";
 import Demo from "../../Components/Chart";
+import { showToast } from "../../Components/Toast/style";
 interface BalanceProp {
   date?: string;
   move?: number;
@@ -60,6 +61,7 @@ export const Balance = () => {
     const wish = { name: wishName, value: wishPrice, kitty: 0 };
     console.log(wish);
     AddWishList(userData, wish);
+    showToast({ type: "success", message: `O desejo foi criado!` });
   };
 
 
@@ -83,15 +85,9 @@ export const Balance = () => {
         >
           Movimentações
         </Button>
-        {
-        // isOpenBalance && 
-        (
-          <ModalBalance
-          isOpen={isOpenBalance}
-          initial={{ opacity: 0, x: -300 }}
-          transition={{ duration: 1 }}
-          animate={{ opacity: 1, x: 0 }}
-          >
+          <ModalBalance className={isOpenBalance ? 'openBalance': 'closeBalance'}>
+         
+          
             <h2>Balanço Financeiro</h2>
             <BankStatement>
               {userData.balance ? (
@@ -136,7 +132,6 @@ export const Balance = () => {
               Sair
             </Button>
           </ModalBalance>
-        )}
       </LeftSide>
       <RightSide>
         <WishList>

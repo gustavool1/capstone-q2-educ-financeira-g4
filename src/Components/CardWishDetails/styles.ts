@@ -1,6 +1,6 @@
 import styled from "styled-components";
-
-export const ModalWish = styled.div`
+import { motion } from 'framer-motion'
+export const ModalWish = styled(motion.div)`
   min-width: 267px;
   width: 80%;
   height: 80%;
@@ -36,6 +36,11 @@ export const WishListHeader = styled.div`
   h3 {
     margin: auto;
     font-size: 24px;
+  }
+  p {
+    margin: 0 30px;
+    color: white;
+    font-weight: bold;
   }
   button {
     border: none;

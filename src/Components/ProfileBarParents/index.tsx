@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import  { useContext, useEffect } from 'react'
 import { ActivitiesContext } from '../../Providers/Activities'
 import { ProfileContainer } from './style'
 import profile from '../../assets/images/iconProfile.jpg'

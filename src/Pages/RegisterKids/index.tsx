@@ -64,7 +64,11 @@ export const RegisterKids = () => {
   return (
     <>
       <Container>
-        <FormContainer>
+        <FormContainer
+           initial={{x:-250, opacity:0 }}
+           animate={{ x:0, opacity:1 }}
+           transition={{duration:2}}
+        >
           <Form onSubmit={handleSubmit(onSubmitFunction)}>
             <h1>Cadastrar dependente</h1>
             <TextField
@@ -114,7 +118,11 @@ export const RegisterKids = () => {
             <Button type="submit">Cadastrar</Button>
           </Form>
         </FormContainer>
-        <ImageContainer>
+        <ImageContainer
+          initial={{x:250, opacity:0 }}
+          animate={{ x:0, opacity:1 }}
+          transition={{duration:2}}
+        >
           <LottieMaker
             lottieImage={
               "https://assets6.lottiefiles.com/packages/lf20_0qrzy1vy.json"

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { motion } from 'framer-motion'
 export const Container = styled.div`
   width: 100vw;
   height: Calc(100vh - 80px);
@@ -11,7 +11,7 @@ export const Container = styled.div`
   align-content: center;
 `;
 
-export const ImageContainer = styled.div`
+export const ImageContainer = styled(motion.div)`
   display: none;
   @media screen and (min-width: 500px) {
     display: flex;
@@ -26,7 +26,7 @@ export const ImageContainer = styled.div`
   }
 `;
 
-export const FormContainer = styled.div`
+export const FormContainer = styled(motion.div)`
   width: 100%;
   height: 100%;
   display: flex;

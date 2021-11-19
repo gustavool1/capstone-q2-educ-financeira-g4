@@ -78,7 +78,7 @@ export const UserContext = createContext<UserProviderData>(
 );
 
 export const UserProvider = ({ children }: UserProps) => {
-  // const {  } = useContext(ModalContext)
+ 
   const [userData, setUserData] = useState<UserDataItens>({} as UserDataItens);
   const history = useHistory();
   const [UserToken, setUserToken] = useState(

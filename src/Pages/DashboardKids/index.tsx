@@ -73,13 +73,13 @@ const DashboardKids = () => {
     }
   };
 
-  // const getLastCard = () => {
-  //   if (carrouselNumber !== 0) {
-  //     setCarrouselNumber(carrouselNumber - 1);
-  //   } else {
-  //     setCarrouselNumber(2);
-  //   }
-  // };
+  const getLastCard = () => {
+    if (carrouselNumber !== 0) {
+      setCarrouselNumber(carrouselNumber - 1);
+    } else {
+      setCarrouselNumber(2);
+    }
+  };
 
   return (
     <>       
@@ -273,7 +273,7 @@ const DashboardKids = () => {
         <h2>Atividades</h2>
         <MobileContent>
           <button
-            onClick={() => setCarrouselNumber(1)}
+            onClick={getLastCard}
             className="passLeft navegateButton"
           >
             &lt;

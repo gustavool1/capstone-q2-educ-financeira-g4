@@ -1,4 +1,5 @@
-import { HiInformationCircle } from "react-icons/hi";
+import { BsFillPencilFill } from "react-icons/bs";
+
 import { Li } from "./styles";
 import { useModal } from "../../Providers/Modal";
 
@@ -18,7 +19,7 @@ export const CardWish = ({ item }: WishProps) => {
             HandleClickDetails(item);
           }}
         >
-          <HiInformationCircle />
+          <BsFillPencilFill />
         </button>
         <h3 className={item.value <= item.kitty ? "done" : ""}>{item.name}</h3>
         <h4 className={item.value <= item.kitty ? "done" : ""}>

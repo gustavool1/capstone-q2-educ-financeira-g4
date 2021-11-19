@@ -42,7 +42,6 @@ interface Activities {
 }
 
 
-
 export const ActivitiesContext = createContext<ActivitiesProviderData>({} as ActivitiesProviderData)
 
 export const ActivitiesProvider = ({ children }:ActivitiesProviderProps) =>{
