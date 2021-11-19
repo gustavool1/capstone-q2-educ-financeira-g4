@@ -20,6 +20,7 @@ import { useModal } from "../../Providers/Modal";
 import { useUser } from "../../Providers/Users";
 import Demo from "../../Components/Chart";
 import { TextField } from "@material-ui/core";
+import { showToast } from "../../Components/Toast/style";
 interface BalanceProp {
   date?: string;
   move?: number;
@@ -64,6 +65,7 @@ export const Balance = () => {
     const wish = { name: wishName, value: wishPrice, kitty: 0 };
     console.log(wish);
     AddWishList(userData, wish);
+    showToast({ type: "success", message: `O desejo foi criado!` });
   };
 
 
