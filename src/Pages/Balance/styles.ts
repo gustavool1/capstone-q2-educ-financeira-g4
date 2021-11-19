@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -50,7 +51,7 @@ export const RightSide = styled.div`
   }
 `;
 
-export const ModalBalance = styled.div`
+export const ModalBalance = styled(motion.div)<{ isOpen: Boolean }>`
   padding-top: 180px;
   position: fixed;
   left: 0;
@@ -86,6 +87,30 @@ export const ModalBalance = styled.div`
       margin-left: -240px;
     }
   }
+
+  @keyframes Entering {
+    0.0% {
+      opacity: 0;
+      left: -300px;
+    }
+    100% {
+      opacity: 1;
+      left: 0
+    }
+  }
+
+  @keyframes ReverseEntering {
+    0.0% {
+      opacity: 1;
+      margin: 0 0 0 0;
+    }
+    100% {
+      opacity: 0;
+      margin: 0 0 0 0;
+    }
+  }
+  animation: ${(props) => (props.isOpen ? "Entering" : "ReverseEntering")} 1s
+    ease 0s normal forwards;
 `;
 
 export const WishList = styled.div`
